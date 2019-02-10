@@ -10,5 +10,8 @@
       }
     }
   ],
-  "alias": ["timreed.co.uk", "www.timreed.co.uk"]
+  "alias": ["timreed.co.uk", "www.timreed.co.uk"],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
