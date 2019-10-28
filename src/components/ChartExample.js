@@ -27,7 +27,6 @@ export default class ChartExample extends PtsCanvas {
       new Pt(this.space.size.x, this.space.pointer.y)
     );
 
-    console.log(this.space.pointer);
     this.form.stroke("#fff", 3).line(line, 10, "circle");
 
     // Draw the bars and also check intersection with the pointer's line
