@@ -16,9 +16,12 @@
     "gatsby-transformer-sharp": "^2.3.0",
     "prismic-reactjs": "^1.1.1",
     "prop-types": "^15.7.2",
+    "pts": "^0.8.10",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-pts-canvas": "^0.2.4",
+    "zdog": "^1.1.1"
   },
   "keywords": [
     "gatsby"

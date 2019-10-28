@@ -1,12 +1,16 @@
 import React from "react";
 import { graphql } from "gatsby";
 
+import AnimatedCanvas from "../componnents/AnimatedCanvas";
+
 const Post = ({ data: { landingPage } }) => {
   const { data } = landingPage;
   console.log("data", data);
   return (
     <>
       <h1>{data.title.text}</h1>
+
+      <AnimatedCanvas hi="helloooooo"></AnimatedCanvas>
       <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
     </>
   );
