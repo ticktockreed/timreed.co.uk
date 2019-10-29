@@ -3,10 +3,12 @@ import {
   Triangle,
   Rectangle,
   Circle,
+  Curve,
   Pt
   // Num
 } from "pts/dist/es5";
 import { PtsCanvas } from "react-pts-canvas";
+import { Polygon } from "pts";
 
 export default class AnimationExample extends PtsCanvas {
   constructor() {
@@ -15,9 +17,6 @@ export default class AnimationExample extends PtsCanvas {
   }
 
   _create() {
-    Group.fromArray([[1, 2], [3, 4]]);
-    Group.fromPtArray([new Pt(1, 2), new Pt(3, 4)]);
-
     // add basic shapes to the canvas to create the logo...
     // tVert, tHoriz, rVert, rCircle, rTriangle
     this.shapes = {
@@ -91,11 +90,21 @@ export default class AnimationExample extends PtsCanvas {
     rCircle.circle = Circle.fromRect(rCircle.rect);
     rTriangle.triangle = Triangle.fromRect(rTriangle.rect);
 
+    const poly1 = Polygon.convexHull(Rectangle.corners(rVert.rect));
+    const poly2 = Polygon.convexHull(
+      Circle.intersectRect2D(rCircle.circle, rVert.rect)
+    );
+
     // make visible
-    form.fillOnly("#f00").rect(rVert.rect);
+    form.fillOnly("#2D2D2D").rect(rVert.rect);
     // form.strokeOnly("#999").rect(rCircle.rect);
-    form.fillOnly("blue").circle(rCircle.circle);
+    form.fillOnly("#2D2D2D").circle(rCircle.circle);
     // form.strokeOnly("#999").rect(rTriangle.rect);
-    form.fillOnly("#999").polygon(rTriangle.triangle);
+    form.fillOnly("#2D2D2D").polygon(rTriangle.triangle);
+
+    form.strokeOnly("#f0f0f0", 5).polygon(Curve.cardinal([...poly1, ...poly2]));
+
+    //  mark points of wrapped polygon
+    form.fill("#fff").points([...poly1, ...poly2], 5, "circle");
   }
 }
