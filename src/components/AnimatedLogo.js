@@ -63,15 +63,13 @@ export default class AnimationExample extends PtsCanvas {
     rCircle.circle = Circle.fromRect(rCircle.rect);
     rTriangle.triangle = Triangle.fromRect(rTriangle.rect);
 
-    const rectCorners = new Bound(
-      new Pt(0, 0),
-      new Pt(600, 0),
-      new Pt(600, 600),
-      new Pt(0, 600)
-    );
+    this.rectCorners = Rectangle.corners(rVert.rect);
+
+    console.log(this.rectCorners);
+    console.log(Bound.fromGroup(this.rectCorners));
     // Create world and 100 random points
-    this.world = new World(rectCorners, 1, 0);
-    this.pts = Create.distributeRandom(rectCorners, 5);
+    this.world = new World(Bound.fromGroup(this.rectCorners), 1, 0);
+    this.pts = Create.distributeRandom(Bound.fromGroup(this.rectCorners), 5);
 
     // // Create particles and hit them with a random impulse
     for (let i = 0, len = this.pts.length; i < len; i++) {
@@ -104,6 +102,11 @@ export default class AnimationExample extends PtsCanvas {
     this._create(space, bound);
   }
 
+  action(type, px, py) {
+    if (type == "move") {
+      this.world.particle(0).position = new Pt(px, py);
+    }
+  }
   // Override PtsCanvas' animate function
   animate(time, ftime) {
     const {
@@ -135,6 +138,8 @@ export default class AnimationExample extends PtsCanvas {
       form.fillOnly(color).point(p, p.radius, "circle");
     });
 
+    const newRect = Rectangle.fromTopLeft(rTriangle.origin, this.rectCorners);
+    form.fillOnly("blue").rect(newRect);
     this.world.update(ftime);
   }
 }
