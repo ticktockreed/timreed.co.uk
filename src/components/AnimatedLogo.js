@@ -3,8 +3,6 @@ import {
   Triangle,
   Rectangle,
   Circle,
-  Curve,
-  Line,
   World,
   Particle,
   Create,
@@ -14,7 +12,6 @@ import {
   // Num
 } from "pts/dist/es5";
 import { PtsCanvas } from "react-pts-canvas";
-import { Polygon } from "pts";
 
 // Create the basic shapes, their positions and sizes and return as object
 // returns
@@ -73,7 +70,6 @@ export default class AnimationExample extends PtsCanvas {
 
     this.rectCorners = Rectangle.corners(this.shapes.rVert.rect);
 
-    console.log(this.rectCorners.boundingBox());
     // Create world and 100 random points
     this.world = new World(
       Bound.fromGroup(this.rectCorners.boundingBox()),
