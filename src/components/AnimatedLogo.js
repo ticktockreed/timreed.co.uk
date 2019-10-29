@@ -4,6 +4,7 @@ import {
   Rectangle,
   Circle,
   Curve,
+  Line,
   Pt
   // Num
 } from "pts/dist/es5";
@@ -85,15 +86,16 @@ export default class AnimationExample extends PtsCanvas {
     rCircle.circle = Circle.fromRect(rCircle.rect);
     rTriangle.triangle = Triangle.fromRect(rTriangle.rect);
 
-    const poly1 = Polygon.convexHull(Rectangle.corners(rVert.rect));
-    const poly2 = Polygon.convexHull(
-      Circle.intersectRect2D(rCircle.circle, rVert.rect)
-    );
+    // const poly1 = Polygon.convexHull(Rectangle.corners(rVert.rect));
+    // const poly2 = Polygon.convexHull(
+    //   );
 
-    console.log(rCircle.circle);
+    const line = new Group(rTriangle.triangle[0], rTriangle.triangle[1]);
+
+    console.log();
 
     const myGroup = new Group(
-      ...rCircle.circle,
+      ...Circle.intersectLine2D(rCircle.circle, line),
       ...rTriangle.triangle,
       ...Rectangle.corners(rVert.rect)
     );
