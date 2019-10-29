@@ -73,9 +73,17 @@ export default class AnimationExample extends PtsCanvas {
 
     this.rectCorners = Rectangle.corners(this.shapes.rVert.rect);
 
+    console.log(this.rectCorners.boundingBox());
     // Create world and 100 random points
-    this.world = new World(Bound.fromGroup(this.rectCorners), 1, 0);
-    this.pts = Create.distributeRandom(Bound.fromGroup(this.rectCorners), 5);
+    this.world = new World(
+      Bound.fromGroup(this.rectCorners.boundingBox()),
+      1,
+      0
+    );
+    this.pts = Create.distributeRandom(
+      Bound.fromGroup(this.rectCorners.boundingBox()),
+      15
+    );
 
     // // Create particles and hit them with a random impulse
     for (let i = 0, len = this.pts.length; i < len; i++) {
@@ -83,6 +91,7 @@ export default class AnimationExample extends PtsCanvas {
         i === 0 ? 30 : 3 + (Math.random() * this.space.size.x) / 50
       );
 
+      console.log("point", p);
       p.hit(Num.randomRange(-50, 50), Num.randomRange(-25, 25));
       this.world.add(p);
     }
