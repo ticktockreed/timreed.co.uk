@@ -72,9 +72,15 @@ export default class AnimationExample extends PtsCanvas {
 
     const baseUnit = space.size.$divide(4).x;
 
-    // set origin positions
-    rCircle.origin.to(baseUnit / 2.6, 0);
-    rTriangle.origin.to(baseUnit / 2.6, baseUnit * 2 - baseUnit * 1.2);
+    const origin = new Pt(space.size.$divide(4));
+
+    // // set origin positions
+    rVert.origin.to(origin);
+    rCircle.origin.to(origin);
+    rTriangle.origin.to(origin);
+
+    rCircle.origin.add(baseUnit / 2.6, 0);
+    rTriangle.origin.add(baseUnit / 2.6, baseUnit * 2 - baseUnit * 1.2);
 
     // set rectangle sizes
     rVert.size.to(baseUnit, baseUnit * 2);
@@ -86,7 +92,7 @@ export default class AnimationExample extends PtsCanvas {
     rTriangle.size.to(baseUnit * 1.2, baseUnit * 1.2);
     rTriangle.rect = Rectangle.fromTopLeft(rTriangle.origin, rTriangle.size);
 
-    // create other shapes
+    // // create other shapes
     rCircle.circle = Circle.fromRect(rCircle.rect);
     rTriangle.triangle = Triangle.fromRect(rTriangle.rect);
 
@@ -97,14 +103,14 @@ export default class AnimationExample extends PtsCanvas {
 
     // make visible
     form.fillOnly("#2D2D2D").rect(rVert.rect);
-    // form.strokeOnly("#999").rect(rCircle.rect);
+    // // form.strokeOnly("#999").rect(rCircle.rect);
     form.fillOnly("#2D2D2D").circle(rCircle.circle);
-    // form.strokeOnly("#999").rect(rTriangle.rect);
+    // // form.strokeOnly("#999").rect(rTriangle.rect);
     form.fillOnly("#2D2D2D").polygon(rTriangle.triangle);
 
     form.strokeOnly("#f0f0f0", 5).polygon(Curve.cardinal([...poly1, ...poly2]));
 
-    //  mark points of wrapped polygon
+    // //  mark points of wrapped polygon
     form.fill("#fff").points([...poly1, ...poly2], 5, "circle");
   }
 }
