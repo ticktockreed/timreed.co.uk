@@ -16,6 +16,47 @@ import {
 import { PtsCanvas } from "react-pts-canvas";
 import { Polygon } from "pts";
 
+// Create the basic shapes, their positions and sizes and return as object
+// returns
+function createShapesGeometry(baseUnit, origin) {
+  let rVert = {
+    origin: new Pt(origin),
+    size: new Pt()
+  };
+
+  let rCircle = {
+    origin: new Pt(origin),
+    size: new Pt()
+  };
+
+  let rTriangle = {
+    origin: new Pt(origin),
+    size: new Pt()
+  };
+
+  rCircle.origin.add(baseUnit / 2.6, 0);
+  rTriangle.origin.add(baseUnit / 2.6, baseUnit * 2 - baseUnit * 1.2);
+
+  rVert.size.to(baseUnit, baseUnit * 2);
+  rVert.rect = Rectangle.fromTopLeft(rVert.origin, rVert.size);
+
+  rCircle.size.to(baseUnit * 1.2, baseUnit * 1.2);
+  rCircle.rect = Rectangle.fromTopLeft(rCircle.origin, rCircle.size);
+
+  rTriangle.size.to(baseUnit * 1.2, baseUnit * 1.2);
+  rTriangle.rect = Rectangle.fromTopLeft(rTriangle.origin, rTriangle.size);
+
+  // // create other shapes
+  rCircle.circle = Circle.fromRect(rCircle.rect);
+  rTriangle.triangle = Triangle.fromRect(rTriangle.rect);
+
+  return {
+    rVert,
+    rCircle,
+    rTriangle
+  };
+}
+
 export default class AnimationExample extends PtsCanvas {
   constructor() {
     super();
@@ -28,45 +69,10 @@ export default class AnimationExample extends PtsCanvas {
     const origin = new Pt(space.size.$divide(4));
     this.baseUnit = space.size.$divide(4).x;
 
-    this.shapes = {
-      rVert: {
-        origin: new Pt(origin),
-        size: new Pt()
-      },
-      rCircle: {
-        origin: new Pt(origin),
-        size: new Pt()
-      },
-      rTriangle: {
-        origin: new Pt(origin),
-        size: new Pt()
-      }
-    };
-    const { rVert, rCircle, rTriangle } = this.shapes;
+    this.shapes = createShapesGeometry(this.baseUnit, origin);
 
-    rCircle.origin.add(this.baseUnit / 2.6, 0);
-    rTriangle.origin.add(
-      this.baseUnit / 2.6,
-      this.baseUnit * 2 - this.baseUnit * 1.2
-    );
+    this.rectCorners = Rectangle.corners(this.shapes.rVert.rect);
 
-    rVert.size.to(this.baseUnit, this.baseUnit * 2);
-    rVert.rect = Rectangle.fromTopLeft(rVert.origin, rVert.size);
-
-    rCircle.size.to(this.baseUnit * 1.2, this.baseUnit * 1.2);
-    rCircle.rect = Rectangle.fromTopLeft(rCircle.origin, rCircle.size);
-
-    rTriangle.size.to(this.baseUnit * 1.2, this.baseUnit * 1.2);
-    rTriangle.rect = Rectangle.fromTopLeft(rTriangle.origin, rTriangle.size);
-
-    // // create other shapes
-    rCircle.circle = Circle.fromRect(rCircle.rect);
-    rTriangle.triangle = Triangle.fromRect(rTriangle.rect);
-
-    this.rectCorners = Rectangle.corners(rVert.rect);
-
-    console.log(this.rectCorners);
-    console.log(Bound.fromGroup(this.rectCorners));
     // Create world and 100 random points
     this.world = new World(Bound.fromGroup(this.rectCorners), 1, 0);
     this.pts = Create.distributeRandom(Bound.fromGroup(this.rectCorners), 5);
