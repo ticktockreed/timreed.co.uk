@@ -3,6 +3,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
+import AnimatedLogo from "../components/AnimatedLogo";
 import ChartExample from "../components/ChartExample";
 import AnimationExample from "../components/AnimationExample";
 
@@ -30,7 +31,8 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
 
   useEffect(() => {
     mockData(variance);
-  }, []);
+    console.log(chartData);
+  }, [variance]);
 
   return (
     <Layout>
@@ -47,7 +49,7 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
       <div>
         <h1>{data.page_title.text}</h1>
         <p>{data.page_intro.text}</p>
-        <ChartExample
+        {/* <ChartExample
           name="pts_chart"
           background="#0c9"
           play={false}
@@ -59,7 +61,14 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           name="pts_anim"
           background="#fe3"
           pause={pauseAnimation}
+        /> */}
+
+        <AnimatedLogo
+          name="logo_anim"
+          background="#111"
+          pause={pauseAnimation}
         />
+
         <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
       </div>
     </Layout>
