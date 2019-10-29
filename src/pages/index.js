@@ -4,8 +4,8 @@ import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
 import AnimatedLogo from "../components/AnimatedLogo";
-import ChartExample from "../components/ChartExample";
-import AnimationExample from "../components/AnimationExample";
+// import ChartExample from "../components/ChartExample";
+// import AnimationExample from "../components/AnimationExample";
 
 let chartData = [];
 
@@ -27,7 +27,7 @@ function mockData(variance) {
 const IndexPage = ({ data: { prismicLandingPage } }) => {
   const { data } = prismicLandingPage;
   const [variance] = useState(0.2);
-  const [paused, pauseAnimation] = useState(false);
+  // const [paused, pauseAnimation] = useState(false);
 
   useEffect(() => {
     mockData(variance);
@@ -62,11 +62,7 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           pause={pauseAnimation}
         /> */}
 
-        <AnimatedLogo
-          name="logo_anim"
-          background="#111"
-          pause={pauseAnimation}
-        />
+        <AnimatedLogo name="logo_anim" background="#111" />
 
         <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
       </div>
