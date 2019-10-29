@@ -5,6 +5,11 @@ import {
   Circle,
   Curve,
   Line,
+  World,
+  Particle,
+  Create,
+  Bound,
+  Num,
   Pt
   // Num
 } from "pts/dist/es5";
@@ -57,6 +62,28 @@ export default class AnimationExample extends PtsCanvas {
     // // create other shapes
     rCircle.circle = Circle.fromRect(rCircle.rect);
     rTriangle.triangle = Triangle.fromRect(rTriangle.rect);
+
+    const rectCorners = new Bound(
+      new Pt(0, 0),
+      new Pt(600, 0),
+      new Pt(600, 600),
+      new Pt(0, 600)
+    );
+    // Create world and 100 random points
+    this.world = new World(rectCorners, 1, 0);
+    this.pts = Create.distributeRandom(rectCorners, 5);
+
+    // // Create particles and hit them with a random impulse
+    for (let i = 0, len = this.pts.length; i < len; i++) {
+      let p = new Particle(this.pts[i]).size(
+        i === 0 ? 30 : 3 + (Math.random() * this.space.size.x) / 50
+      );
+
+      p.hit(Num.randomRange(-50, 50), Num.randomRange(-25, 25));
+      this.world.add(p);
+    }
+
+    // this.world.particle(0).lock = true; // lock it to move it by pointer later on
   }
 
   componentDidUpdate() {
@@ -100,5 +127,14 @@ export default class AnimationExample extends PtsCanvas {
 
     // //  mark points of wrapped polygon
     form.fill("#fff").points(myGroup, 5, "circle");
+    form.fill("#fff").points(this.groupee, 5, "circle");
+
+    this.world.drawParticles((p, i) => {
+      let color =
+        i === 0 ? "#fff" : ["#ff2d5d", "#42dc8e", "#2e43eb", "#ffe359"][i % 4];
+      form.fillOnly(color).point(p, p.radius, "circle");
+    });
+
+    this.world.update(ftime);
   }
 }
