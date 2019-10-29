@@ -31,7 +31,6 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
 
   useEffect(() => {
     mockData(variance);
-    console.log(chartData);
   }, [variance]);
 
   return (
