@@ -16,31 +16,32 @@ export default class AnimationExample extends PtsCanvas {
     this.pts = [];
   }
 
-  _create() {
+  _create(space, bound) {
     // add basic shapes to the canvas to create the logo...
     // tVert, tHoriz, rVert, rCircle, rTriangle
+    const origin = new Pt(space.size.$divide(4));
+    this.baseUnit = space.size.$divide(4).x;
+
     this.shapes = {
-      // tVert: {
-      //   origin: new Pt(),
-      //   size: new Pt()
-      // },
-      // tHoriz: {
-      //   origin: new Pt(),
-      //   size: new Pt()
-      // },
       rVert: {
-        origin: new Pt(),
+        origin: new Pt(origin),
         size: new Pt()
       },
       rCircle: {
-        origin: new Pt(),
+        origin: new Pt(origin),
         size: new Pt()
       },
       rTriangle: {
-        origin: new Pt(),
+        origin: new Pt(origin),
         size: new Pt()
       }
     };
+
+    this.shapes.rCircle.origin.add(this.baseUnit / 2.6, 0);
+    this.shapes.rTriangle.origin.add(
+      this.baseUnit / 2.6,
+      this.baseUnit * 2 - this.baseUnit * 1.2
+    );
   }
 
   componentDidUpdate() {
@@ -53,13 +54,12 @@ export default class AnimationExample extends PtsCanvas {
 
   // Override PtsCanvas' start function
   start(space, bound) {
-    console.log(space);
-    this._create();
+    this._create(space, bound);
   }
 
   // Override PtsCanvas' resize function
-  resize() {
-    this._create();
+  resize(space, bound) {
+    this._create(space, bound);
   }
 
   // Override PtsCanvas' animate function
@@ -67,20 +67,9 @@ export default class AnimationExample extends PtsCanvas {
     const {
       space,
       form,
-      shapes: { rVert, rCircle, rTriangle }
+      shapes: { rVert, rCircle, rTriangle },
+      baseUnit
     } = this;
-
-    const baseUnit = space.size.$divide(4).x;
-
-    const origin = new Pt(space.size.$divide(4));
-
-    // // set origin positions
-    rVert.origin.to(origin);
-    rCircle.origin.to(origin);
-    rTriangle.origin.to(origin);
-
-    rCircle.origin.add(baseUnit / 2.6, 0);
-    rTriangle.origin.add(baseUnit / 2.6, baseUnit * 2 - baseUnit * 1.2);
 
     // set rectangle sizes
     rVert.size.to(baseUnit, baseUnit * 2);
@@ -101,16 +90,25 @@ export default class AnimationExample extends PtsCanvas {
       Circle.intersectRect2D(rCircle.circle, rVert.rect)
     );
 
+    console.log(rCircle.circle);
+
+    const myGroup = new Group(
+      ...rCircle.circle,
+      ...rTriangle.triangle,
+      ...Rectangle.corners(rVert.rect)
+    );
+
+    // console.log(myGroup);
     // make visible
     form.fillOnly("#2D2D2D").rect(rVert.rect);
     // // form.strokeOnly("#999").rect(rCircle.rect);
     form.fillOnly("#2D2D2D").circle(rCircle.circle);
     // // form.strokeOnly("#999").rect(rTriangle.rect);
-    form.fillOnly("#2D2D2D").polygon(rTriangle.triangle);
-
-    form.strokeOnly("#f0f0f0", 5).polygon(Curve.cardinal([...poly1, ...poly2]));
+    form.fillOnly("#f00").polygon(rTriangle.triangle);
 
     // //  mark points of wrapped polygon
-    form.fill("#fff").points([...poly1, ...poly2], 5, "circle");
+    // form.strokeOnly("#f0f0f0", 5).polygon(Curve.cardinal([...poly1, ...poly2]));
+    form.fill("#fff").points(myGroup, 5, "circle");
+    // form.fillOnly("rgba(255, 255, 255, 0.8)").polygon([...poly1, ...poly2]);
   }
 }
