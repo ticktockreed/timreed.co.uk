@@ -64,11 +64,11 @@ export default class AnimationExample extends PtsCanvas {
   }
 
   _create(space, bound) {
-    // add basic shapes to the canvas to create the logo...
-    // tVert, tHoriz, rVert, rCircle, rTriangle
     const origin = new Pt(space.size.$divide(4));
     this.baseUnit = space.size.$divide(4).x;
 
+    // add basic shapes to the canvas to create the logo...
+    // rVert, rCircle, rTriangle
     this.shapes = createShapesGeometry(this.baseUnit, origin);
 
     this.rectCorners = Rectangle.corners(this.shapes.rVert.rect);
@@ -87,7 +87,7 @@ export default class AnimationExample extends PtsCanvas {
       this.world.add(p);
     }
 
-    // this.world.particle(0).lock = true; // lock it to move it by pointer later on
+    this.world.particle(0).lock = true; // lock it to move it by pointer later on
   }
 
   componentDidUpdate() {
