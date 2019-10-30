@@ -3,7 +3,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
-import AnimatedLogo from "../components/AnimatedLogo";
+import AnimatedLogo2 from "../components/AnimatedLogo2";
 // import ChartExample from "../components/ChartExample";
 // import AnimationExample from "../components/AnimationExample";
 
@@ -62,7 +62,7 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           pause={pauseAnimation}
         /> */}
 
-        <AnimatedLogo name="logo_anim" background="#111" />
+        <AnimatedLogo2 name="logo_anim" background="#111" />
 
         <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
       </div>
