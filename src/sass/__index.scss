@@ -9,13 +9,14 @@
     color: $color;
   }
 }
-
-html,
-body {
+html {
   width: 100%;
   height: 100%;
+}
+html,
+body {
   background-color: black;
-  color: #999;
+  color: $grey;
 
   font-family: $fontBody;
 }
@@ -25,6 +26,6 @@ body {
   height: 100%;
 
   path {
-    fill: #333 !important;
+    fill: darken($grey-dark, 10%) !important;
   }
 }
