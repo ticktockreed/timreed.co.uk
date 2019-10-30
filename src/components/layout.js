@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
+import "modern-normalize";
 import "../sass/__index.scss";
 
 const Layout = ({ children }) => (
