@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
-// import "./layout.css"
+import "../sass/__index.scss";
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -19,12 +19,19 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div>
+        <div className="container">
           <main>{children}</main>
           <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
+            <div
+              className="row justify-content-center"
+              style={{ opacity: 0.7 }}
+            >
+              <div className="col-6 text-center richtext">
+                © {new Date().getFullYear()}, Built with
+                {` `}
+                <a href="https://www.gatsbyjs.org">Gatsby</a>
+              </div>
+            </div>
           </footer>
         </div>
       </>
