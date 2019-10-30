@@ -9,7 +9,9 @@ import Logo from "../images/Logo.svg";
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <div>{/* <Logo></Logo> */}</div>
+    <div>
+      <Logo></Logo>
+    </div>
   </Layout>
 );
 
