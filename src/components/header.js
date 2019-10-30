@@ -6,8 +6,8 @@ import Logo from "../images/Logo.svg";
 const Header = ({ siteTitle }) => (
   <header className="site-header">
     <div className="container">
-      <div className="row justify-content-center align-items-center site-header--row">
-        <div className="col-10 col-lg-6 text-center">
+      <div className="row">
+        <div className="col-10 col-lg-6">
           <h1>
             <Link to="/">
               <Logo className="site-logo"></Logo>
