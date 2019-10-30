@@ -43,7 +43,7 @@ export default class AnimationExample extends PtsCanvas {
 
     // Generate noise in a grid
     this.noiseGrid.forEach(p => {
-      p.step(0.01 * (1 - speed.x), 0.01 * (1 - speed.y));
+      p.step(0.004 * (1 - speed.x), 0.004 * (1 - speed.y));
       this.form
         .fillOnly("#3f3f3f")
         .point(p, Math.abs((p.noise2D() * this.space.size.x) / 18), "circle");
