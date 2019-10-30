@@ -3,7 +3,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
-import AnimatedLogo from "../components/AnimatedLogo";
+import AnimationExample from "../components/AnimationExample";
 // import ChartExample from "../components/ChartExample";
 // import AnimationExample from "../components/AnimationExample";
 
@@ -44,6 +44,13 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           `gatsby`
         ]}
       />
+      <AnimationExample
+        name="logo-anim"
+        className="logo-anim"
+        background="#111"
+        pause={false}
+      />
+
       <div className="row justify-content-center">
         <div className="col-6">
           {/* <div className="richtext"> */}
@@ -54,7 +61,6 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
             <h1>{data.page_title.text}</h1>
             <p>{data.page_intro.text}</p>
 
-            <AnimatedLogo name="logo_anim" background="#111" />
 
             <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
           </div> */}

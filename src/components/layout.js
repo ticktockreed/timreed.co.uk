@@ -22,10 +22,7 @@ const Layout = ({ children }) => (
         <div className="container">
           <main>{children}</main>
           <footer>
-            <div
-              className="row justify-content-center"
-              style={{ opacity: 0.7 }}
-            >
+            <div className="row justify-content-center">
               <div className="col-6 text-center richtext">
                 © {new Date().getFullYear()}, Built with
                 {` `}

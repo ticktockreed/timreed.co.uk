@@ -1,13 +1,4 @@
-import {
-  Pt,
-  Group,
-  Line,
-  Create,
-  Sound,
-  Triangle,
-  Const,
-  Geom
-} from "pts/dist/es5";
+import { Create } from "pts/dist/es5";
 import { PtsCanvas } from "react-pts-canvas";
 
 export default class AnimationExample extends PtsCanvas {
@@ -54,7 +45,7 @@ export default class AnimationExample extends PtsCanvas {
     this.noiseGrid.forEach(p => {
       p.step(0.01 * (1 - speed.x), 0.01 * (1 - speed.y));
       this.form
-        .fillOnly("#123")
+        .fillOnly("#3f3f3f")
         .point(p, Math.abs((p.noise2D() * this.space.size.x) / 18), "circle");
     });
   }
