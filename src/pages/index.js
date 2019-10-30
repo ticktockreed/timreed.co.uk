@@ -52,7 +52,7 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
       />
 
       <div className="row justify-content-center">
-        <div className="col-6">
+        <div className="col-10 col-lg-6 ">
           {/* <div className="richtext"> */}
           <h1 className="heading03 text-center text-color-turquoise">
             Coming soon...

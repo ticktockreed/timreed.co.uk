@@ -24,7 +24,7 @@ const Layout = ({ children }) => (
           <main>{children}</main>
           <footer>
             <div className="row justify-content-center">
-              <div className="col-6 text-center richtext">
+              <div className="col-10 col-lg-6 text-center richtext">
                 © {new Date().getFullYear()}, Built with
                 {` `}
                 <a href="https://www.gatsbyjs.org">Gatsby</a>
