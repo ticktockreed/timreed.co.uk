@@ -9,24 +9,26 @@ const Footer = () => (
   <div className="footer">
     <div className="container">
       <div className="row justify-content-center">
-        <p className="sr-only">Social</p>
+        <p className="sr-only">Find me on: </p>
         <a
           href={"https://twitter.com/ticktockreed"}
           target="_blank"
           rel="noopener noreferrer"
+          className="footer-social-icon"
         >
           <Twitter></Twitter>
-        </a>
+        </a>{" "}
         <a
           href={"https://linkedin.com/in/ticktockreed"}
           target="_blank"
           rel="noopener noreferrer"
+          className="footer-social-icon"
         >
           <LinkedIn></LinkedIn>
         </a>
       </div>
-      <div className="row justify-content-center">
-        <div className="col-10 col-lg-6 text-center richtext">
+      <div className="row justify-content-center pt-2">
+        <div className="col-10 col-lg-6 text-center richtext text-color-grey-mid">
           © {new Date().getFullYear()} Timothy Reed
         </div>
       </div>
