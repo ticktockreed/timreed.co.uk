@@ -55,10 +55,7 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
         <div className="row justify-content-center">
           <div className="col-10 col-lg-6 ">
             <div className="richtext">
-              <h2>
-                That sweet spot where design and development converge to give
-                you a tickle of excitement
-              </h2>
+              <h2>I like interfaces</h2>
             </div>
           </div>
         </div>
