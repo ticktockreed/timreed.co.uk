@@ -51,12 +51,19 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
         pause={false}
       /> */}
 
-      <div className="row justify-content-center">
-        <div className="col-10 col-lg-6 ">
-          <div className="richtext">
-            <h1>{data.page_title.text}</h1>
-            <p>{data.page_intro.text}</p>
+      <div className="hero">
+        <div className="row justify-content-center">
+          <div className="col-10 col-lg-6 ">
+            <div className="richtext">
+              <h2>I like interfaces</h2>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div className="row justify-content-center">
+        <div className="col-10 col-lg-6">
+          <div className="richtext">
             <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
           </div>
         </div>

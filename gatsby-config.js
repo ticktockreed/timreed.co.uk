@@ -16,14 +16,6 @@ module.exports = {
         path: `${__dirname}/src/images`
       }
     },
-    {
-      resolve: "gatsby-plugin-web-font-loader",
-      options: {
-        google: {
-          families: ["Baloo", "Droid Serif"]
-        }
-      }
-    },
     `gatsby-plugin-sass`,
     {
       resolve: "gatsby-plugin-react-svg",
@@ -45,6 +37,14 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/tr-logo.png` // This path is relative to the root of the site.
+      }
+    },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ["Pt Sans", "Source Sans Pro"]
+        }
       }
     },
     {
