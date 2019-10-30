@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
+import "modern-normalize";
 import "../sass/__index.scss";
 
 const Layout = ({ children }) => (
@@ -22,11 +23,8 @@ const Layout = ({ children }) => (
         <div className="container">
           <main>{children}</main>
           <footer>
-            <div
-              className="row justify-content-center"
-              style={{ opacity: 0.7 }}
-            >
-              <div className="col-6 text-center richtext">
+            <div className="row justify-content-center">
+              <div className="col-10 col-lg-6 text-center richtext">
                 © {new Date().getFullYear()}, Built with
                 {` `}
                 <a href="https://www.gatsbyjs.org">Gatsby</a>
