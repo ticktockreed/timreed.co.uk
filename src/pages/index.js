@@ -3,7 +3,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
-import AnimatedLogo2 from "../components/AnimatedLogo2";
+import AnimatedLogo from "../components/AnimatedLogo";
 // import ChartExample from "../components/ChartExample";
 // import AnimationExample from "../components/AnimationExample";
 
@@ -28,7 +28,6 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
   const { data } = prismicLandingPage;
   const [variance] = useState(0.2);
   // const [paused, pauseAnimation] = useState(false);
-
   useEffect(() => {
     mockData(variance);
   }, [variance]);
@@ -36,7 +35,7 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
   return (
     <Layout>
       <SEO
-        title={data.meta_title.text}
+        title="Home"
         keywords={[
           `Tim Reed`,
           `web developer`,
@@ -45,26 +44,21 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           `gatsby`
         ]}
       />
-      <div>
-        <h1>{data.page_title.text}</h1>
-        <p>{data.page_intro.text}</p>
-        {/* <ChartExample
-          name="pts_chart"
-          background="#0c9"
-          play={false}
-          data={chartData}
-          variance={variance}
-        ></ChartExample>
+      <div className="row justify-content-center">
+        <div className="col-6">
+          {/* <div className="richtext"> */}
+          <h1 className="heading03 text-center text-color-turquoise">
+            Coming soon...
+          </h1>
+          {/* <div>
+            <h1>{data.page_title.text}</h1>
+            <p>{data.page_intro.text}</p>
 
-        <AnimationExample
-          name="pts_anim"
-          background="#fe3"
-          pause={pauseAnimation}
-        /> */}
+            <AnimatedLogo name="logo_anim" background="#111" />
 
-        <AnimatedLogo2 name="logo_anim" background="#111" />
-
-        <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
+            <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
+          </div> */}
+        </div>
       </div>
     </Layout>
   );

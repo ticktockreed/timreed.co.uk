@@ -1,13 +1,21 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
+import Logo from "../images/Logo.svg";
 
 const Header = ({ siteTitle }) => (
   <header>
-    <div>
-      <h1>
-        <Link to="/">{siteTitle}</Link>
-      </h1>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-6 text-center">
+          <h1>
+            <Link to="/">
+              <Logo className="site-logo"></Logo>
+              <div className="sr-only">{siteTitle}</div>
+            </Link>
+          </h1>
+        </div>
+      </div>
     </div>
   </header>
 );
