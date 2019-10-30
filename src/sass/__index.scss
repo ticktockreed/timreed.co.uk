@@ -1,2 +1,30 @@
 @import "./_bootstrap.scss";
-@import "./layout.scss";
+@import "./_variables.scss";
+@import "./typography.scss";
+// @import "./layout.scss";
+
+// Colour modifiers
+@each $item, $color in $colorMap {
+  .text-color-#{$item} {
+    color: $color;
+  }
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: #999;
+
+  font-family: $fontBody;
+}
+
+.site-logo {
+  width: 100%;
+  height: 100%;
+
+  path {
+    fill: #333 !important;
+  }
+}

@@ -5,15 +5,17 @@ import Logo from "../images/Logo.svg";
 
 const Header = ({ siteTitle }) => (
   <header>
-    <div>
-      <h1>
-        <div>
-          <Link to="/">
-            <Logo></Logo>
-            <div className="sr-only">{siteTitle}</div>
-          </Link>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-6 text-center">
+          <h1>
+            <Link to="/">
+              <Logo className="site-logo"></Logo>
+              <div className="sr-only">{siteTitle}</div>
+            </Link>
+          </h1>
         </div>
-      </h1>
+      </div>
     </div>
   </header>
 );

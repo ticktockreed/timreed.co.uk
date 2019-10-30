@@ -13,6 +13,14 @@ module.exports = {
         path: `${__dirname}/src/images`
       }
     },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ["Baloo", "Droid Serif"]
+        }
+      }
+    },
     `gatsby-plugin-sass`,
     {
       resolve: "gatsby-plugin-react-svg",

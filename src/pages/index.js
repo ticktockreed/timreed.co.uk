@@ -8,6 +8,15 @@ import SEO from "../components/seo";
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+    <div className="row justify-content-center">
+      <div className="col-6">
+        {/* <div className="richtext"> */}
+        <h1 className="heading02 text-center text-color-turquoise">
+          Coming soon...
+        </h1>
+        {/* </div> */}
+      </div>
+    </div>
   </Layout>
 );
 
