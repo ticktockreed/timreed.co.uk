@@ -7,6 +7,7 @@ $grey: #b9b9b9;
 $grey-mid: hsl(0, 0%, 47%);
 $grey-dark: #2d2d2d;
 $grey-darker: #13121b;
+$black: black;
 
 $turquoise: #58ffe0;
 $pink: #ec2b88;
@@ -17,7 +18,8 @@ $colorMap: (
   "grey-dark": $grey-dark,
   "grey-darker": $grey-darker,
   "turquoise": $turquoise,
-  "pink": $pink
+  "pink": $pink,
+  "black": $black
 );
 // Gradients
 $grad-dark-grey: linear-gradient(#919191, #191919);

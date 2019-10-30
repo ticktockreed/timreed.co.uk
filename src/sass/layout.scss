@@ -1,3 +1,8 @@
 .content {
   padding-top: 100px;
+  min-height: 800px;
+  position: relative;
+  z-index: 11;
+  margin-bottom: 150px;
+  background-color: $black;
 }
