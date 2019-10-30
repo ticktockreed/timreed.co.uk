@@ -63,14 +63,6 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           </div>
         </div>
       </div>
-
-      <div className="row justify-content-center">
-        <div className="col-10 col-lg-6">
-          <div className="richtext">
-            <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
-          </div>
-        </div>
-      </div>
     </Layout>
   );
 };

@@ -44,23 +44,6 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           `gatsby`
         ]}
       />
-      {/* <AnimationExample
-        name="logo-anim"
-        className="logo-anim"
-        background="#111"
-        pause={false}
-      /> */}
-
-      <div className="hero">
-        <div className="row justify-content-center">
-          <div className="col-10 col-lg-6 ">
-            <div className="richtext">
-              <h2>I like interfaces</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="row justify-content-center">
         <div className="col-10 col-lg-6">
           <div className="richtext">
