@@ -55,12 +55,48 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
         <div className="row justify-content-center">
           <div className="col-10 col-lg-6 ">
             <div className="richtext">
+              <h2>Welcome to the portfolio website of Tim Reed.</h2>
               <h2>
                 That sweet spot where design and development converge to give
                 you a tickle of excitement
               </h2>
             </div>
           </div>
+        </div>
+
+        <div className="row align-items-center justify-content-center">
+          {data.body.map((slice, i) => {
+            if (slice.slice_type === "image_grid") {
+              return (
+                <div className="image-grid" key={`slice-image-grid_${i}`}>
+                  <div className="image-grid-title">
+                    <h2>{slice.primary.title.text}</h2>
+                    <p>
+                      Some companies I've had the pleasure to build digital
+                      interfaces for
+                    </p>
+                  </div>
+                  <div className="row align-items-center justify-content-center">
+                    {slice.items.map((item, i) => {
+                      return (
+                        <div
+                          className="col text-center"
+                          key={`image-grid-item_${i}`}
+                        >
+                          <img
+                            className="client-logo"
+                            src={item.image.url}
+                            alt={item.image.copyright}
+                            width={100}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </Layout>
@@ -71,7 +107,7 @@ export default IndexPage;
 
 export const pageQuery = graphql`
   query {
-    prismicLandingPage(uid: {}, data: {}) {
+    prismicLandingPage {
       prismicId
       data {
         page_title {
@@ -85,6 +121,24 @@ export const pageQuery = graphql`
         }
         page_content {
           html
+        }
+        body {
+          slice_type
+          primary {
+            title {
+              text
+            }
+          }
+          items {
+            image {
+              url
+              copyright
+              dimensions {
+                width
+                height
+              }
+            }
+          }
         }
       }
     }

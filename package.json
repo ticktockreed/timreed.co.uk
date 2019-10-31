@@ -21,6 +21,7 @@
     "merge-graphql-schemas": "^1.7.0",
     "modern-normalize": "^0.5.0",
     "node-sass": "^4.13.0",
+    "prismic-reactjs": "^1.1.1",
     "prop-types": "^15.7.2",
     "pts": "^0.8.10",
     "react": "^16.11.0",
