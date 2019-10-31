@@ -8,9 +8,28 @@ import SkillsList from "../components/SkillsList";
 // import ChartExample from "../components/ChartExample";
 // import AnimationExample from "../components/AnimationExample";
 
+const cleanupSkillsList = skills => {
+  return skills.map(({ node: { data } }) => {
+    const skill = data.skill_name.text;
+    const category = data.category.document[0].data.skill_category.text;
+    return {
+      name: skill,
+      category
+    };
+  });
+};
+const cleanupCategoriesList = categories => {
+  return categories.map(cat => {
+    const category = cat.node.data.skill_category.text;
+    return {
+      category
+    };
+  });
+};
+
 const Skills = ({ data: { allPrismicSkill, allPrismicSkillCategories } }) => {
-  const skills = allPrismicSkill.edges;
-  const categories = allPrismicSkillCategories.edges;
+  const skills = cleanupSkillsList(allPrismicSkill.edges);
+  const categories = cleanupCategoriesList(allPrismicSkillCategories.edges);
 
   return (
     <Layout>

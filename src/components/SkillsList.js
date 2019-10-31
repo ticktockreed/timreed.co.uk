@@ -2,12 +2,10 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const getSkillsFromList = skills => {
-  return skills.map(({ node: data }) => {
-    const skill = data.data.skill_name.text;
-
+  return skills.map(({ name, category }) => {
     return (
-      <div className="skill" key={`skill_${data.data.skill_name.text}`}>
-        {skill}
+      <div className="skill" key={`skill_${name}`}>
+        {name}
       </div>
     );
   });
@@ -15,23 +13,15 @@ const getSkillsFromList = skills => {
 
 function getSkillsByCategory(categories, skills) {
   return categories.map(category => {
-    const cat = category.node.data.skill_category.text;
-    const skillsByCat = skills.filter(
-      ({
-        node: {
-          data: {
-            category: { document }
-          }
-        }
-      }) => {
-        const skillCat = document[0].data.skill_category.text;
-        return skillCat === cat;
-      }
-    );
+    const cat = category.category;
+    const skillsByCat = skills.filter(skill => {
+      return skill.category === cat;
+    });
 
     return (
       <>
         <h3>{cat}</h3>
+
         {getSkillsFromList(skillsByCat)}
       </>
     );
