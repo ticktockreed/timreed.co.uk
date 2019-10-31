@@ -4,10 +4,6 @@ import SEO from "../components/seo";
 import { graphql } from "gatsby";
 import SkillsList from "../components/SkillsList";
 
-// import AnimationExample from "../components/AnimationExample";
-// import ChartExample from "../components/ChartExample";
-// import AnimationExample from "../components/AnimationExample";
-
 const cleanupSkillsList = skills => {
   return skills.map(({ node: { data } }) => {
     const skill = data.skill_name.text;

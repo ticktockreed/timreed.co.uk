@@ -18,6 +18,9 @@ function getSkillsByCategory(categories, skills) {
       return skill.category === cat;
     });
 
+    if (skillsByCat.length === 0) {
+      return false;
+    }
     return (
       <>
         <h3>{cat}</h3>
@@ -31,7 +34,7 @@ function getSkillsByCategory(categories, skills) {
 const Skills = ({ skills, categories }) => {
   return (
     <>
-      <h2>A List of skillz</h2>
+      <h2>Tekkers</h2>
 
       {/* for each category go get the skills for that cat */}
       {getSkillsByCategory(categories, skills)}
