@@ -39,8 +39,8 @@ const Skills = ({ data: { allPrismicSkill, allPrismicSkillCategories } }) => {
           `gatsby`
         ]}
       />
-      <div className="row justify-content-center">
-        <div className="col-10 col-lg-6">
+      <div className="row justify-content-lg-center">
+        <div className="col-9 offset-2 offset-lg-0 col-lg-6  ">
           <div className="richtext">
             <SkillsList skills={skills} categories={categories} />
           </div>

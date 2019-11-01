@@ -52,8 +52,8 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
       /> */}
 
       <div className="hero">
-        <div className="row justify-content-center">
-          <div className="col-10 col-lg-6 ">
+        <div className="row justify-content-lg-center">
+          <div className="col-9 offset-2 offset-lg-0 col-lg-6  ">
             <div className="richtext">
               <h2>Welcome to the portfolio website of Tim Reed.</h2>
               <h2>
@@ -63,42 +63,42 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="row align-items-center justify-content-center">
-          <div className="col-10 col-lg-10 ">
-            {data.body.map((slice, i) => {
-              if (slice.slice_type === "image_grid") {
-                return (
-                  <div className="image-grid" key={`slice-image-grid_${i}`}>
-                    <div className="image-grid-title">
-                      <h2>{slice.primary.title.text}</h2>
-                      <p>
-                        Some companies I've had the pleasure to build digital
-                        interfaces for
-                      </p>
-                    </div>
-                    <div className="row align-items-center justify-content-center">
-                      {slice.items.map((item, i) => {
-                        return (
-                          <div
-                            className="col text-center"
-                            key={`image-grid-item_${i}`}
-                          >
-                            <img
-                              className="client-logo"
-                              src={item.image.url}
-                              alt={item.image.copyright}
-                              width={100}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
+      <div className="row justify-content-lg-center">
+        <div className="col-9 offset-2 offset-lg-0 col-lg-8 ">
+          {data.body.map((slice, i) => {
+            if (slice.slice_type === "image_grid") {
+              return (
+                <div className="image-grid" key={`slice-image-grid_${i}`}>
+                  <div className="image-grid-title">
+                    <h2>{slice.primary.title.text}</h2>
+                    <p>
+                      Some companies I've had the pleasure to build digital
+                      interfaces for
+                    </p>
                   </div>
-                );
-              }
-            })}
-          </div>
+                  <div className="row align-items-center justify-content-center">
+                    {slice.items.map((item, i) => {
+                      return (
+                        <div
+                          className="col text-center"
+                          key={`image-grid-item_${i}`}
+                        >
+                          <img
+                            className="client-logo"
+                            src={item.image.url}
+                            alt={item.image.copyright}
+                            width={100}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </Layout>

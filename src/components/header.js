@@ -8,14 +8,14 @@ const Header = ({ siteTitle }) => (
   <header className="site-header">
     <div className="container">
       <div className="row">
-        <div className="col-10 col-md-1">
+        <div className="col-2 col-md-1">
           <h1>
             <Link to="/">
               <Logo className="site-logo"></Logo>
               <div className="sr-only">{siteTitle}</div>
             </Link>
-            <Nav></Nav>
           </h1>
+          <Nav></Nav>
         </div>
       </div>
     </div>

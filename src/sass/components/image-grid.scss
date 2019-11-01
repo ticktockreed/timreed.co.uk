@@ -4,6 +4,11 @@
   margin: 10px;
   opacity: 0.6;
   transition: opacity 100ms ease-in;
+  max-width: 70px;
+
+  @include media-breakpoint-up(lg) {
+    max-width: 100px;
+  }
 
   &:hover {
     transition: opacity 100ms ease-out;
