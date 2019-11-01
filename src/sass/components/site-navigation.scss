@@ -1,5 +1,47 @@
+$gutter: $grid-gutter-width;
+
+.site-navigation-wrapper {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  position: fixed;
+  z-index: 100;
+
+  > div {
+    height: 100%;
+    > div {
+      height: 100%;
+      > div > {
+        height: 100%;
+      }
+    }
+  }
+}
 .site-navigation {
+  // @include make-col(1);
+  height: 230px;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  margin: auto $gutter / 2;
+
   a {
     text-decoration: none;
+
+    svg {
+      width: 100%;
+      height: 50px;
+    }
   }
+}
+.site-navigation-inner {
+  background-color: rgba($grey-dark, 0.8);
+  width: 50px;
+  margin: auto;
+  border-radius: 6px;
+  padding: 10px;
 }

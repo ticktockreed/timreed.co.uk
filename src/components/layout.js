@@ -6,6 +6,7 @@ import Footer from "./footer";
 import Header from "./header";
 import "modern-normalize";
 import "../sass/__index.scss";
+import Nav from "./nav";
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -22,9 +23,13 @@ const Layout = ({ children }) => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
 
-        <main className="content">
-          <div className="container">{children}</div>
-        </main>
+        <Nav></Nav>
+
+        <div className="content-wrapper">
+          <main className="content">
+            <div className="container">{children}</div>
+          </main>
+        </div>
 
         <Footer siteTitle={data.site.siteMetadata.title} />
       </>
