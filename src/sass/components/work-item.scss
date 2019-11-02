@@ -1,11 +1,9 @@
-.work-items {
+.work-items__scrollpane {
   display: flex;
-  width: 2000px;
 }
 .work-item {
-  width: 600px;
   padding: 10px;
-  margin: 0 0 $gutter 0;
+  margin: 50px;
   position: relative;
   perspective: 300px;
 
@@ -15,6 +13,10 @@
 }
 .work-item__image-wrapper {
   position: relative;
+  overflow: hidden;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 400px;
 }
 
 .work-item__mouse-position {
@@ -24,6 +26,11 @@
   background-color: rgba(0, 0, 0, 1);
   padding: 10;
 }
+.work-item__title {
+  transform: rotateX(0deg) rotateY(0deg) translate3d(0px, -30px, 30px);
+  z-index: 100;
+}
+
 .work-item__center-dot {
   position: absolute;
   border: solid 5px red;

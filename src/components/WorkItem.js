@@ -13,6 +13,7 @@ const WorkItem = ({ data, uid }) => {
 
   const handleMouseMove = (evt, workItemWrapper, inner) => {
     // debugger;
+
     const _x = workItemWrapper.offsetLeft + workItemWrapper.offsetWidth / 2;
     const _y = workItemWrapper.offsetTop + workItemWrapper.offsetHeight / 2;
     const x = evt.pageX - _x;
@@ -59,22 +60,28 @@ const WorkItem = ({ data, uid }) => {
           className="work-item__image-wrapper"
           ref={inner}
           style={{
-            transform: `rotateX(${mousePointer.rotateX}deg) rotateY(${mousePointer.rotateY}deg)`
+            transform: `rotateX(${mousePointer.rotateX}deg) rotateY(${mousePointer.rotateY}deg)`,
+            backgroundImage: `url("${data.main_image.url}")`
+          }}
+        ></div>
+        <div
+          className="work-item__title"
+          style={{
+            transform: `rotateX(${mousePointer.rotateX}deg) rotateY(${mousePointer.rotateY}deg) translate3d(0, -30px, 30px`
           }}
         >
-          {/* work item */}
           {data.title.text}
-          <img src={data.main_image.url} alt={data.main_image.alt} />
         </div>
+        <div
+          className="work-item__center-dot"
+          style={{
+            // display: mousePointer.active ? "block" : "none",
+            top: mousePointer._y,
+            left: mousePointer._x,
+            zIndex: 10000
+          }}
+        ></div>
       </div>
-      <div
-        className="work-item__center-dot"
-        style={{
-          display: mousePointer.active ? "block" : "none",
-          top: mousePointer._y,
-          left: mousePointer._x
-        }}
-      ></div>
     </>
   );
 };

@@ -29,7 +29,8 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
-    "react-pts-canvas": "^0.2.4"
+    "react-pts-canvas": "^0.2.4",
+    "react-slick": "^0.25.2"
   },
   "keywords": [
     "gatsby"
