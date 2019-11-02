@@ -12,12 +12,10 @@ const WorkItem = ({ data, uid }) => {
   const inner = useRef(null);
 
   const handleMouseMove = (evt, workItemWrapper, inner) => {
-    // debugger;
-
     const _x = workItemWrapper.offsetLeft + workItemWrapper.offsetWidth / 2;
     const _y = workItemWrapper.offsetTop + workItemWrapper.offsetHeight / 2;
     const x = evt.pageX - _x;
-    const y = evt.pageY - _y;
+    const y = (evt.pageY - _y) * -1;
 
     const rotateX = (x / (inner.offsetWidth / 4)).toFixed(2);
     const rotateY = (y / (inner.offsetHeight / 4)).toFixed(2);
@@ -34,15 +32,7 @@ const WorkItem = ({ data, uid }) => {
   };
 
   const handleMouseOut = () => {
-    setMousePointer({
-      active: false,
-      _x: 0,
-      _y: 0,
-      x: 0,
-      y: 0,
-      rotateX: 0,
-      rotateY: 0
-    });
+    setMousePointer({ ...mousePointer, ...{ active: false } });
   };
 
   return (

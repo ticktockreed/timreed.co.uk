@@ -12,7 +12,7 @@ const WorkPage = ({ data: { prismicWork } }) => {
     arrows: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1
   };
   return (
@@ -37,6 +37,7 @@ const WorkPage = ({ data: { prismicWork } }) => {
           </div>
         </div>
       </div>
+
       <div className="work-items">
         <Slider {...sliderSettings}>
           {data.body[0].items.map(({ work_item }) => {

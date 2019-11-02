@@ -1,9 +1,9 @@
-.work-items__scrollpane {
-  display: flex;
+.work-items {
+  margin-left: 400px;
+  position: relative;
 }
 .work-item {
   padding: 10px;
-  margin: 50px;
   position: relative;
   perspective: 300px;
 
@@ -14,7 +14,7 @@
 .work-item__image-wrapper {
   position: relative;
   overflow: hidden;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   height: 400px;
 }
