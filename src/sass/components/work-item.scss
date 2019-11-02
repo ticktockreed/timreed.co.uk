@@ -1,11 +1,19 @@
 .work-items {
-  // margin-left: 400px;
-  position: relative;
+  // width: 2000px;
+  padding-left: 20%;
+  // display: flex;
+  white-space: nowrap;
+}
+.work-item__wrapper {
+  display: inline-block;
+  width: 500px;
 }
 .work-item {
   padding: 10px;
   position: relative;
-  perspective: 300px;
+  margin: 0 100px;
+
+  perspective: 80px;
   max-width: 500px;
   img {
     max-width: 100%;
@@ -17,6 +25,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 400px;
+  transition: transform 0.3s;
 }
 
 .work-item__mouse-position {
@@ -27,8 +36,9 @@
   padding: 10;
 }
 .work-item__title {
-  transform: rotateX(0deg) rotateY(0deg) translate3d(0px, -30px, 30px);
+  transform: rotateX(0deg) rotateY(0deg) translate3d(0px, -30px, 20px);
   z-index: 100;
+  transition: transform 0.3s;
 }
 
 .work-item__center-dot {

@@ -40,7 +40,6 @@ const WorkPage = ({ data: { prismicWork } }) => {
       </div>
 
       <div className="work-items">
-        {/* <Slider {...sliderSettings}> */}
         {data.body[0].items.map(({ work_item }) => {
           if (!work_item) {
             return false;
@@ -49,7 +48,6 @@ const WorkPage = ({ data: { prismicWork } }) => {
           const { data, uid } = work_item.document[0];
           return <WorkItem data={data} uid={uid}></WorkItem>;
         })}
-        {/* </Slider> */}
       </div>
     </Layout>
   );

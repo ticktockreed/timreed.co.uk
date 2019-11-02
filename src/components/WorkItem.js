@@ -37,7 +37,7 @@ const WorkItem = ({ data, uid }) => {
     //   set origin position of card
     updateMouseOrigin(container);
 
-    updateRotateDeg(inner, mousePointer);
+    updateRotateDeg(container, mousePointer);
 
     // set cursor position from center
     const x = evt.pageX - mouseOrigin.x;
@@ -54,22 +54,24 @@ const WorkItem = ({ data, uid }) => {
     updateMousePosition(evt, container, inner);
   };
 
-  //   const handleMouseLeave = () => {
-  //     setMousePointer({
-  //       ...mousePointer,
-  //       ...{ active: false, rotateX: 0, rotateY: 0 }
-  //     });
-  //   };
+  const handleMouseLeave = () => {
+    setMousePointer({
+      active: false,
+      x: 0,
+      y: 0
+    });
+    setRotateDeg({ x: 0, y: 0 });
+  };
 
   return (
-    <>
+    <div className="work-item__wrapper">
       <div
         className="work-item"
         key={`work-item_${uid}`}
         onMouseEnter={evt =>
           handleMouseMove(evt, container.current, inner.current)
         }
-        // onMouseLeave={handleMouseLeave}
+        onMouseLeave={handleMouseLeave}
         onMouseMove={evt =>
           handleMouseMove(evt, container.current, inner.current)
         }
@@ -86,22 +88,22 @@ const WorkItem = ({ data, uid }) => {
         <div
           className="work-item__title"
           style={{
-            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg) translate3d(0, -30px, 30px`
+            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg) translate3d(0, -60px, 20px`
           }}
         >
           {data.title.text}
         </div>
-        <div
-          className="work-item__center-dot"
-          style={{
-            // display: mousePointer.active ? "block" : "none",
-            top: mouseOrigin.y,
-            left: mouseOrigin.x,
-            zIndex: 10000
-          }}
-        ></div>
       </div>
-    </>
+      <div
+        className="work-item__center-dot"
+        style={{
+          // display: mousePointer.active ? "block" : "none",
+          top: mouseOrigin.y,
+          left: mouseOrigin.x,
+          zIndex: 10000
+        }}
+      ></div>
+    </div>
   );
 };
 
