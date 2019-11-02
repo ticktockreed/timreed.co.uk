@@ -1,12 +1,11 @@
 .work-items {
-  margin-left: 400px;
-  position: relative;
+  // margin-left: 400px;
 }
 .work-item {
   padding: 10px;
   position: relative;
   perspective: 300px;
-
+  max-width: 500px;
   img {
     max-width: 100%;
   }

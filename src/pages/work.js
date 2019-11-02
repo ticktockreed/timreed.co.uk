@@ -12,7 +12,8 @@ const WorkPage = ({ data: { prismicWork } }) => {
     arrows: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 2,
+    centerMode: true,
     slidesToScroll: 1
   };
   return (
