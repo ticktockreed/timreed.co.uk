@@ -40,8 +40,8 @@ const WorkItem = ({ data, uid }) => {
     updateRotateDeg(inner, mousePointer);
 
     // set cursor position from center
-    const x = evt.clientX - mouseOrigin.x;
-    const y = (evt.clientY - mouseOrigin.y) * -1;
+    const x = evt.pageX - mouseOrigin.x;
+    const y = (evt.pageY - mouseOrigin.y) * -1;
 
     setMousePointer({
       active: true,
