@@ -4,8 +4,25 @@
   padding: 10px;
   background-color: rgba(#fff, 0.6);
   margin: 0 0 $gutter 0;
+  position: relative;
+  perspective: 300px;
 
   img {
     max-width: 100%;
   }
+}
+.work-item__image-wrapper {
+  position: absolute;
+}
+
+.work-item__mouse-position {
+  position: fixed;
+  right: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 10;
+}
+.work-item__center-dot {
+  position: absolute;
+  border: solid 5px red;
 }
