@@ -12,15 +12,14 @@ const WorkItem = ({ data, uid }) => {
   const inner = useRef(null);
 
   const handleMouseMove = (evt, workItemWrapper, inner) => {
+    // debugger;
     const _x = workItemWrapper.offsetLeft + workItemWrapper.offsetWidth / 2;
     const _y = workItemWrapper.offsetTop + workItemWrapper.offsetHeight / 2;
-    const x = evt.clientX - _x;
-    const y = evt.clientY - _y;
+    const x = evt.pageX - _x;
+    const y = evt.pageY - _y;
 
-    const rotateX = (x / (inner.offsetWidth / 4)).toFixed();
-    const rotateY = (y / (inner.offsetHeight / 4)).toFixed();
-
-    console.log(rotateX, rotateY);
+    const rotateX = (x / (inner.offsetWidth / 4)).toFixed(2);
+    const rotateY = (y / (inner.offsetHeight / 4)).toFixed(2);
 
     setMousePointer({
       active: true,
@@ -35,7 +34,7 @@ const WorkItem = ({ data, uid }) => {
 
   const handleMouseOut = () => {
     setMousePointer({
-      active: true,
+      active: false,
       _x: 0,
       _y: 0,
       x: 0,
@@ -57,23 +56,14 @@ const WorkItem = ({ data, uid }) => {
         ref={workItemWrapper}
       >
         <div
-          className="work-item__mouse-position"
-          style={{
-            display: mousePointer.active ? "block" : "none"
-          }}
-        >
-          X: {mousePointer.x}, Y: {mousePointer.y}
-        </div>
-        {/* work item */}
-        {data.title.text}
-
-        <div
           className="work-item__image-wrapper"
           ref={inner}
           style={{
             transform: `rotateX(${mousePointer.rotateX}deg) rotateY(${mousePointer.rotateY}deg)`
           }}
         >
+          {/* work item */}
+          {data.title.text}
           <img src={data.main_image.url} alt={data.main_image.alt} />
         </div>
       </div>

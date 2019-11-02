@@ -1,8 +1,10 @@
+.work-items {
+  display: flex;
+  width: 2000px;
+}
 .work-item {
-  width: 300px;
-  height: 300px;
+  width: 600px;
   padding: 10px;
-  background-color: rgba(#fff, 0.6);
   margin: 0 0 $gutter 0;
   position: relative;
   perspective: 300px;
@@ -12,7 +14,7 @@
   }
 }
 .work-item__image-wrapper {
-  position: absolute;
+  position: relative;
 }
 
 .work-item__mouse-position {

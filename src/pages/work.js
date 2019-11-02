@@ -22,19 +22,19 @@ const WorkPage = ({ data: { prismicWork } }) => {
       <div className="row justify-content-center">
         <div className="col-10 col-lg-6" style={{ position: "static" }}>
           <div className="richtext">
-            {console.log("data.body[0].items)", data.body[0].items)}
-
-            {data.body[0].items.map(({ work_item }) => {
-              if (!work_item) {
-                return false;
-              }
-
-              const { data, uid } = work_item.document[0];
-              return <WorkItem data={data} uid={uid}></WorkItem>;
-            })}
             {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
           </div>
         </div>
+      </div>
+      <div className="work-items">
+        {data.body[0].items.map(({ work_item }) => {
+          if (!work_item) {
+            return false;
+          }
+
+          const { data, uid } = work_item.document[0];
+          return <WorkItem data={data} uid={uid}></WorkItem>;
+        })}
       </div>
     </Layout>
   );
