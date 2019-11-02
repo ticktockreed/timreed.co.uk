@@ -2,8 +2,9 @@ import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
+import WorkItem from "../components/WorkItem";
 
-const IndexPage = ({ data: { prismicWork } }) => {
+const WorkPage = ({ data: { prismicWork } }) => {
   const { data } = prismicWork;
 
   return (
@@ -19,7 +20,7 @@ const IndexPage = ({ data: { prismicWork } }) => {
         ]}
       />
       <div className="row justify-content-center">
-        <div className="col-10 col-lg-6">
+        <div className="col-10 col-lg-6" style={{ position: "static" }}>
           <div className="richtext">
             {console.log("data.body[0].items)", data.body[0].items)}
 
@@ -29,13 +30,7 @@ const IndexPage = ({ data: { prismicWork } }) => {
               }
 
               const { data, uid } = work_item.document[0];
-              return (
-                <div className="work-item" key={`work-item_${uid}`}>
-                  {/* work item */}
-                  {data.title.text}
-                  <img src={data.main_image.url} alt={data.main_image.alt} />
-                </div>
-              );
+              return <WorkItem data={data} uid={uid}></WorkItem>;
             })}
             {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
           </div>
@@ -45,7 +40,7 @@ const IndexPage = ({ data: { prismicWork } }) => {
   );
 };
 
-export default IndexPage;
+export default WorkPage;
 
 export const pageQuery = graphql`
   query {
