@@ -5,74 +5,55 @@ import Hammer from "hammerjs";
 const WorkList = ({ items }) => {
   const containerRef = useRef(null);
   const sliderRef = useRef(null);
-  const [status, setStatus] = useState("just here");
-  const [blockText, setBlockText] = useState("I'm a slider");
   const [sliderPosition, setSliderPositon] = useState({
     isDragging: false,
+    _x: 0, // previousX
     x: 0
   });
 
   useEffect(() => {
     const newHammer = Hammer(containerRef.current);
-    newHammer.add(
-      new Hammer.Pan({ direction: Hammer.DIRECTION_ALL, threshold: 0 })
-    );
-    newHammer.on("pan", handleDrag);
-
-    // poor choice here, but to keep it simple
-    // setting up a few vars to keep track of things.
-    // at issue is these values need to be encapsulated
-    // in some scope other than global.
+    let isDragging = false;
     let lastPosX = 0;
 
-    let isDragging = false;
-    function handleDrag(ev) {
-      // for convience, let's get a reference to our object
-      let elem = sliderRef.current;
+    newHammer.on("pan", e =>
+      setSliderPositon(sliderPosition => {
+        if (!sliderPosition.isDragging) {
+          isDragging = true;
+          lastPosX = sliderPosition._x;
+        }
 
-      // DRAG STARTED
-      // here, let's snag the current position
-      // and keep track of the fact that we're dragging
-      if (!isDragging) {
-        isDragging = true;
-        lastPosX = elem.offsetLeft;
+        let posX = e.deltaX + lastPosX;
 
-        setStatus("You, sir, are dragging me...");
+        if (e.isFinal) {
+          isDragging = false;
+        }
 
-        setBlockText("WOAH");
-      }
-
-      // we simply need to determine where the x,y of this
-      // object is relative to where it's "last" known position is
-      // NOTE:
-      //    deltaX and deltaY are cumulative
-      // Thus we need to always calculate 'real x and y' relative
-      // to the "lastPosX/Y"
-      let posX = ev.deltaX + lastPosX;
-
-      // move our element to that position
-      elem.style.left = posX + "px";
-
-      // DRAG ENDED
-      // this is where we simply forget we are dragging
-      if (ev.isFinal) {
-        isDragging = false;
-        setStatus("Much better. It's nice here.");
-        setBlockText("Thanks");
-      }
-    }
+        console.log(lastPosX);
+        return {
+          isDragging: isDragging,
+          _x: posX,
+          x: posX
+        };
+      })
+    );
   }, [sliderRef]);
 
   return (
     <div className="work-items" ref={containerRef}>
       <div className="helper">
         <div>Xpos: {sliderPosition.x}</div>
+        <div>lastPosX: {sliderPosition._x}</div>
         <div>Dragging: {sliderPosition.isDragging && "isDragging"}</div>
-        <div>status: {status}</div>
-        <div>blockText: {blockText}</div>
       </div>
 
-      <div className="work-items__slider" ref={sliderRef}>
+      <div
+        className="work-items__slider"
+        ref={sliderRef}
+        style={{
+          transform: `translate3d(${sliderPosition.x}px,0,0)`
+        }}
+      >
         {items.map(({ work_item }) => {
           if (!work_item) {
             return false;
