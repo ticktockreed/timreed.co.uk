@@ -1,11 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import WorkItem from "./WorkItem";
 import Hammer from "hammerjs";
-import { WSAEINVALIDPROVIDER } from "constants";
-
-function decelerate(startDist, velocity) {
-  console.log("decelerate");
-}
 
 const WorkList = ({ items }) => {
   const sliderRef = useRef(null);
@@ -18,12 +13,16 @@ const WorkList = ({ items }) => {
   useEffect(() => {
     const newHammer = Hammer(sliderRef.current);
     let isDragging = false;
+    let isDecelerating = false;
     let lastPosX = 0;
 
     newHammer.on("pan", e =>
       setSliderPositon(sliderPosition => {
         const sliderLength = sliderRef.current.getBoundingClientRect().width;
 
+        if (sliderPosition.isDecelerating) {
+          return sliderPosition;
+        }
         if (!sliderPosition.isDragging) {
           isDragging = true;
           lastPosX = sliderPosition._x;
@@ -42,11 +41,51 @@ const WorkList = ({ items }) => {
 
         if (e.isFinal) {
           isDragging = false;
+          isDecelerating = true;
         }
 
-        console.log(e);
+        if (isDecelerating) {
+          const updateInterval = 16;
+          const scaleFactor = 200;
+
+          const amplitude = e.overallVelocityX * scaleFactor;
+          console.log("amplitude", amplitude);
+          console.log("posx", posX);
+          const targetPosition = posX + amplitude;
+          console.log("targetPosition", targetPosition);
+          const timestamp = Date.now();
+          const timeConstant = 100;
+
+          const ticker = setInterval(function() {
+            var elapsed = Date.now() - timestamp;
+            let position =
+              targetPosition -
+              parseInt(amplitude * Math.exp(-elapsed / timeConstant));
+
+            if (position > 0) {
+              position = 0;
+            }
+            const endOfPane = -sliderLength + window.innerWidth;
+            if (position <= endOfPane) {
+              position = endOfPane;
+            }
+            console.log(elapsed);
+            if (elapsed > 6 * timeConstant) {
+              clearInterval(ticker);
+              isDecelerating = false;
+            }
+            setSliderPositon({
+              isDragging: isDragging,
+              isDecelerating: isDecelerating,
+              _x: position,
+              x: position
+            });
+          }, updateInterval);
+        }
+
         return {
           isDragging: isDragging,
+          isDecelerating: isDecelerating,
           _x: posX,
           x: posX
         };
@@ -60,6 +99,9 @@ const WorkList = ({ items }) => {
         <div>Xpos: {sliderPosition.x}</div>
         <div>lastPosX: {sliderPosition._x}</div>
         <div>Dragging: {sliderPosition.isDragging && "isDragging"}</div>
+        <div>
+          Decelerating: {sliderPosition.isDecelerating && "isDecelerating"}
+        </div>
       </div>
       <div className="work-items">
         <div
