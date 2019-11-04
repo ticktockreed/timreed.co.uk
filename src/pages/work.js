@@ -4,6 +4,7 @@ import SEO from "../components/seo";
 import { graphql } from "gatsby";
 import WorkItem from "../components/WorkItem";
 import Slider from "react-slick";
+import WorkList from "../components/WorkList";
 
 const WorkPage = ({ data: { prismicWork } }) => {
   const { data } = prismicWork;
@@ -38,17 +39,7 @@ const WorkPage = ({ data: { prismicWork } }) => {
           </div>
         </div>
       </div>
-
-      <div className="work-items">
-        {data.body[0].items.map(({ work_item }) => {
-          if (!work_item) {
-            return false;
-          }
-
-          const { data, uid } = work_item.document[0];
-          return <WorkItem data={data} uid={uid}></WorkItem>;
-        })}
-      </div>
+      <WorkList items={data.body[0].items}></WorkList>
     </Layout>
   );
 };

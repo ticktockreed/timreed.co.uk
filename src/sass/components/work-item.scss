@@ -1,7 +1,11 @@
 .work-items {
-  // width: 2000px;
   padding-left: 20%;
-  // display: flex;
+  outline: solid 1px red;
+  width: 100%;
+  overflow: hidden;
+}
+.work-items__slider {
+  position: absolute;
   white-space: nowrap;
 }
 .work-item__wrapper {
@@ -44,4 +48,11 @@
 .work-item__center-dot {
   position: absolute;
   border: solid 5px red;
+}
+
+.helper {
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
 }

@@ -19,6 +19,7 @@
     "gatsby-source-prismic": "^2.3.0-alpha.3",
     "gatsby-source-prismic-graphql": "^3.3.1",
     "gatsby-transformer-sharp": "^2.3.2",
+    "hammerjs": "^2.0.8",
     "merge-graphql-schemas": "^1.7.0",
     "modern-normalize": "^0.5.0",
     "node-sass": "^4.13.0",

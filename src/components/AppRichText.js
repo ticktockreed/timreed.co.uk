@@ -3,8 +3,6 @@ import { RichText } from "prismic-reactjs";
 
 import { linkResolver } from "../utils/linkResolver";
 
-console.log(RichText.asHtml);
-
 const AppRichText = ({ text }) => {
   return (
     <div
