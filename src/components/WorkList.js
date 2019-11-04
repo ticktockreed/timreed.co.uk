@@ -1,6 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import WorkItem from "./WorkItem";
 import Hammer from "hammerjs";
+import { WSAEINVALIDPROVIDER } from "constants";
+
+function decelerate(startDist, velocity) {
+  console.log("decelerate");
+}
 
 const WorkList = ({ items }) => {
   const sliderRef = useRef(null);
@@ -17,6 +22,8 @@ const WorkList = ({ items }) => {
 
     newHammer.on("pan", e =>
       setSliderPositon(sliderPosition => {
+        const sliderLength = sliderRef.current.getBoundingClientRect().width;
+
         if (!sliderPosition.isDragging) {
           isDragging = true;
           lastPosX = sliderPosition._x;
@@ -24,11 +31,20 @@ const WorkList = ({ items }) => {
 
         let posX = e.deltaX + lastPosX;
 
+        // Set limits for scroll
+        if (posX > 0) {
+          posX = 0;
+        }
+        const endOfPane = -sliderLength + window.innerWidth;
+        if (posX <= endOfPane) {
+          posX = endOfPane;
+        }
+
         if (e.isFinal) {
           isDragging = false;
         }
 
-        console.log(lastPosX);
+        console.log(e);
         return {
           isDragging: isDragging,
           _x: posX,
