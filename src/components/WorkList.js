@@ -49,10 +49,7 @@ const WorkList = ({ items }) => {
           const scaleFactor = 200;
 
           const amplitude = e.overallVelocityX * scaleFactor;
-          console.log("amplitude", amplitude);
-          console.log("posx", posX);
           const targetPosition = posX + amplitude;
-          console.log("targetPosition", targetPosition);
           const timestamp = Date.now();
           const timeConstant = 100;
 
@@ -69,7 +66,7 @@ const WorkList = ({ items }) => {
             if (position <= endOfPane) {
               position = endOfPane;
             }
-            console.log(elapsed);
+
             if (elapsed > 6 * timeConstant) {
               clearInterval(ticker);
               isDecelerating = false;
