@@ -4,6 +4,11 @@
   overflow: hidden;
   position: relative;
   height: 500px;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
 }
 .work-items__slider {
   position: absolute;
