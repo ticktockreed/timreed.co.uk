@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-const WorkItem = ({ data, uid }) => {
+const WorkItem = ({ data, uid, sliderPosition }) => {
   const [mousePointer, setMousePointer] = useState({
     active: false,
     x: 0,
@@ -40,8 +40,8 @@ const WorkItem = ({ data, uid }) => {
     updateRotateDeg(container, mousePointer);
 
     // set cursor position from center
-    const x = evt.pageX - mouseOrigin.x;
-    const y = (evt.pageY - mouseOrigin.y) * -1;
+    const x = evt.clientX - sliderPosition.x - mouseOrigin.x;
+    const y = (evt.clientY - mouseOrigin.y) * -1;
 
     setMousePointer({
       active: true,

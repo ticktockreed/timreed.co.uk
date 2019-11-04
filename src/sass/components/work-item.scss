@@ -2,10 +2,12 @@
   outline: solid 1px red;
   width: 100%;
   overflow: hidden;
+  position: relative;
+  height: 500px;
 }
 .work-items__slider {
   position: absolute;
-  white-space: nowrap;
+  width: 2500px;
 }
 .work-item__wrapper {
   display: inline-block;
