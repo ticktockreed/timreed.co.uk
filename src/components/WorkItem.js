@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const WorkItem = ({ data, uid, sliderPosition }) => {
   const [mousePointer, setMousePointer] = useState({
@@ -62,6 +62,20 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
     });
     setRotateDeg({ x: 0, y: 0 });
   };
+
+  useEffect(() => {
+    let y = 0;
+    if (sliderPosition.dragDirection === 2) {
+      y = -1;
+    } else if (sliderPosition.dragDirection === 4) {
+      y = 1;
+    }
+
+    setRotateDeg({
+      x: 0,
+      y
+    });
+  }, [sliderPosition.dragDirection]);
 
   return (
     <div className="work-item__wrapper">

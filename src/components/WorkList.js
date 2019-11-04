@@ -6,6 +6,9 @@ const WorkList = ({ items }) => {
   const sliderRef = useRef(null);
   const [sliderPosition, setSliderPositon] = useState({
     isDragging: false,
+    isDecelerating: false,
+    dragDirection: "",
+    dragVelocity: 0,
     _x: 0, // previousX
     x: 0
   });
@@ -83,6 +86,7 @@ const WorkList = ({ items }) => {
         return {
           isDragging: isDragging,
           isDecelerating: isDecelerating,
+          dragDirection: e.direction,
           _x: posX,
           x: posX
         };
@@ -99,6 +103,7 @@ const WorkList = ({ items }) => {
         <div>
           Decelerating: {sliderPosition.isDecelerating && "isDecelerating"}
         </div>
+        <div>Drag Direction: {sliderPosition.dragDirection}</div>
       </div>
       <div className="work-items">
         <div
