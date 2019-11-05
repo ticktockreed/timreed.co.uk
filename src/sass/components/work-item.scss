@@ -4,7 +4,7 @@
   position: relative;
   height: 490px;
 
-  padding-top: 60px;
+  padding-top: 100px;
 }
 .work-items__slider {
   position: absolute;
@@ -21,6 +21,21 @@
 .work-item {
   position: relative;
   margin: 0 100px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    height: 30px;
+    right: 0;
+
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.2) 50%,
+      transparent 80%
+    );
+  }
 
   perspective: 120px;
   max-width: 500px;
