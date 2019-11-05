@@ -7,7 +7,7 @@ const WorkList = ({ items }) => {
   const [sliderPosition, setSliderPositon] = useState({
     isDragging: false,
     isDecelerating: false,
-    dragDirection: "",
+    dragDirection: 0,
     dragVelocity: 0,
     _x: 0, // previousX
     x: 0
@@ -21,6 +21,7 @@ const WorkList = ({ items }) => {
 
     newHammer.on("pan", e =>
       setSliderPositon(sliderPosition => {
+        console.log(e);
         const sliderLength = sliderRef.current.getBoundingClientRect().width;
 
         if (sliderPosition.isDecelerating) {
@@ -43,6 +44,7 @@ const WorkList = ({ items }) => {
         }
 
         if (e.isFinal) {
+          console.log("isFinal");
           isDragging = false;
           isDecelerating = true;
         }

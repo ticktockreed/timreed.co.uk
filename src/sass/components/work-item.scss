@@ -1,19 +1,17 @@
 .work-items {
-  outline: solid 1px red;
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 600px;
-  padding-top: 100px;
+  height: 490px;
+}
+.work-items__slider {
+  position: absolute;
+  display: flex;
   cursor: grab;
 
   &:active {
     cursor: grabbing;
   }
-}
-.work-items__slider {
-  position: absolute;
-  display: flex;
 }
 .work-item__wrapper {
   display: inline-block;
@@ -37,6 +35,8 @@
   background-repeat: no-repeat;
   height: 400px;
   transition: transform 0.3s;
+  background-image: none !important;
+  background-color: #333;
 }
 
 .work-item__mouse-position {
@@ -49,7 +49,11 @@
 .work-item__title {
   transform: rotateX(0deg) rotateY(0deg) translate3d(0px, -30px, 20px);
   z-index: 100;
+  background-color: rgba(225, 225, 225, 0.5);
+  display: inline-block;
+  padding: 10px;
   transition: transform 0.3s;
+  color: $black;
 }
 
 .work-item__center-dot {

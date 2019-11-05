@@ -102,13 +102,13 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
         <div
           className="work-item__title"
           style={{
-            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg) translate3d(0, -60px, 20px`
+            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg) translate3d(0, -100px, 20px)`
           }}
         >
           {data.title.text}
         </div>
       </div>
-      <div
+      {/* <div
         className="work-item__center-dot"
         style={{
           // display: mousePointer.active ? "block" : "none",
@@ -116,7 +116,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
           left: mouseOrigin.x,
           zIndex: 10000
         }}
-      ></div>
+      ></div> */}
     </div>
   );
 };

@@ -29,13 +29,15 @@ const WorkPage = ({ data: { prismicWork } }) => {
           `gatsby`
         ]}
       />
-      <div className="row justify-content-lg-center">
-        <div
-          className="col-9 offset-2 offset-lg-0 col-lg-6"
-          style={{ position: "static" }}
-        >
-          <div className="richtext">
-            {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
+      <div className="container">
+        <div className="row justify-content-lg-center">
+          <div
+            className="col-9 offset-2 offset-lg-0 col-lg-6"
+            style={{ position: "static" }}
+          >
+            <div className="richtext">
+              {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
+            </div>
           </div>
         </div>
       </div>
