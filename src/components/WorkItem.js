@@ -104,14 +104,9 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
               backgroundImage: `url("${data.main_image.url}")`
             }}
           ></div>
-        </div>
-        <div
-          className="work-item__title"
-          style={{
-            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg) translate3d(0, -100px, 20px)`
-          }}
-        >
-          {data.title.text}
+          <div className="work-item__info">
+            <div className="work-item__title">{data.title.text}</div>
+          </div>
         </div>
       </div>
       {/* <div

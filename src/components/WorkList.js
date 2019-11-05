@@ -2,6 +2,20 @@ import React, { useRef, useEffect, useState } from "react";
 import WorkItem from "./WorkItem";
 import Hammer from "hammerjs";
 
+const Helper = ({ sliderPosition }) => {
+  return (
+    <div className="helper">
+      <div>Xpos: {sliderPosition.x}</div>
+      <div>lastPosX: {sliderPosition._x}</div>
+      <div>Dragging: {sliderPosition.isDragging && "isDragging"}</div>
+      <div>
+        Decelerating: {sliderPosition.isDecelerating && "isDecelerating"}
+      </div>
+      <div>Drag Direction: {sliderPosition.dragDirection}</div>
+    </div>
+  );
+};
+
 const WorkList = ({ items }) => {
   const buffer = 400;
   const sliderRef = useRef(null);
@@ -25,8 +39,6 @@ const WorkList = ({ items }) => {
 
     newHammer.on("pan", e =>
       setSliderPositon(sliderPosition => {
-        console.log(e);
-
         if (sliderPosition.isDecelerating) {
           return sliderPosition;
         }
@@ -47,7 +59,6 @@ const WorkList = ({ items }) => {
         }
 
         if (e.isFinal) {
-          console.log("isFinal");
           isDragging = false;
           isDecelerating = true;
         }
@@ -102,15 +113,7 @@ const WorkList = ({ items }) => {
 
   return (
     <>
-      <div className="helper">
-        <div>Xpos: {sliderPosition.x}</div>
-        <div>lastPosX: {sliderPosition._x}</div>
-        <div>Dragging: {sliderPosition.isDragging && "isDragging"}</div>
-        <div>
-          Decelerating: {sliderPosition.isDecelerating && "isDecelerating"}
-        </div>
-        <div>Drag Direction: {sliderPosition.dragDirection}</div>
-      </div>
+      {/* <Helper sliderPosition={sliderPosition}></Helper> */}
       <div className="work-items">
         <div
           className="work-items__slider"
