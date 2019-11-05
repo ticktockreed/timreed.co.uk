@@ -23,4 +23,4 @@ $colorMap: (
 );
 // Gradients
 $grad-dark-grey: linear-gradient(#919191, #191919);
-$grad-dark-black: linear-gradient(0.6turn, #2e2e2e, #000000);
+$grad-dark-black: linear-gradient(0.6turn, #2e2e2e, $grey-darker);

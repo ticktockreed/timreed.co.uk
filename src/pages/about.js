@@ -22,23 +22,25 @@ const AboutPage = ({ data: { prismicAbout } }) => {
           `gatsby`
         ]}
       />
-      <div className="row justify-content-lg-center">
-        <div className="col-9 offset-2 offset-lg-0 col-lg-6  ">
-          <div className="richtext">
-            {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
-            {body.map((slice, i) => {
-              console.log(slice);
-              if (slice.slice_type === "text") {
-                return (
-                  <div
-                    className={slice.slice_type}
-                    key={`${slice.slice_type}_${i}`}
-                  >
-                    <AppRichText text={slice.primary.text}></AppRichText>
-                  </div>
-                );
-              }
-            })}
+      <div class="container">
+        <div className="row justify-content-lg-center">
+          <div className="col-9 offset-2 offset-lg-0 col-lg-6  ">
+            <div className="richtext">
+              {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
+              {body.map((slice, i) => {
+                console.log(slice);
+                if (slice.slice_type === "text") {
+                  return (
+                    <div
+                      className={slice.slice_type}
+                      key={`${slice.slice_type}_${i}`}
+                    >
+                      <AppRichText text={slice.primary.text}></AppRichText>
+                    </div>
+                  );
+                }
+              })}
+            </div>
           </div>
         </div>
       </div>

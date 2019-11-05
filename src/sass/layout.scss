@@ -1,7 +1,9 @@
 .content {
   padding-top: 100px;
+  background: $grad-dark-black;
 
   height: 100%;
+  min-height: 800px;
   width: 100%;
   margin-bottom: 130px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
