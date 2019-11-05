@@ -2,30 +2,30 @@ import React, { useRef, useEffect, useState } from "react";
 import WorkItem from "./WorkItem";
 import Hammer from "hammerjs";
 
-const Helper = ({ sliderPosition }) => {
-  return (
-    <div className="helper">
-      <div>Xpos: {sliderPosition.x}</div>
-      <div>lastPosX: {sliderPosition._x}</div>
-      <div>Dragging: {sliderPosition.isDragging && "isDragging"}</div>
-      <div>
-        Decelerating: {sliderPosition.isDecelerating && "isDecelerating"}
-      </div>
-      <div>Drag Direction: {sliderPosition.dragDirection}</div>
-    </div>
-  );
-};
+// const Helper = ({ sliderPosition }) => {
+//   return (
+//     <div className="helper">
+//       <div>Xpos: {sliderPosition.x}</div>
+//       <div>lastPosX: {sliderPosition._x}</div>
+//       <div>Dragging: {sliderPosition.isDragging && "isDragging"}</div>
+//       <div>
+//         Decelerating: {sliderPosition.isDecelerating && "isDecelerating"}
+//       </div>
+//       <div>Drag Direction: {sliderPosition.dragDirection}</div>
+//     </div>
+//   );
+// };
 
 const WorkList = ({ items }) => {
-  const buffer = 400;
+  const buffer = 0.2 * window.innerWidth;
   const sliderRef = useRef(null);
   const [sliderPosition, setSliderPositon] = useState({
     isDragging: false,
     isDecelerating: false,
     dragDirection: 0,
     dragVelocity: 0,
-    _x: 400, // previousX
-    x: 400
+    _x: buffer, // previousX
+    x: buffer
   });
 
   useEffect(() => {
