@@ -66,9 +66,9 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
   useEffect(() => {
     let y = 0;
     if (sliderPosition.dragDirection === 2) {
-      y = -1;
+      y = -0.75;
     } else if (sliderPosition.dragDirection === 4) {
-      y = 1;
+      y = 0.75;
     }
 
     setRotateDeg({
