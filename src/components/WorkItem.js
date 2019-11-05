@@ -44,15 +44,6 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
     const y =
       evt.clientY + (container.getBoundingClientRect().y + mouseOrigin.y) * -1;
 
-    console.log(
-      "evt.clientY",
-      evt.clientY,
-      "mouseOrigin.y",
-      mouseOrigin.y,
-      "container.offSetTop",
-      container.getBoundingClientRect().y
-    );
-
     setMousePointer({
       active: true,
       x,
@@ -121,7 +112,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
           </div>
         </div>
       </div>
-      <div
+      {/* <div
         className="work-item__center-dot"
         style={{
           // display: mousePointer.active ? "block" : "none",
@@ -129,7 +120,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
           left: mouseOrigin.x,
           zIndex: 10000
         }}
-      ></div>
+      ></div> */}
     </>
   );
 };
