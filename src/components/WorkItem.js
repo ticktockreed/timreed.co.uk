@@ -95,10 +95,16 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
           className="work-item__image-wrapper"
           ref={inner}
           style={{
-            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`,
-            backgroundImage: `url("${data.main_image.url}")`
+            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`
           }}
-        ></div>
+        >
+          <div
+            className="work-item__image"
+            style={{
+              backgroundImage: `url("${data.main_image.url}")`
+            }}
+          ></div>
+        </div>
         <div
           className="work-item__title"
           style={{

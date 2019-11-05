@@ -3,14 +3,15 @@ import WorkItem from "./WorkItem";
 import Hammer from "hammerjs";
 
 const WorkList = ({ items }) => {
+  const buffer = 400;
   const sliderRef = useRef(null);
   const [sliderPosition, setSliderPositon] = useState({
     isDragging: false,
     isDecelerating: false,
     dragDirection: 0,
     dragVelocity: 0,
-    _x: 0, // previousX
-    x: 0
+    _x: 400, // previousX
+    x: 400
   });
 
   useEffect(() => {
@@ -18,11 +19,13 @@ const WorkList = ({ items }) => {
     let isDragging = false;
     let isDecelerating = false;
     let lastPosX = 0;
+    const sliderLength = sliderRef.current.getBoundingClientRect().width;
+    const xMin = -sliderLength + window.innerWidth - buffer;
+    const xMax = buffer;
 
     newHammer.on("pan", e =>
       setSliderPositon(sliderPosition => {
         console.log(e);
-        const sliderLength = sliderRef.current.getBoundingClientRect().width;
 
         if (sliderPosition.isDecelerating) {
           return sliderPosition;
@@ -35,10 +38,10 @@ const WorkList = ({ items }) => {
         let posX = e.deltaX + lastPosX;
 
         // Set limits for scroll
-        if (posX > 0) {
-          posX = 0;
+        if (posX > xMax) {
+          posX = xMax;
         }
-        const endOfPane = -sliderLength + window.innerWidth;
+        const endOfPane = xMin;
         if (posX <= endOfPane) {
           posX = endOfPane;
         }
@@ -64,10 +67,11 @@ const WorkList = ({ items }) => {
               targetPosition -
               parseInt(amplitude * Math.exp(-elapsed / timeConstant));
 
-            if (position > 0) {
-              position = 0;
+            // Set limits for scroll
+            if (position > xMax) {
+              position = xMax;
             }
-            const endOfPane = -sliderLength + window.innerWidth;
+            const endOfPane = xMin;
             if (position <= endOfPane) {
               position = endOfPane;
             }
