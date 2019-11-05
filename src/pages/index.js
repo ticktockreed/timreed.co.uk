@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 
 // import AnimationExample from "../components/AnimationExample";
 // import ChartExample from "../components/ChartExample";
-// import AnimationExample from "../components/AnimationExample";
+import AnimationExample from "../components/AnimationExample";
 
 let chartData = [];
 
@@ -44,12 +44,12 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           `gatsby`
         ]}
       />
-      {/* <AnimationExample
+      <AnimationExample
         name="logo-anim"
         className="logo-anim"
         background="#111"
         pause={false}
-      /> */}
+      />
 
       <div className="container">
         <div className="hero">
