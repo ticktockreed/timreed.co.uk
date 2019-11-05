@@ -41,7 +41,17 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
 
     // set cursor position from center
     const x = evt.clientX - sliderPosition.x - mouseOrigin.x;
-    const y = (evt.clientY - mouseOrigin.y) * -1;
+    const y =
+      evt.clientY + (container.getBoundingClientRect().y + mouseOrigin.y) * -1;
+
+    console.log(
+      "evt.clientY",
+      evt.clientY,
+      "mouseOrigin.y",
+      mouseOrigin.y,
+      "container.offSetTop",
+      container.getBoundingClientRect().y
+    );
 
     setMousePointer({
       active: true,
@@ -78,38 +88,40 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
   }, [sliderPosition.dragDirection]);
 
   return (
-    <div className="work-item__wrapper">
-      <div
-        className="work-item"
-        key={`work-item_${uid}`}
-        onMouseEnter={evt =>
-          handleMouseMove(evt, container.current, inner.current)
-        }
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={evt =>
-          handleMouseMove(evt, container.current, inner.current)
-        }
-        ref={container}
-      >
+    <>
+      <div className="work-item__wrapper">
         <div
-          className="work-item__image-wrapper"
-          ref={inner}
-          style={{
-            transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`
-          }}
+          className="work-item"
+          key={`work-item_${uid}`}
+          onMouseEnter={evt =>
+            handleMouseMove(evt, container.current, inner.current)
+          }
+          onMouseLeave={handleMouseLeave}
+          onMouseMove={evt =>
+            handleMouseMove(evt, container.current, inner.current)
+          }
+          ref={container}
         >
           <div
-            className="work-item__image"
+            className="work-item__image-wrapper"
+            ref={inner}
             style={{
-              backgroundImage: `url("${data.main_image.url}")`
+              transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`
             }}
-          ></div>
-          <div className="work-item__info">
-            <div className="work-item__title">{data.title.text}</div>
+          >
+            <div
+              className="work-item__image"
+              style={{
+                backgroundImage: `url("${data.main_image.url}")`
+              }}
+            ></div>
+            <div className="work-item__info">
+              <div className="work-item__title">{data.title.text}</div>
+            </div>
           </div>
         </div>
       </div>
-      {/* <div
+      <div
         className="work-item__center-dot"
         style={{
           // display: mousePointer.active ? "block" : "none",
@@ -117,8 +129,8 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
           left: mouseOrigin.x,
           zIndex: 10000
         }}
-      ></div> */}
-    </div>
+      ></div>
+    </>
   );
 };
 
