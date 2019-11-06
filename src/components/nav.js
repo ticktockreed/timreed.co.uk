@@ -4,7 +4,6 @@ import React from "react";
 
 import Work from "../images/work.svg";
 import Person from "../images/person.svg";
-import Email from "../images/email.svg";
 import Stars from "../images/stars.svg";
 
 const Header = () => (

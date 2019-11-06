@@ -5,10 +5,11 @@ import { graphql } from "gatsby";
 import SkillsList from "../components/SkillsList";
 
 const cleanupSkillsList = skills => {
-  return skills.map(({ node: { data } }) => {
+  return skills.map(({ node: { data, uid } }) => {
     const skill = data.skill_name.text;
     const category = data.category.document[0].data.skill_category.text;
     return {
+      uid,
       name: skill,
       category
     };
@@ -27,6 +28,7 @@ const Skills = ({ data: { allPrismicSkill, allPrismicSkillCategories } }) => {
   const skills = cleanupSkillsList(allPrismicSkill.edges);
   const categories = cleanupCategoriesList(allPrismicSkillCategories.edges);
 
+  console.log(skills);
   return (
     <Layout>
       <SEO
@@ -74,6 +76,7 @@ export const pageQuery = graphql`
     allPrismicSkill {
       edges {
         node {
+          uid
           data {
             category {
               document {

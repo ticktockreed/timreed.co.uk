@@ -110,12 +110,6 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
               <div className="work-item__title">{data.title.text}</div>
               <div className="work-item__skills">
                 {data.skills.map(({ skill }, idx) => {
-                  console.log(skill.document[0].data);
-                  console.log(
-                    skill.document[0].data.category.document[0].data
-                      .skill_category.text
-                  );
-                  console.log(skill.document[0].data.skill_name.text);
                   return (
                     <div className="work-item__skill" key={`skill_${idx}`}>
                       {skill.document[0].data.skill_name.text}

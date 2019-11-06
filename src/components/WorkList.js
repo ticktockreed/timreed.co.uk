@@ -42,6 +42,40 @@ const WorkList = ({ items }) => {
     const xMin = -sliderLength + window.innerWidth - buffer;
     const xMax = buffer;
 
+    const decelerate = (
+      ticker,
+      timestamp,
+      targetPosition,
+      amplitude,
+      timeConstant
+    ) => {
+      var elapsed = Date.now() - timestamp;
+      let position =
+        targetPosition -
+        parseInt(amplitude * Math.exp(-elapsed / timeConstant));
+
+      // Set limits for scroll
+      if (position > xMax) {
+        position = xMax;
+      }
+      const endOfPane = xMin;
+      if (position <= endOfPane) {
+        position = endOfPane;
+      }
+
+      if (elapsed > 6 * timeConstant) {
+        clearInterval(ticker);
+        isDecelerating = false;
+      }
+
+      setSliderPositon({
+        isDragging: isDragging,
+        isDecelerating: isDecelerating,
+        _x: position,
+        x: position
+      });
+    };
+
     newHammer.on("pan", e =>
       setSliderPositon(sliderPosition => {
         if (sliderPosition.isDecelerating) {
@@ -71,38 +105,23 @@ const WorkList = ({ items }) => {
         if (isDecelerating) {
           const updateInterval = 16;
           const scaleFactor = 200;
-
           const amplitude = e.overallVelocityX * scaleFactor;
+          let ticker = null;
           const targetPosition = posX + amplitude;
           const timestamp = Date.now();
           const timeConstant = 100;
 
-          const ticker = setInterval(function() {
-            var elapsed = Date.now() - timestamp;
-            let position =
-              targetPosition -
-              parseInt(amplitude * Math.exp(-elapsed / timeConstant));
-
-            // Set limits for scroll
-            if (position > xMax) {
-              position = xMax;
-            }
-            const endOfPane = xMin;
-            if (position <= endOfPane) {
-              position = endOfPane;
-            }
-
-            if (elapsed > 6 * timeConstant) {
-              clearInterval(ticker);
-              isDecelerating = false;
-            }
-            setSliderPositon({
-              isDragging: isDragging,
-              isDecelerating: isDecelerating,
-              _x: position,
-              x: position
-            });
-          }, updateInterval);
+          ticker = setInterval(
+            () =>
+              decelerate(
+                ticker,
+                timestamp,
+                targetPosition,
+                amplitude,
+                timeConstant
+              ),
+            updateInterval
+          );
         }
 
         return {

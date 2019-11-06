@@ -11,6 +11,9 @@
   display: flex;
   cursor: grab;
 
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+
   &:active {
     cursor: grabbing;
   }
