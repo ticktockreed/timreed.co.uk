@@ -23,11 +23,11 @@ const Header = () => (
           <div className="sr-only">Work</div>
           <Work />
         </Link>
-        <Link to={"/contact"}>
+        {/* <Link to={"/contact"}>
           <div className="sr-only">Contact</div>
 
           <Email />
-        </Link>
+        </Link> */}
       </div>
     </nav>
   </div>

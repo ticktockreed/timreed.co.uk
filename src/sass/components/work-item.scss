@@ -22,26 +22,26 @@
   position: relative;
   margin: 0 100px;
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -50px;
-    left: 0;
-    height: 30px;
-    right: 0;
-
-    background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0.2) 20%,
-      transparent 80%
-    );
-  }
-
   perspective: 120px;
   max-width: 500px;
   img {
     max-width: 100%;
   }
+}
+
+.work-item__shadow {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  height: 30px;
+  right: 0;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.2) 20%,
+    transparent 80%
+  );
 }
 .work-item__image-wrapper {
   position: relative;
@@ -60,7 +60,7 @@
   opacity: 0.8;
   transition: opacity 250ms ease-in;
 
-  &:hover {
+  .work-item:hover & {
     opacity: 1;
   }
 }
@@ -77,6 +77,7 @@
   background-color: $black;
   width: 100%;
   position: absolute;
+  padding: 10px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -85,13 +86,23 @@
 .work-item__title {
   z-index: 100;
   display: inline-block;
-  padding: 10px;
   color: $white;
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-size: 16px;
   font-weight: bold;
 }
 
+.work-item__skill {
+  border-radius: 20px;
+  background-color: $grey-dark;
+  padding: 7px 10px;
+  margin-right: 10px;
+  color: white;
+  display: inline-block;
+}
+
+// ============== Helpers ================
 .work-item__center-dot {
   position: fixed;
   border: solid 5px red;

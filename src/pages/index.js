@@ -54,9 +54,12 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
       <div className="container">
         <div className="hero">
           <div className="row justify-content-lg-center">
-            <div className="col-9 offset-2 offset-lg-0 col-lg-6  ">
+            <div className="col-9 offset-2 offset-lg-0 col-lg-8  ">
               <div className="richtext">
-                <h2>Welcome to the portfolio of Tim Reed.</h2>
+                <h2>
+                  Welcome to the portfolio of <br />
+                  Tim Reed.
+                </h2>
               </div>
             </div>
           </div>
@@ -69,7 +72,7 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
                 return (
                   <div className="image-grid" key={`slice-image-grid_${i}`}>
                     <div className="image-grid-title">
-                      <h2>{slice.primary.title.text}</h2>
+                      {/* <h2>{slice.primary.title.text}</h2> */}
                       <p>
                         Some companies I've had the pleasure to build digital
                         interfaces for

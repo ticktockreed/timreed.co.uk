@@ -108,8 +108,19 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
             ></div>
             <div className="work-item__info">
               <div className="work-item__title">{data.title.text}</div>
+              <div className="work-item__skills">
+                <div className="work-item__skill">ReactJS</div>
+                <div className="work-item__skill">SASS</div>
+                <div className="work-item__skill">Prismic</div>
+              </div>
             </div>
           </div>
+          <div
+            className="work-item__shadow"
+            style={{
+              transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`
+            }}
+          ></div>
         </div>
       </div>
       {/* <div
