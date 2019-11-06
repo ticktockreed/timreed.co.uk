@@ -6,6 +6,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
           {
             test: /es5/,
             use: loaders.null()
+          },
+          {
+            test: /hammer/,
+            use: loaders.null()
           }
         ]
       }

@@ -17,7 +17,12 @@ import Hammer from "hammerjs";
 // };
 
 const WorkList = ({ items }) => {
-  const buffer = 0.2 * window.innerWidth;
+  let pageWidth = 0;
+  if (typeof window !== `undefined`) {
+    pageWidth = window.innerWidth;
+  }
+
+  const buffer = 0.2 * pageWidth;
   const sliderRef = useRef(null);
   const [sliderPosition, setSliderPositon] = useState({
     isDragging: false,
