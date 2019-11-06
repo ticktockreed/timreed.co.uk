@@ -2,21 +2,11 @@ import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
-import WorkItem from "../components/WorkItem";
-import Slider from "react-slick";
 import WorkList from "../components/WorkList";
 
 const WorkPage = ({ data: { prismicWork } }) => {
   const { data } = prismicWork;
-  const sliderSettings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    centerMode: true,
-    slidesToScroll: 1
-  };
+
   return (
     <Layout>
       <SEO
@@ -60,14 +50,34 @@ export const pageQuery = graphql`
                 data {
                   main_image {
                     url
-                    alt
                     dimensions {
                       height
                       width
                     }
+                    alt
                   }
                   title {
                     text
+                  }
+                  skills {
+                    skill {
+                      document {
+                        data {
+                          skill_name {
+                            text
+                          }
+                          category {
+                            document {
+                              data {
+                                skill_category {
+                                  text
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
                 uid

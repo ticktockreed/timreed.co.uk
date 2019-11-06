@@ -109,9 +109,19 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
             <div className="work-item__info">
               <div className="work-item__title">{data.title.text}</div>
               <div className="work-item__skills">
-                <div className="work-item__skill">ReactJS</div>
-                <div className="work-item__skill">SASS</div>
-                <div className="work-item__skill">Prismic</div>
+                {data.skills.map(({ skill }, idx) => {
+                  console.log(skill.document[0].data);
+                  console.log(
+                    skill.document[0].data.category.document[0].data
+                      .skill_category.text
+                  );
+                  console.log(skill.document[0].data.skill_name.text);
+                  return (
+                    <div className="work-item__skill" key={`skill_${idx}`}>
+                      {skill.document[0].data.skill_name.text}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
