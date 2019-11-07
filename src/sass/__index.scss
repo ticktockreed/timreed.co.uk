@@ -26,8 +26,13 @@ body {
 }
 
 .logomask__wrapper {
-  position: relative;
-  width: 60%;
+  position: absolute;
+  top: 0;
+  right: 10vh;
+  width: 80vh;
+  bottom: 0;
+  height: 80vh;
+  margin: auto;
   display: inline-block;
 }
 
