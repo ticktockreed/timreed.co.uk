@@ -1,0 +1,23 @@
+.skills {
+  width: 100%;
+  position: relative;
+}
+.skills-category {
+  //   white-space: nowrap;
+  padding: 10px 0;
+  margin: 10px 0;
+  border-bottom: 1px solid $grey-dark;
+}
+
+.skill {
+  font-family: $fontMain;
+  font-weight: bold;
+  font-size: 40px;
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.skills-inner {
+  //   position: absolute;
+  //   transform: translate3d(0px, 0px, 0px) rotate(-15deg);
+}

@@ -22,23 +22,23 @@ function getSkillsByCategory(categories, skills) {
       return false;
     }
     return (
-      <>
-        <h3>{cat}</h3>
+      <div className="skills-category">
+        {/* <span>{cat}</span> */}
 
         {getSkillsFromList(skillsByCat)}
-      </>
+      </div>
     );
   });
 }
 
 const Skills = ({ skills, categories }) => {
   return (
-    <>
-      <h2>Skills</h2>
-
-      {/* for each category go get the skills for that cat */}
-      {getSkillsByCategory(categories, skills)}
-    </>
+    <div className="skills">
+      <div className="skills-inner">
+        {/* for each category go get the skills for that cat */}
+        {getSkillsByCategory(categories, skills)}
+      </div>
+    </div>
   );
 };
 

@@ -43,10 +43,14 @@ const Skills = ({ data: { allPrismicSkill, allPrismicSkillCategories } }) => {
       />
       <div className="container">
         <div className="row justify-content-lg-center">
-          <div className="col-9 offset-2 offset-lg-0 col-lg-6  ">
+          <div className="col-9 offset-2 offset-lg-0 col-lg-10  ">
             <div className="richtext">
-              <SkillsList skills={skills} categories={categories} />
+              <h2 className="heading01">Skills</h2>
+              <p>
+                I've played with lots of tech in the past here's just a sample
+              </p>
             </div>
+            <SkillsList skills={skills} categories={categories} />
           </div>
         </div>
       </div>

@@ -10,12 +10,27 @@ $gutter: $grid-gutter-width;
     display: block;
     overflow: hidden;
     margin: 0 0 -30px;
+
+    // &::after {
+    //   content: "";
+    //   left: 0;
+    //   right: 0;
+    //   bottom: 0;
+    //   top: 0;
+    //   position: absolute;
+    //   background: linear-gradient(
+    //     #000 10%,
+    //     transparent 20%,
+    //     transparent 80%,
+    //     #000 90%
+    //   );
+    // }
   }
 }
 .site-navigation__text {
   text-transform: uppercase;
   color: $grey;
-  opacity: 0.5;
+  opacity: 0.35;
   font-family: $fontMain;
   font-size: 60px;
   font-weight: bold;
