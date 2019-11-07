@@ -2,31 +2,31 @@ import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
 
-import Work from "../images/work.svg";
-import Person from "../images/person.svg";
-import Stars from "../images/stars.svg";
-
 const Header = () => (
   <div className="site-navigation-wrapper">
     <nav className="site-navigation">
       <div className="site-navigation-inner">
-        <Link to={"/about"}>
-          <div className="sr-only">About</div>
-          <Person />
+        <Link
+          to={"/about"}
+          activeClassName="site-navigation__text--active"
+          className="site-navigation__text"
+        >
+          About
         </Link>
-        <Link to={"/skills"}>
-          <div className="sr-only">Skills</div>
-          <Stars />
+        <Link
+          to={"/skills"}
+          activeClassName="site-navigation__text--active"
+          className="site-navigation__text"
+        >
+          Skills
         </Link>
-        <Link to={"/work"}>
-          <div className="sr-only">Work</div>
-          <Work />
+        <Link
+          to={"/work"}
+          activeClassName="site-navigation__text--active"
+          className="site-navigation__text"
+        >
+          Work
         </Link>
-        {/* <Link to={"/contact"}>
-          <div className="sr-only">Contact</div>
-
-          <Email />
-        </Link> */}
       </div>
     </nav>
   </div>
