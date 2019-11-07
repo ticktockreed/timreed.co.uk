@@ -29,8 +29,8 @@ $gutter: $grid-gutter-width;
 }
 .site-navigation__text {
   text-transform: uppercase;
-  color: $grey;
-  opacity: 0.35;
+  color: $white;
+  opacity: 0.25;
   font-family: $fontMain;
   font-size: 60px;
   font-weight: bold;
@@ -43,13 +43,21 @@ $gutter: $grid-gutter-width;
 .site-navigation__text--active,
 .site-navigation__text:hover {
   clip-path: polygon(0% 0%, 100% 00%, 100% 100%, 0 100%);
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .site-navigation__text--active {
   opacity: 1;
   &:hover {
     opacity: 1;
+  }
+  & + .site-navigation__text {
+    clip-path: polygon(0% 10%, 100% 20%, 100% 80%, 0 70%);
+
+    &:hover {
+      clip-path: polygon(0% 0%, 100% 00%, 100% 100%, 0 100%);
+      opacity: 0.4;
+    }
   }
 }
 .site-navigation-inner {
