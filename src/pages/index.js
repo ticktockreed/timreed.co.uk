@@ -6,6 +6,8 @@ import { graphql } from "gatsby";
 // import AnimationExample from "../components/AnimationExample";
 // import ChartExample from "../components/ChartExample";
 import AnimationExample from "../components/AnimationExample";
+import Logomask from "../images/Logomask.svg";
+import ImageGrid from "../components/ImageGrid";
 
 let chartData = [];
 
@@ -44,63 +46,49 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           `gatsby`
         ]}
       />
-      <AnimationExample
-        name="logo-anim"
-        className="logo-anim"
-        background="#111"
-        pause={false}
-      />
-
+      <div className="container"></div>
       <div className="container">
         <div className="hero">
+          <div className="row justify-content-lg-center text-right">
+            <div className="col-9 offset-2 offset-lg-0 col-lg-10">
+              <div className="logomask__wrapper">
+                <div className="logomask__tilt">
+                  <AnimationExample
+                    name="logo-anim"
+                    className="logo-anim"
+                    background="#111"
+                    pause={false}
+                  />
+                  <Logomask
+                    className="logomask"
+                    preserveAspectRatio="xMinYMin slice"
+                  ></Logomask>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="row justify-content-lg-center">
-            <div className="col-9 offset-2 offset-lg-0 col-lg-8  ">
+            <div className="col-9 offset-2 offset-lg-0 col-lg-8">
               <div className="richtext">
                 <h2>
                   Welcome to the portfolio of <br />
-                  Tim Reed.
+                  Tim Reed, <span className="text-red">Creative Developer</span>
                 </h2>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="row justify-content-lg-center">
+        {/* <div className="row justify-content-lg-center">
           <div className="col-9 offset-2 offset-lg-0 col-lg-8 ">
             {data.body.map((slice, i) => {
               if (slice.slice_type === "image_grid") {
-                return (
-                  <div className="image-grid" key={`slice-image-grid_${i}`}>
-                    <div className="image-grid-title">
-                      {/* <h2>{slice.primary.title.text}</h2> */}
-                      <p>
-                        Some companies I've had the pleasure to build digital
-                        interfaces for
-                      </p>
-                    </div>
-                    <div className="row align-items-center justify-content-center">
-                      {slice.items.map((item, i) => {
-                        return (
-                          <div
-                            className="col text-center"
-                            key={`image-grid-item_${i}`}
-                          >
-                            <img
-                              className="client-logo"
-                              src={item.image.url}
-                              alt={item.image.copyright}
-                              width={100}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                );
+                return <ImageGrid slice={slice} idx={i}></ImageGrid>;
               }
             })}
           </div>
-        </div>
+        </div> */}
       </div>
     </Layout>
   );
