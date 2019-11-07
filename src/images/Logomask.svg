@@ -3,8 +3,8 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 170.1 170.1" style="enable-background:new 0 0 170.1 170.1;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.logomask{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
 </style>
-<path id="Combined-Shape" class="st0" d="M170.1,0v170.1H0V0H170.1z M114.6,27.4H20.9v37.1h23.9v78.1h105.3l-22.1-45.2
+<path id="Combined-Shape" class="logomask" d="M170.1,0v170.1H0V0H170.1z M114.6,27.4H20.9v37.1h23.9v78.1h105.3l-22.1-45.2
 	c12.9-5.5,22.1-18.4,22.1-33.7l0,0v-0.7C149.8,43.4,134.1,27.4,114.6,27.4L114.6,27.4z"/>
 </svg>

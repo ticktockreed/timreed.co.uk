@@ -34,7 +34,7 @@ function getSkillsByCategory(categories, skills) {
 const Skills = ({ skills, categories }) => {
   return (
     <>
-      <h2>Tekkers</h2>
+      <h2>Skills</h2>
 
       {/* for each category go get the skills for that cat */}
       {getSkillsByCategory(categories, skills)}
