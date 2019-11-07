@@ -10,6 +10,7 @@ const Header = () => (
           to={"/about"}
           activeClassName="site-navigation__text--active"
           className="site-navigation__text"
+          partiallyActive={true}
         >
           About
         </Link>
@@ -17,6 +18,7 @@ const Header = () => (
           to={"/skills"}
           activeClassName="site-navigation__text--active"
           className="site-navigation__text"
+          partiallyActive={true}
         >
           Skills
         </Link>
@@ -24,6 +26,7 @@ const Header = () => (
           to={"/work"}
           activeClassName="site-navigation__text--active"
           className="site-navigation__text"
+          partiallyActive={true}
         >
           Work
         </Link>
