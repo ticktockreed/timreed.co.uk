@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
+import Make3d from "../components/Make3d";
 
 // import AnimationExample from "../components/AnimationExample";
 // import ChartExample from "../components/ChartExample";
@@ -28,16 +29,20 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
         <div className="row justify-content-lg-center align-items-center hero">
           <div className="logomask__wrapper">
             <div className="logomask__tilt">
-              <AnimationExample
-                name="logo-anim"
-                className="logo-anim"
-                background="#111"
-                pause={false}
-              />
-              <Logomask
-                className="logomask"
-                preserveAspectRatio="xMinYMin slice"
-              ></Logomask>
+              <Make3d>
+                <>
+                  <AnimationExample
+                    name="logo-anim"
+                    className="logo-anim"
+                    background="#111"
+                    pause={false}
+                  />
+                  <Logomask
+                    className="logomask"
+                    preserveAspectRatio="xMinYMin slice"
+                  ></Logomask>
+                </>
+              </Make3d>
             </div>
           </div>
           <div className="col-9 offset-2 offset-lg-0 col-lg-8">
