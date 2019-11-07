@@ -52,7 +52,14 @@ module.exports = {
       options: {
         repositoryName: `timreedcouk`,
         accessToken: `${process.env.API_KEY}`,
-        linkResolver: ({ node, key, value }) => post => `/${post.uid}`
+        pages: [
+          {
+            type: "work-item", // Custom type of the document
+            match: "/work/:uid", // Pages will be generated in this pattern
+            path: "/work-preview", // Placeholder route for previews
+            component: require.resolve("./src/templates/workPage.js") // Template file
+          }
+        ]
       }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
