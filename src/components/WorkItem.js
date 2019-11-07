@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Link } from "gatsby";
 
 const WorkItem = ({ data, uid, sliderPosition }) => {
   const [mousePointer, setMousePointer] = useState({
@@ -81,7 +82,8 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
   return (
     <>
       <div className="work-item__wrapper">
-        <div
+        <Link
+          to={`work/${uid}`}
           className="work-item"
           key={`work-item_${uid}`}
           onMouseEnter={evt =>
@@ -128,7 +130,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
               transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`
             }}
           ></div>
-        </div>
+        </Link>
       </div>
       {/* <div
         className="work-item__center-dot"

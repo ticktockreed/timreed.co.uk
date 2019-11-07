@@ -20,9 +20,21 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
         ]}
       />
       <>
-        <h1>{data.title.text}</h1>
-        {/* 
-      <div dangerouslySetInnerHTML={{ __html: data.content.html }} /> */}
+        <div className="container">
+          <div className="row justify-content-lg-center align-items-center hero">
+            <h1>{data.title.text}</h1>
+            {/* {data.body.map((slice, i) => {
+              if (slice.slice_type === "text") {
+                console.log(slice);
+                return (
+                  <div
+                  // dangerouslySetInnerHTML={{ __html: slice.html }}
+                  />
+                );
+              }
+            })} */}
+          </div>
+        </div>
       </>
     </Layout>
   );
@@ -36,6 +48,16 @@ export const pageQuery = graphql`
       data {
         title {
           text
+        }
+        body {
+          ... on PrismicWorkItemBodyText {
+            slice_type
+            primary {
+              text {
+                html
+              }
+            }
+          }
         }
       }
     }

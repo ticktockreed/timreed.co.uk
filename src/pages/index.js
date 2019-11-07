@@ -10,6 +10,7 @@ import Logomask from "../images/Logomask.svg";
 import ImageGrid from "../components/ImageGrid";
 
 const IndexPage = ({ data: { prismicLandingPage } }) => {
+  const { data } = prismicLandingPage;
   return (
     <Layout>
       <SEO
@@ -48,6 +49,15 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
                 </h2>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="row justify-content-lg-center">
+          <div className="col-9 offset-2 offset-lg-0 col-lg-8 ">
+            {data.body.map((slice, i) => {
+              if (slice.slice_type === "image_grid") {
+                return <ImageGrid slice={slice} idx={i}></ImageGrid>;
+              }
+            })}
           </div>
         </div>
       </div>
@@ -96,15 +106,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-// { CLIENT GRID
-//   /* <div className="row justify-content-lg-center">
-//   <div className="col-9 offset-2 offset-lg-0 col-lg-8 ">
-//     {data.body.map((slice, i) => {
-//       if (slice.slice_type === "image_grid") {
-//         return <ImageGrid slice={slice} idx={i}></ImageGrid>;
-//       }
-//     })}
-//   </div>
-// </div> */
-// }

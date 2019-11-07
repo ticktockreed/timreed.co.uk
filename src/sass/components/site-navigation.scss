@@ -36,7 +36,7 @@ $gutter: $grid-gutter-width;
   font-weight: bold;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  clip-path: polygon(0% 10%, 100% 20%, 100% 100%, 0 80%);
+  clip-path: polygon(0% 10%, 100% 20%, 100% 100%, 0 90%);
   transition: clip-path 200ms ease-in-out, opacity 200ms ease-in;
 }
 
