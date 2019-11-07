@@ -4,12 +4,16 @@ $gutter: $grid-gutter-width;
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 0;
+  top: 10%;
+  margin: auto;
 
   a {
     text-decoration: none;
     display: block;
     overflow: hidden;
     margin: 0 0 -30px;
+    height: 30%;
 
     // &::after {
     //   content: "";
@@ -36,7 +40,7 @@ $gutter: $grid-gutter-width;
   font-weight: bold;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  clip-path: polygon(0% 10%, 100% 20%, 100% 100%, 0 90%);
+  clip-path: polygon(0% 10%, 100% 20%, 100% 80%, 0 70%);
   transition: clip-path 200ms ease-in-out, opacity 200ms ease-in;
 }
 
