@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import AppRichText from "../components/AppRichText";
+import ReactPlayer from "react-player";
 
 const WorkItem = ({ data: { prismicWorkItem } }) => {
   const { data } = prismicWorkItem;
@@ -34,6 +35,13 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       <AppRichText text={slice.primary.text}></AppRichText>
                     );
                   }
+                  if (slice.slice_type === "video") {
+                    return (
+                      <ReactPlayer
+                        url={slice.primary.video_url.text}
+                      ></ReactPlayer>
+                    );
+                  }
                 })}
             </div>
           </div>
@@ -57,6 +65,17 @@ export const pageQuery = graphql`
             slice_type
             primary {
               text {
+                html
+              }
+            }
+          }
+          ... on PrismicWorkItemBodyVideo {
+            slice_type
+            primary {
+              video_url {
+                text
+              }
+              caption {
                 html
               }
             }
