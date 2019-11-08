@@ -8,7 +8,6 @@ const AboutPage = ({ data: { prismicAbout } }) => {
   const {
     data: { body }
   } = prismicAbout;
-  console.log(prismicAbout);
 
   return (
     <Layout>
@@ -22,7 +21,7 @@ const AboutPage = ({ data: { prismicAbout } }) => {
           `gatsby`
         ]}
       />
-      <div class="container">
+      <div className="container">
         <div className="row justify-content-lg-center  align-items-center hero">
           <div className="col-9 offset-2 offset-lg-0 col-lg-6">
             {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}

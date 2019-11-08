@@ -12,7 +12,7 @@ const getSkillsFromList = skills => {
 };
 
 function getSkillsByCategory(categories, skills) {
-  return categories.map(category => {
+  return categories.map((category, idx) => {
     const cat = category.category;
     const skillsByCat = skills.filter(skill => {
       return skill.category === cat;
@@ -22,7 +22,7 @@ function getSkillsByCategory(categories, skills) {
       return false;
     }
     return (
-      <div className="skills-category">
+      <div key={`skill-category__${idx}`} className="skills-category">
         {/* <span>{cat}</span> */}
 
         {getSkillsFromList(skillsByCat)}

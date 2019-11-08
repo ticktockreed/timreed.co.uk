@@ -28,7 +28,6 @@ const Skills = ({ data: { allPrismicSkill, allPrismicSkillCategories } }) => {
   const skills = cleanupSkillsList(allPrismicSkill.edges);
   const categories = cleanupCategoriesList(allPrismicSkillCategories.edges);
 
-  console.log(skills);
   return (
     <Layout>
       <SEO

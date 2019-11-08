@@ -58,9 +58,15 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
         </div>
         <div className="row justify-content-lg-center">
           <div className="col-9 offset-2 offset-lg-0 col-lg-8 ">
-            {data.body.map((slice, i) => {
+            {data.body.map((slice, idx) => {
               if (slice.slice_type === "image_grid") {
-                return <ImageGrid slice={slice} idx={i}></ImageGrid>;
+                return (
+                  <ImageGrid
+                    slice={slice}
+                    idx={idx}
+                    key={`slice__${idx}`}
+                  ></ImageGrid>
+                );
               }
             })}
           </div>

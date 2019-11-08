@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 
 const Make3d = ({ children }) => {
-  console.log(children);
   const [mousePointer, setMousePointer] = useState({
     active: false,
     x: 0,
