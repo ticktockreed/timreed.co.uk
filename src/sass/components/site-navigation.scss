@@ -5,7 +5,7 @@ $gutter: $grid-gutter-width;
   left: 0;
   right: 0;
   bottom: 0;
-  top: 10%;
+  top: 100px;
   margin: auto;
 
   a {
@@ -14,21 +14,6 @@ $gutter: $grid-gutter-width;
     overflow: hidden;
     margin: 0 0 -30px;
     height: 30%;
-
-    // &::after {
-    //   content: "";
-    //   left: 0;
-    //   right: 0;
-    //   bottom: 0;
-    //   top: 0;
-    //   position: absolute;
-    //   background: linear-gradient(
-    //     #000 10%,
-    //     transparent 20%,
-    //     transparent 80%,
-    //     #000 90%
-    //   );
-    // }
   }
 }
 .site-navigation__text {
@@ -54,14 +39,6 @@ $gutter: $grid-gutter-width;
   opacity: 1;
   &:hover {
     opacity: 1;
-  }
-  & + .site-navigation__text {
-    clip-path: polygon(0% 10%, 100% 20%, 100% 80%, 0 70%);
-
-    &:hover {
-      clip-path: polygon(0% 0%, 100% 00%, 100% 100%, 0 100%);
-      opacity: 0.4;
-    }
   }
 }
 .site-navigation-inner {
