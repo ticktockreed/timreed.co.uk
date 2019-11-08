@@ -18,7 +18,8 @@ const NavLink = ({ children, to, ...props }) => {
         //   someCustomDefinedAnimation({ exit, node, direction: "out" })
       }}
       entry={{
-        length: 0,
+        length: 1,
+        delay: 1,
         trigger: ({ exit, node, e, entry }) => {
           transitionPage({ exit, node, e, entry, direction: "in" });
         }

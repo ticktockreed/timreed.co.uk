@@ -2,8 +2,10 @@ import { TweenMax } from "gsap";
 
 export function transitionPage({ exit, node, direction }) {
   if (direction === "in") {
-    TweenMax.to(node, 2, { width: 200, height: 150 });
+    console.log("in", exit);
+    TweenMax.from(node, 1, { width: "80%", height: "80%" });
   } else if (direction === "out") {
-    TweenMax.to(node, 2, { width: 0, height: 0 });
+    console.log("out", exit);
+    TweenMax.to(node, 1, { width: "80%", height: "80%" });
   }
 }
