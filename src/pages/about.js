@@ -4,13 +4,18 @@ import SEO from "../components/seo";
 import { graphql } from "gatsby";
 import AppRichText from "../components/AppRichText";
 
-const AboutPage = ({ data: { prismicAbout } }) => {
+const AboutPage = ({
+  data: { prismicAbout },
+  transitionStatus,
+  entry,
+  exit
+}) => {
   const {
     data: { body }
   } = prismicAbout;
 
   return (
-    <Layout>
+    <Layout className={`${transitionStatus}`}>
       <SEO
         title="Home"
         keywords={[
@@ -21,7 +26,7 @@ const AboutPage = ({ data: { prismicAbout } }) => {
           `gatsby`
         ]}
       />
-      <div className="container">
+      <div className={`container`}>
         <div className="row justify-content-lg-center  align-items-center hero">
           <div className="col-9 offset-2 offset-lg-0 col-lg-6">
             {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
