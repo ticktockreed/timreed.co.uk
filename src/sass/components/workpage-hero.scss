@@ -35,15 +35,24 @@
 .workpage-hero__title {
   position: absolute;
   top: 60%;
+
+  &::after {
+    content: "";
+    display: block;
+    background-color: $text-black;
+    width: $gutter * 2;
+    height: 6px;
+    margin-top: $gutter;
+  }
 }
 
 .workpage-hero__agency {
   position: absolute;
-  bottom: $gutter/2;
+  bottom: $gutter;
 }
 
 .workpage-hero__client {
   position: absolute;
-  bottom: $gutter/2;
-  right: $gutter/2;
+  bottom: $gutter;
+  right: 25px;
 }

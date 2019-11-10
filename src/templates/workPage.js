@@ -65,19 +65,26 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                   {data.title.text}
                 </h1>
                 <div className="workpage-hero__agency">
-                  <span className="paragraph02 opacity-70">At:</span>{" "}
-                  <span className="paragraph03">Hugo & Cat</span>
+                  <span className="paragraph02">At:</span>{" "}
+                  <span className="paragraph03">{data.agency.text}</span>
                 </div>
               </div>
-              <div className="workpage-hero__box">
+              <div
+                className="workpage-hero__box"
+                style={{
+                  backgroundColor: data.brand_color
+                    ? data.brand_color.text
+                    : "inherit"
+                }}
+              >
                 <div className="heading00 workpage-hero__title text-color-white">
                   {data.title.text}
                 </div>
                 <div className="workpage-hero__client">
-                  <span className="paragraph02 text-color-white opacity-70">
-                    Client:
-                  </span>{" "}
-                  <span className="paragraph03 text-color-white">Vizient</span>
+                  <span className="paragraph02 text-color-white">Client:</span>{" "}
+                  <span className="paragraph03 text-color-white">
+                    {data.client.text}
+                  </span>
                 </div>
               </div>
             </div>
@@ -86,7 +93,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
             <div className="workpage-skills__color-block"></div>
             <div className="row align-items-end">
               <div className="col offset-3">
-                <span className="paragraph02 opacity-70">Skills: </span>
+                <span className="paragraph02">Skills: </span>
                 {data.skills.map(({ skill }, idx) => {
                   if (!skill) {
                     return false;
@@ -160,6 +167,15 @@ export const pageQuery = graphql`
     prismicWorkItem(id: { eq: $id }) {
       data {
         title {
+          text
+        }
+        brand_color {
+          text
+        }
+        client {
+          text
+        }
+        agency {
           text
         }
         skills {
