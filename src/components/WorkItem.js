@@ -2,136 +2,35 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "gatsby";
 
 const WorkItem = ({ data, uid, sliderPosition }) => {
-  const [mousePointer, setMousePointer] = useState({
-    active: false,
-    x: 0,
-    y: 0
-  });
-  const [mouseOrigin, setMouseOrigin] = useState({
-    x: 0,
-    y: 0
-  });
-  const [rotateDeg, setRotateDeg] = useState({
-    x: 0,
-    y: 0
-  });
-
-  const container = useRef(null);
-  const inner = useRef(null);
-
-  const updateMouseOrigin = container => {
-    setMouseOrigin({
-      x: container.offsetLeft + Math.floor(container.offsetWidth / 2),
-      y: container.offsetTop + Math.floor(container.offsetHeight / 2)
-    });
-  };
-
-  const updateRotateDeg = inner => {
-    // get the rotation angle for the transform (note X and Y are reversed)
-    setRotateDeg({
-      x: (mousePointer.y / (inner.offsetHeight / 2)).toFixed(2),
-      y: (mousePointer.x / (inner.offsetWidth / 2)).toFixed(2)
-    });
-  };
-
-  const updateMousePosition = (evt, container, inner) => {
-    //   set origin position of card
-    updateMouseOrigin(container);
-
-    updateRotateDeg(container, mousePointer);
-
-    // set cursor position from center
-    const x = evt.clientX - sliderPosition.x - mouseOrigin.x;
-    const y =
-      evt.clientY + (container.getBoundingClientRect().y + mouseOrigin.y) * -1;
-
-    setMousePointer({
-      active: true,
-      x,
-      y
-    });
-  };
-
-  const handleMouseMove = (evt, container, inner) => {
-    updateMousePosition(evt, container, inner);
-  };
-
-  const handleMouseLeave = () => {
-    setMousePointer({
-      active: false,
-      x: 0,
-      y: 0
-    });
-    setRotateDeg({ x: 0, y: 0 });
-  };
-
-  useEffect(() => {
-    let y = 0;
-    if (sliderPosition.dragDirection === 2) {
-      y = -0.75;
-    } else if (sliderPosition.dragDirection === 4) {
-      y = 0.75;
-    }
-
-    setRotateDeg({
-      x: 0,
-      y
-    });
-  }, [sliderPosition.dragDirection]);
-
   return (
     <>
-      <div className="work-item__wrapper">
-        <Link
-          to={`work/${uid}`}
-          className="work-item"
-          key={`work-item_${uid}`}
-          onMouseEnter={evt =>
-            handleMouseMove(evt, container.current, inner.current)
-          }
-          onMouseLeave={handleMouseLeave}
-          onMouseMove={evt =>
-            handleMouseMove(evt, container.current, inner.current)
-          }
-          ref={container}
-        >
+      <Link to={`work/${uid}`} className="work-item" key={`work-item_${uid}`}>
+        <div className="work-item__shadow"></div>
+        <div className="work-item__image-wrapper">
           <div
-            className="work-item__image-wrapper"
-            ref={inner}
+            className="work-item__image"
             style={{
-              transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`
-            }}
-          >
-            <div
-              className="work-item__image"
-              style={{
-                backgroundImage: `url("${data.main_image.url}")`
-              }}
-            ></div>
-            <div className="work-item__info">
-              <div className="work-item__title">{data.title.text}</div>
-              <div className="work-item__skills">
-                {data.skills.map(({ skill }, idx) => {
-                  if (!skill) {
-                    return false;
-                  }
-                  return (
-                    <div className="work-item__skill" key={`skill_${idx}`}>
-                      {skill.document[0].data.skill_name.text}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-          <div
-            className="work-item__shadow"
-            style={{
-              transform: `rotateX(${rotateDeg.x}deg) rotateY(${rotateDeg.y}deg)`
+              // backgroundImage: `url("${data.main_image.url}")`
+              backgroundColor: data.brand_color.text
             }}
           ></div>
-        </Link>
-      </div>
+          <div className="work-item__info">
+            <div className="work-item__title">{data.title.text}</div>
+            {/* <div className="work-item__skills">
+              {data.skills.map(({ skill }, idx) => {
+                if (!skill) {
+                  return false;
+                }
+                return (
+                  <div className="skillitem" key={`skill_${idx}`}>
+                    {skill.document[0].data.skill_name.text}
+                  </div>
+                );
+              })}
+            </div> */}
+          </div>
+        </div>
+      </Link>
       {/* <div
         className="work-item__center-dot"
         style={{

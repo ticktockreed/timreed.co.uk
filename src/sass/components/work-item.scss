@@ -1,33 +1,24 @@
-.work-items {
+.worklist {
   width: 100%;
-  overflow: hidden;
-  position: relative;
-  height: 490px;
-
   padding-top: 100px;
 }
+
 .work-items__slider {
   position: absolute;
   display: flex;
-  cursor: grab;
-
-  -ms-touch-action: pan-y;
-  touch-action: pan-y;
-
-  &:active {
-    cursor: grabbing;
-  }
 }
+
 .work-item__wrapper {
   display: inline-block;
 }
+
 .work-item {
   position: relative;
-  margin: 0 100px;
   display: block;
-
   perspective: 120px;
+  margin: 100px;
   max-width: 500px;
+  z-index: 1000;
   img {
     max-width: 100%;
   }
@@ -37,24 +28,22 @@
   content: "";
   position: absolute;
   bottom: -50px;
-  left: 0;
-  height: 30px;
-  right: 0;
-
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.5) 20%,
-    transparent 80%
-  );
+  left: auto;
+  width: 100%;
+  height: 100%;
+  right: -50px;
+  background-color: #f0f0f0;
+  z-index: 1000;
 }
+
 .work-item__image-wrapper {
   position: relative;
   overflow: hidden;
   height: 300px;
-  width: 400px;
-  background-color: #333;
-  border-radius: 5px;
+  position: relative;
+  z-index: 1000;
 }
+
 .work-item__image {
   background-size: cover;
   background-position: center center;
@@ -63,22 +52,14 @@
   height: 100%;
   opacity: 0.8;
   transition: opacity 250ms ease-in;
+  background-color: $green;
 
   .work-item:hover & {
     opacity: 1;
   }
 }
 
-.work-item__mouse-position {
-  position: fixed;
-  right: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 1);
-  padding: 10;
-}
-
 .work-item__info {
-  background-color: $black;
   width: 100%;
   position: absolute;
   padding: 10px;
@@ -95,17 +76,4 @@
   text-transform: uppercase;
   font-size: 16px;
   font-weight: bold;
-}
-
-// ============== Helpers ================
-.work-item__center-dot {
-  position: fixed;
-  border: solid 5px red;
-}
-
-.helper {
-  position: fixed;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
 }

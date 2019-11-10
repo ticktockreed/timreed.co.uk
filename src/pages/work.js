@@ -30,8 +30,8 @@ const WorkPage = ({ data: { prismicWork } }) => {
             </div>
           </div>
         </div>
+        <WorkList items={data.body[0].items}></WorkList>
       </div>
-      <WorkList items={data.body[0].items}></WorkList>
     </Layout>
   );
 };
@@ -57,6 +57,15 @@ export const pageQuery = graphql`
                     alt
                   }
                   title {
+                    text
+                  }
+                  brand_color {
+                    text
+                  }
+                  client {
+                    text
+                  }
+                  agency {
                     text
                   }
                   skills {
