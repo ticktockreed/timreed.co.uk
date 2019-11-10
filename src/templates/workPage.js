@@ -44,7 +44,6 @@ export function findClosestPoint(e, UI) {
 const WorkItem = ({ data: { prismicWorkItem } }) => {
   const { data } = prismicWorkItem;
 
-  console.log("props", data);
   return (
     <Layout>
       <SEO
@@ -59,21 +58,57 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
       />
       <>
         <div className="container">
-          <div className="row justify-content-lg-center align-items-center hero">
-            <h1 className="heading00">{data.title.text}</h1>
-
-            {data.skills.map(({ skill }, idx) => {
-              if (!skill) {
-                return false;
-              }
-              return (
-                <div className="work-item__skill" key={`skill_${idx}`}>
-                  {skill.document[0].data.skill_name.text}
+          <div className="workpage-hero">
+            <div className="row justify-content-lg-center align-items-center">
+              <div className="workpage-hero__titlebox">
+                <h1 className="heading00 workpage-hero__title">
+                  {data.title.text}
+                </h1>
+                <div className="workpage-hero__agency">
+                  <span className="paragraph02 opacity-70">At:</span>{" "}
+                  <span className="paragraph03">Hugo & Cat</span>
                 </div>
-              );
-            })}
+              </div>
+              <div className="workpage-hero__box">
+                <div className="heading00 workpage-hero__title text-color-white">
+                  {data.title.text}
+                </div>
+                <div className="workpage-hero__client">
+                  <span className="paragraph02 text-color-white opacity-70">
+                    Client:
+                  </span>{" "}
+                  <span className="paragraph03 text-color-white">Vizient</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="row">
+          <div className="workpage-skills">
+            <div className="workpage-skills__color-block"></div>
+            <div className="row align-items-end">
+              <div className="col offset-3">
+                <span className="paragraph02 opacity-70">Skills: </span>
+                {data.skills.map(({ skill }, idx) => {
+                  if (!skill) {
+                    return false;
+                  }
+                  return (
+                    <>
+                      <div className="skillitem" key={`skill_${idx}`}>
+                        {skill.document[0].data.skill_name.text}
+                      </div>
+                      {idx !== data.skills.length - 1 ? (
+                        <span className="skillitem__divide">.</span>
+                      ) : (
+                        ""
+                      )}
+                    </>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="row">
             <div className="col-10 offset-2">
               {data.body &&
                 data.body.map((slice, i) => {
@@ -111,7 +146,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                   }
                 })}
             </div>
-          </div>
+          </div> */}
         </div>
       </>
     </Layout>

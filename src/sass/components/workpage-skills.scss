@@ -1,0 +1,16 @@
+.workpage-skills {
+  position: relative;
+  padding-bottom: $gutter;
+  > .row {
+    height: 100px;
+  }
+}
+.workpage-skills__color-block {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: grey;
+  opacity: 0.1;
+  width: 50%;
+  height: 80%;
+}

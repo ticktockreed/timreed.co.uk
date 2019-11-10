@@ -1,0 +1,49 @@
+.workpage-hero {
+  margin-top: 200px;
+  position: relative;
+  padding-bottom: 42%;
+  @include make-col-offset(1);
+  margin-bottom: 100px;
+}
+.workpage-hero__box {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+
+  clip-path: polygon(
+    percentage(3 / 12) 0,
+    100% 0,
+    100% 100%,
+    percentage(3 / 12) 100%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.workpage-hero__titlebox {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.workpage-hero__title {
+  position: absolute;
+  top: 60%;
+}
+
+.workpage-hero__agency {
+  position: absolute;
+  bottom: $gutter/2;
+}
+
+.workpage-hero__client {
+  position: absolute;
+  bottom: $gutter/2;
+  right: $gutter/2;
+}
