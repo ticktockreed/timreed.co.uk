@@ -28,7 +28,7 @@
 %paragraph01 {
   font-family: $fontMain;
   font-size: 16px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0;
   font-weight: 400;
 }
 %paragraph02 {
@@ -37,6 +37,12 @@
   text-decoration: none;
   position: relative;
   letter-spacing: 0.25em;
+}
+%paragraph03 {
+  font-family: $fontMain;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  font-weight: 400;
 }
 
 .heading00 {
@@ -50,6 +56,18 @@
 }
 .heading03 {
   @extend %heading03;
+}
+
+.paragraph01 {
+  @extend %paragraph01;
+}
+
+.paragraph02 {
+  @extend %paragraph02;
+}
+
+.paragraph03 {
+  @extend %paragraph03;
 }
 
 .richtext {

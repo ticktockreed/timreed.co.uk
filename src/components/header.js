@@ -7,7 +7,7 @@ import Logo from "../images/TR-Logo-Flat.svg";
 const Header = ({ siteTitle }) => (
   <header className="site-header">
     <div className="container">
-      <div className="row align-items-center justify-content-between">
+      <div className="row align-items-center justify-content-between site-header__row">
         <div className="col">
           <Link to="/" className="site-name">
             Tim Reed
@@ -25,7 +25,7 @@ const Header = ({ siteTitle }) => (
           <Nav></Nav>
         </div> */}
         <div className="col text-right">
-          <div className="wow">Creative Developer</div>
+          <div className="paragraph03">Creative Developer</div>
         </div>
       </div>
     </div>
