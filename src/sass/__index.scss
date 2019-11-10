@@ -19,8 +19,9 @@ html {
 }
 html,
 body {
-  color: $grey;
-  background-color: $black;
-
+  color: $text-black;
+  background-color: $white;
   font-family: $fontBody;
+
+  @extend %paragraph01;
 }

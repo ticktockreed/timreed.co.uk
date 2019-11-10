@@ -1,18 +1,34 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
-import Logo from "../images/LogoMerged.svg";
-import Nav from "./nav";
+import Logo from "../images/TR-Logo-Flat.svg";
+// import Nav from "./nav";
 
 const Header = ({ siteTitle }) => (
   <header className="site-header">
-    <h1>
-      <Link to="/">
-        <Logo className="site-logo"></Logo>
-        <div className="sr-only">{siteTitle}</div>
-      </Link>
-    </h1>
-    <Nav></Nav>
+    <div className="container">
+      <div className="row align-items-center justify-content-between">
+        <div className="col">
+          <Link to="/" className="site-name">
+            Tim Reed
+          </Link>
+        </div>
+        <div className="col text-center">
+          <h1>
+            <Link to="/">
+              <Logo className="site-logo"></Logo>
+              <div className="sr-only">{siteTitle}</div>
+            </Link>
+          </h1>
+        </div>
+        {/* <div className="col">
+          <Nav></Nav>
+        </div> */}
+        <div className="col text-right">
+          <div className="wow">Creative Developer</div>
+        </div>
+      </div>
+    </div>
   </header>
 );
 

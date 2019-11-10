@@ -1,4 +1,56 @@
-@import "./headings.scss";
+%heading00 {
+  font-family: $fontMain;
+  font-size: 40px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+%heading01 {
+  font-family: $fontMain;
+  font-size: 5.063em;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+%heading02 {
+  font-family: $fontMain;
+  font-weight: bold;
+  font-size: 2.25em;
+}
+
+%heading03 {
+  font-family: $fontMain;
+  font-weight: normal;
+  font-size: 1.5em;
+}
+
+%paragraph01 {
+  font-family: $fontMain;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  font-weight: 400;
+}
+%paragraph02 {
+  text-transform: uppercase;
+  color: $text-black;
+  text-decoration: none;
+  position: relative;
+  letter-spacing: 0.25em;
+}
+
+.heading00 {
+  @extend %heading00;
+}
+.heading01 {
+  @extend %heading01;
+}
+.heading02 {
+  @extend %heading02;
+}
+.heading03 {
+  @extend %heading03;
+}
 
 .richtext {
   h1 {
@@ -13,14 +65,4 @@
   a {
     color: $pink;
   }
-}
-
-.heading01 {
-  @extend %heading01;
-}
-.heading02 {
-  @extend %heading02;
-}
-.heading03 {
-  @extend %heading03;
 }

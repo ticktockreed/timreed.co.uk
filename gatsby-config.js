@@ -45,7 +45,7 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Pt Sans", "Source Sans Pro"]
+          families: ["Open Sans:400,800"]
         }
       }
     },
