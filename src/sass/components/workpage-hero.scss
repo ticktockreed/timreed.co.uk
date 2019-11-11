@@ -16,7 +16,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+  clip: rect(0px, 1140px, 510px, 286px);
+  opacity: 0;
 }
 .workpage-hero__box {
   width: 100%;

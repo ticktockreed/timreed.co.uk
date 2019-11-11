@@ -87,12 +87,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                   backgroundColor: data.brand_color
                     ? data.brand_color.text
                     : "inherit",
-                  clipPath: `polygon(
-                                ${(3 / 12) * 100}% 0,
-                                100% 0,
-                                100% 100%,
-                                ${(3 / 12) * 100}% 100%
-                            )`
+                  clip: `rect(0px, 1140px, 510px, 286px)`
                 }}
               >
                 <div className="heading00 workpage-hero__title text-color-white">

@@ -25,8 +25,8 @@ $gutter: $grid-gutter-width;
   font-weight: bold;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  clip-path: polygon(0% 10%, 100% 20%, 100% 80%, 0 70%);
-  transition: clip-path 200ms ease-in-out, opacity 200ms ease-in;
+  clip: rect(0px, 60px, 200px, 0px);
+  transition: clip 200ms ease-in-out, opacity 200ms ease-in;
 }
 
 .site-navigation__text--active,
