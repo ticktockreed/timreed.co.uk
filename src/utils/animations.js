@@ -12,6 +12,11 @@ export function transitionPage({ exit, node, e, entry, direction }) {
     const heroBoxRect = heroBox.getBoundingClientRect();
 
     timelineIn
+      .set(document.body, {
+        position: "fixed",
+        width: "100%",
+        height: "100%"
+      })
       .set(workpage, {
         opacity: 0
       })
@@ -48,6 +53,9 @@ export function transitionPage({ exit, node, e, entry, direction }) {
       })
       .to(heroBox, 0.2, {
         clip: `rect(0px, 1140px, 580px, 300px)`
+      })
+      .set(document.body, {
+        position: "relative"
       });
     //   .to(
     //     heroBoxDummy,
