@@ -1,8 +1,3 @@
-.worklist {
-  width: 100%;
-  padding-top: 100px;
-}
-
 .work-items__slider {
   position: absolute;
   display: flex;
@@ -33,6 +28,7 @@
   right: -50px;
   background-color: #f0f0f0;
   z-index: 1000;
+  display: none;
 }
 
 .work-item__image-wrapper {
