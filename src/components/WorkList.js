@@ -13,13 +13,7 @@ const WorkList = ({ items }) => {
         const { data, uid } = work_item.document[0];
         return (
           <div className="col-6">
-            <Make3d>
-              <WorkItem
-                data={data}
-                uid={uid}
-                key={`workItem__${uid}`}
-              ></WorkItem>
-            </Make3d>
+            <WorkItem data={data} uid={uid} key={`workItem__${uid}`}></WorkItem>
           </div>
         );
       })}

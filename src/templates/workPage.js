@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -43,6 +43,17 @@ export function findClosestPoint(e, UI) {
 
 const WorkItem = ({ data: { prismicWorkItem } }) => {
   const { data } = prismicWorkItem;
+  const herobox = useRef(null);
+  const [heroBoxPosition, setHeroBoxPosition] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+  });
+
+  useEffect(() => {
+    setHeroBoxPosition(herobox.current.getBoundingClientRect());
+  }, [herobox]);
 
   return (
     <Layout>
@@ -57,7 +68,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
         ]}
       />
       <>
-        <div className="container">
+        <div className="container workpage">
           <div className="workpage-hero">
             <div className="row justify-content-lg-center align-items-center">
               <div className="workpage-hero__titlebox">
@@ -71,10 +82,17 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
               </div>
               <div
                 className="workpage-hero__box"
+                ref={herobox}
                 style={{
                   backgroundColor: data.brand_color
                     ? data.brand_color.text
-                    : "inherit"
+                    : "inherit",
+                  clipPath: `polygon(
+                                ${(3 / 12) * 100}% 0,
+                                100% 0,
+                                100% 100%,
+                                ${(3 / 12) * 100}% 100%
+                            )`
                 }}
               >
                 <div className="heading00 workpage-hero__title text-color-white">
@@ -155,6 +173,15 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
             </div>
           </div> */}
         </div>
+
+        <div
+          className="workpage-hero__box-dummy"
+          style={{
+            backgroundColor: data.brand_color
+              ? data.brand_color.text
+              : "inherit"
+          }}
+        />
       </>
     </Layout>
   );
