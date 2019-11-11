@@ -7,8 +7,8 @@ import { transitionPage } from "../utils/animations";
 const WorkLink = ({ children, to, ...props }) => {
   return (
     <TransitionLink
-      activeClassName="site-navigation__text--active"
-      className="site-navigation__text"
+      activeClassName="worklink--active"
+      className="worklink"
       partiallyActive={true}
       to={to}
       exit={{
@@ -19,8 +19,8 @@ const WorkLink = ({ children, to, ...props }) => {
         //   someCustomDefinedAnimation({ exit, node, direction: "out" })
       }}
       entry={{
-        length: 1,
-        delay: 0.5,
+        length: 0.35,
+        delay: 0.35,
         trigger: ({ exit, node, e, entry }) => {
           transitionPage({ exit, node, e, entry, direction: "in" });
         }
@@ -36,11 +36,7 @@ const WorkLink = ({ children, to, ...props }) => {
 const WorkItem = ({ data, uid, sliderPosition }) => {
   return (
     <>
-      <WorkLink
-        to={`work/${uid}`}
-        className="work-item"
-        key={`work-item_${uid}`}
-      >
+      <WorkLink to={`/work/${uid}`} className="work-item">
         <div className="work-item__shadow"></div>
         <div className="work-item__image-wrapper">
           <div

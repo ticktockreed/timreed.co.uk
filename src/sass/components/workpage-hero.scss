@@ -1,5 +1,5 @@
 .workpage-hero {
-  margin-top: 200px;
+  margin-top: 120px;
   position: relative;
   padding-bottom: 42%;
   @include make-col-offset(1);
@@ -47,9 +47,10 @@
     content: "";
     display: block;
     background-color: $text-black;
-    width: $gutter * 2;
     height: 6px;
-    margin-top: $gutter;
+    width: 45px;
+    height: 5px;
+    margin-top: 16px;
   }
 }
 

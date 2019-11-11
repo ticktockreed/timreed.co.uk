@@ -1,19 +1,19 @@
 @keyframes slideIn {
-  from {
+  0% {
     // transform: translateX(0%);
     width: 0;
   }
-  to {
+  100% {
     // transform: translateX(100%);
     width: 90%;
   }
 }
 @keyframes slideOut {
-  from {
+  0% {
     // transform: translateX(0%);
     width: 90%;
   }
-  to {
+  100% {
     // transform: translateX(100%);
     width: 0;
   }
@@ -28,14 +28,14 @@
   background-color: $white;
 }
 .site-header__row {
-  height: 140px;
+  height: 100px;
 }
 
 .site-logo {
   width: 100%;
   height: 100%;
   display: block;
-  max-width: 30px;
+  max-width: 25px;
   margin: auto;
 }
 
@@ -50,7 +50,7 @@
     content: "";
     height: 0.7em;
     position: absolute;
-    width: 0;
+    width: 90%;
     background-color: grey;
     opacity: 0.2;
     bottom: 0em;
