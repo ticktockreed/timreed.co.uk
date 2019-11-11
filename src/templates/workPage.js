@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { TransitionState } from "gatsby-plugin-transition-link";
+
 import AppRichText from "../components/AppRichText";
 import ReactPlayer from "react-player";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -34,68 +36,76 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
           `gatsby`
         ]}
       />
-      <>
-        <div className="container workpage" style={{ opacity: 0 }}>
-          <div className="workpage-hero">
-            <div className="row justify-content-lg-center align-items-center">
-              <div className="workpage-hero__titlebox">
-                <h1 className="heading00 workpage-hero__title">
-                  {data.title.text}
-                </h1>
-                <div className="workpage-hero__agency">
-                  <span className="paragraph02">At:</span>{" "}
-                  <span className="paragraph03">{data.agency.text}</span>
-                </div>
-              </div>
+      <TransitionState>
+        {({ transitionStatus }) => {
+          return (
+            <>
               <div
-                className="workpage-hero__box"
-                ref={herobox}
-                style={{
-                  backgroundColor: data.brand_color
-                    ? data.brand_color.text
-                    : "inherit",
-                  clip: `rect(0px, 1140px, 580px, 300px)`
-                }}
+                className="container workpage"
+                style={{ opacity: transitionStatus === "entered" ? 1 : 0 }}
               >
-                <div className="heading00 workpage-hero__title text-color-white">
-                  {data.title.text}
-                </div>
-                <div className="workpage-hero__client">
-                  <span className="paragraph02 text-color-white">Client:</span>{" "}
-                  <span className="paragraph03 text-color-white">
-                    {data.client.text}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="workpage-skills">
-            <div className="workpage-skills__color-block"></div>
-            <div className="row align-items-end">
-              <div className="col offset-3">
-                <span className="paragraph02">Skills: </span>
-                {data.skills.map(({ skill }, idx) => {
-                  if (!skill) {
-                    return false;
-                  }
-                  return (
-                    <span key={`skill_${idx}`}>
-                      <div className="skillitem">
-                        {skill.document[0].data.skill_name.text}
+                <div className="workpage-hero">
+                  <div className="row justify-content-lg-center align-items-center">
+                    <div className="workpage-hero__titlebox">
+                      <h1 className="heading00 workpage-hero__title">
+                        {data.title.text}
+                      </h1>
+                      <div className="workpage-hero__agency">
+                        <span className="paragraph02">At:</span>{" "}
+                        <span className="paragraph03">{data.agency.text}</span>
                       </div>
-                      {idx !== data.skills.length - 1 ? (
-                        <span className="skillitem__divide">.</span>
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+                    </div>
+                    <div
+                      className="workpage-hero__box"
+                      ref={herobox}
+                      style={{
+                        backgroundColor: data.brand_color
+                          ? data.brand_color.text
+                          : "inherit",
+                        clip: `rect(0px, 1140px, 580px, 300px)`
+                      }}
+                    >
+                      <div className="heading00 workpage-hero__title text-color-white">
+                        {data.title.text}
+                      </div>
+                      <div className="workpage-hero__client">
+                        <span className="paragraph02 text-color-white">
+                          Client:
+                        </span>{" "}
+                        <span className="paragraph03 text-color-white">
+                          {data.client.text}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="workpage-skills">
+                  <div className="workpage-skills__color-block"></div>
+                  <div className="row align-items-end">
+                    <div className="col offset-3">
+                      <span className="paragraph02">Skills: </span>
+                      {data.skills.map(({ skill }, idx) => {
+                        if (!skill) {
+                          return false;
+                        }
+                        return (
+                          <span key={`skill_${idx}`}>
+                            <div className="skillitem">
+                              {skill.document[0].data.skill_name.text}
+                            </div>
+                            {idx !== data.skills.length - 1 ? (
+                              <span className="skillitem__divide">.</span>
+                            ) : (
+                              ""
+                            )}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
 
-          {/* <div className="row">
+                {/* <div className="row">
             <div className="col-10 offset-2">
               {data.body &&
                 data.body.map((slice, i) => {
@@ -134,17 +144,20 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                 })}
             </div>
           </div> */}
-        </div>
+              </div>
 
-        <div
-          className="workpage-hero__box-dummy"
-          style={{
-            backgroundColor: data.brand_color
-              ? data.brand_color.text
-              : "inherit"
-          }}
-        />
-      </>
+              <div
+                className="workpage-hero__box-dummy"
+                style={{
+                  backgroundColor: data.brand_color
+                    ? data.brand_color.text
+                    : "inherit"
+                }}
+              />
+            </>
+          );
+        }}
+      </TransitionState>
     </Layout>
   );
 };
