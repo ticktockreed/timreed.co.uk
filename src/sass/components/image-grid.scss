@@ -1,6 +1,7 @@
 .client-logo {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%) contrast(0.2); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%) contrast(0.2);
+
   margin: 10px;
   opacity: 0.6;
   transition: opacity 100ms ease-in;

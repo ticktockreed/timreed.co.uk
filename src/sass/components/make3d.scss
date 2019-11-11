@@ -1,6 +1,6 @@
 .make3d {
-  position: absolute;
-  margin: 0 100px;
+  position: relative;
+
   display: block;
   perspective: 120px;
   max-width: 500px;
@@ -9,8 +9,6 @@
 .make3d__image-wrapper {
   position: relative;
   overflow: hidden;
-  height: 80vh;
-  width: 80vh;
   border-radius: 5px;
 }
 .make3d__image {

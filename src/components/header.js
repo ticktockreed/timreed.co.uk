@@ -15,9 +15,9 @@ const Header = ({ siteTitle }) => (
         </div>
         <div className="col text-center">
           <h1>
-            <Link to="/">
+            <Link to="/about">
               <Logo className="site-logo"></Logo>
-              <div className="sr-only">{siteTitle}</div>
+              <div className="sr-only">About Tim Reed</div>
             </Link>
           </h1>
         </div>

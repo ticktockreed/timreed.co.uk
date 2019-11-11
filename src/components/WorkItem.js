@@ -10,7 +10,6 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
           <div
             className="work-item__image"
             style={{
-              // backgroundImage: `url("${data.main_image.url}")`
               backgroundColor: data.brand_color.text
             }}
           ></div>
@@ -31,15 +30,6 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
           </div>
         </div>
       </Link>
-      {/* <div
-        className="work-item__center-dot"
-        style={{
-          // display: mousePointer.active ? "block" : "none",
-          top: mouseOrigin.y,
-          left: mouseOrigin.x,
-          zIndex: 10000
-        }}
-      ></div> */}
     </>
   );
 };

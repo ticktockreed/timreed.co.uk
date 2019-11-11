@@ -26,6 +26,7 @@
 
 .work-item__shadow {
   content: "";
+  transform: translate3d(0, 0, -20px);
   position: absolute;
   bottom: -50px;
   left: auto;
