@@ -79,7 +79,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                     return false;
                   }
                   return (
-                    <div key={`skill_${idx}`}>
+                    <span key={`skill_${idx}`}>
                       <div className="skillitem">
                         {skill.document[0].data.skill_name.text}
                       </div>
@@ -88,7 +88,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       ) : (
                         ""
                       )}
-                    </div>
+                    </span>
                   );
                 })}
               </div>
