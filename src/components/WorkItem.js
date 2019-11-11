@@ -20,7 +20,7 @@ const WorkLink = ({ children, to, ...props }) => {
       }}
       entry={{
         length: 1,
-        delay: 1,
+        delay: 0.5,
         trigger: ({ exit, node, e, entry }) => {
           transitionPage({ exit, node, e, entry, direction: "in" });
         }

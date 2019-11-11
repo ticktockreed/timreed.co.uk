@@ -87,7 +87,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                   backgroundColor: data.brand_color
                     ? data.brand_color.text
                     : "inherit",
-                  clip: `rect(0px, 1140px, 510px, 286px)`
+                  clip: `rect(0px, 1140px, 580px, 300px)`
                 }}
               >
                 <div className="heading00 workpage-hero__title text-color-white">
