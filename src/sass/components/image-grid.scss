@@ -8,10 +8,6 @@
   opacity: 0.6;
   transition: opacity 100ms ease-in;
 
-  @include media-breakpoint-up(lg) {
-    max-width: 100px;
-  }
-
   &:hover {
     transition: opacity 100ms ease-out;
     opacity: 1;
