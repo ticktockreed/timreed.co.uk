@@ -1,9 +1,13 @@
 %heading00 {
   font-family: "Source Code Pro";
-  font-size: 30px;
+  font-size: 20px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   font-weight: 700;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 30px;
+  }
 }
 
 %heading01 {
@@ -27,9 +31,14 @@
 
 %paragraph01 {
   font-family: $fontMain;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0;
+  line-height: 1.2;
   font-weight: 400;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 14px;
+  }
 }
 %paragraph02 {
   text-transform: uppercase;
@@ -37,14 +46,24 @@
   text-decoration: none;
   font-weight: 600;
   position: relative;
-  font-size: 12px;
+  font-size: 10px;
+  line-height: 1.2;
   letter-spacing: 0.25em;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 12px;
+  }
 }
 %paragraph03 {
   font-family: $fontMain;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 1.2;
   letter-spacing: 0.15em;
   font-weight: 400;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 14px;
+  }
 }
 
 .heading00 {

@@ -51,7 +51,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                         {data.title.text}
                       </h1>
                       <div className="workpage-hero__agency">
-                        <span className="paragraph02">At:</span>{" "}
+                        <span className="paragraph02 text-label mb-1">At:</span>{" "}
                         <span className="paragraph03">{data.agency.text}</span>
                       </div>
                     </div>
@@ -69,7 +69,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                         {data.title.text}
                       </div>
                       <div className="workpage-hero__client">
-                        <span className="paragraph02 text-color-white">
+                        <span className="text-label mb-1 paragraph02 text-color-white">
                           Client:
                         </span>{" "}
                         <span className="paragraph03 text-color-white">
@@ -82,8 +82,10 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                 <div className="workpage-skills">
                   <div className="workpage-skills__color-block"></div>
                   <div className="row align-items-end">
-                    <div className="col offset-3">
-                      <span className="paragraph02">Skills: </span>
+                    <div className="col offset-1 offset-md-3">
+                      <span className="paragraph02 text-label mb-1">
+                        Skills:{" "}
+                      </span>
                       {data.skills.map(({ skill }, idx) => {
                         if (!skill) {
                           return false;
