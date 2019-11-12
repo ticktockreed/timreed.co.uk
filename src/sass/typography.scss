@@ -25,36 +25,36 @@
 }
 
 %heading02 {
-  font-family: $fontMain;
-  font-weight: normal;
-  text-transform: uppercase;
-  font-size: 22.506px;
-  letter-spacing: 0;
-
-  @include media-breakpoint-up(sm) {
-    font-size: 22.506px;
-  }
-}
-
-%heading03 {
-  font-family: $fontMain;
-  font-weight: normal;
+  font-family: $fontBody;
+  font-weight: 600;
   text-transform: uppercase;
   font-size: 16.883px;
-  letter-spacing: 0;
+  letter-spacing: 2.6px;
 
   @include media-breakpoint-up(sm) {
     font-size: 16.883px;
   }
 }
 
+%heading03 {
+  font-family: $fontBody;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12.666px;
+  letter-spacing: 2.6px;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 12.666px;
+  }
+}
+
 %heading04 {
-  font-family: $fontMain;
+  font-family: $fontBody;
   font-weight: normal;
   text-transform: uppercase;
   font-size: 12.666px;
-
   letter-spacing: 0;
+
   @include media-breakpoint-up(sm) {
     font-size: 12.666px;
   }
@@ -94,6 +94,17 @@
 
   @include media-breakpoint-up(sm) {
     font-size: 12.666px;
+  }
+}
+%paragraph-intro {
+  font-family: $fontBody;
+  font-size: 16.883px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 16.883px;
   }
 }
 

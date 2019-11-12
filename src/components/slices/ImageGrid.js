@@ -3,7 +3,7 @@ import React from "react";
 const ImageGrid = ({ slice, idx }) => {
   return (
     <div className="image-grid" key={`slice-image-grid_${idx}`}>
-      <div className="image-grid-title">
+      <div className="image-grid-title richtext">
         <h2 className="heading03">{slice.primary.title.text}</h2>
         <p>
           Some companies I've had the pleasure to build digital interfaces for

@@ -1,0 +1,17 @@
+.textslice {
+  position: relative;
+  margin-bottom: $spacer-lg;
+}
+.textslice__color-block {
+  position: absolute;
+  left: 30%;
+  bottom: 0;
+  background-color: grey;
+  opacity: 0.1;
+  width: 70%;
+  height: 100%;
+
+  @include media-breakpoint-up(md) {
+    width: 70%;
+  }
+}

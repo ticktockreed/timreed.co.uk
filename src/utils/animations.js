@@ -56,19 +56,10 @@ export function transitionPage({ exit, node, e, entry, direction }) {
       })
       .set(document.body, {
         position: "relative"
+      })
+      .set(heroBoxDummy, {
+        display: "none"
       });
-    //   .to(
-    //     heroBoxDummy,
-    //     1,
-    //     {
-    //       clip: `rect(0px, 1140px, 580px, 300px)`
-    //     },
-    //     "-=1"
-    //   )
-    //   .to(workpage, 1, {
-    //     opacity: 1
-    //   })
-    //   .to(heroBoxDummy, 0.25, { opacity: 0 });
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();
     const workItems = [].slice.call(node.querySelectorAll(".work-item"));

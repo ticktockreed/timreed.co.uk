@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
+import Img from "gatsby-image";
 import SEO from "../components/seo";
 import { TransitionState } from "gatsby-plugin-transition-link";
 
@@ -111,10 +112,18 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                 <div className="slices">
                   {data.body &&
                     data.body.map((slice, i) => {
+                      const sizeMap = {
+                        xs: "col-6 col-md-3",
+                        sm: "col-6 col-md-4",
+                        md: "col-8 col-md-6",
+                        lg: "col-10 col-md-8",
+                        xl: "col-10 col-md-10"
+                      };
+
                       if (slice.slice_type === "intro") {
                         return (
                           <div className="row justify-content-center">
-                            <div className="col-10 col-md-8">
+                            <div className={sizeMap.lg}>
                               <Intro slice={slice} idx={i}></Intro>
                             </div>
                           </div>
@@ -123,7 +132,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       if (slice.slice_type === "text") {
                         return (
                           <div className="row justify-content-center textslice">
-                            <div className="col-8 col-md-6">
+                            <div className={sizeMap.md}>
                               <div className="textslice__color-block"></div>
                               <AppRichText
                                 text={slice.primary.text}
@@ -142,14 +151,33 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       if (slice.slice_type === "video") {
                         return (
                           <div className="row justify-content-center">
-                            <div className="col-10 col-md-8">
-                              <ReactPlayer
-                                url={slice.primary.video_url.text}
-                                muted={true}
-                                controls={false}
-                                loop={true}
-                                playing={true}
-                              ></ReactPlayer>
+                            <div className={sizeMap[slice.primary.column_size]}>
+                              <div className="videoslice">
+                                <ReactPlayer
+                                  url={slice.primary.video_url.text}
+                                  className="react-player"
+                                  muted={true}
+                                  controls={false}
+                                  loop={true}
+                                  playing={true}
+                                ></ReactPlayer>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      }
+                      if (slice.slice_type === "image") {
+                        return (
+                          <div className="row justify-content-center imageslice">
+                            <div className={sizeMap[slice.primary.column_size]}>
+                              {/* <img src="" ></img> */}
+                              {console.log(slice.primary.image.localFile)}
+                              <Img
+                                fluid={
+                                  slice.primary.image.localFile.childImageSharp
+                                    .fluid
+                                }
+                              ></Img>
                             </div>
                           </div>
                         );
@@ -157,7 +185,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       if (slice.slice_type === "code") {
                         return (
                           <div className="row justify-content-center">
-                            <div className="col-10 col-md-8">
+                            <div className={sizeMap.lg}>
                               <SyntaxHighlighter
                                 wrapLines={true}
                                 language={slice.primary.code_type}
@@ -227,6 +255,27 @@ export const pageQuery = graphql`
           }
         }
         body {
+          ... on PrismicWorkItemBodyImage {
+            slice_type
+            primary {
+              column_size
+              image {
+                localFile {
+                  childImageSharp {
+                    resolutions(width: 1000) {
+                      ...GatsbyImageSharpResolutions_withWebp
+                    }
+                    fixed(width: 1000) {
+                      ...GatsbyImageSharpFixed
+                    }
+                    fluid {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+            }
+          }
           ... on PrismicWorkItemBodyIntro {
             slice_type
             primary {
@@ -259,6 +308,7 @@ export const pageQuery = graphql`
           ... on PrismicWorkItemBodyVideo {
             slice_type
             primary {
+              column_size
               video_url {
                 text
               }
