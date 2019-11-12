@@ -9,8 +9,13 @@ import AppRichText from "../components/AppRichText";
 import Intro from "../components/slices/Intro";
 import ReactPlayer from "react-player";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark, atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import {
+  dark,
+  atomDark,
+  coy,
+  ghcolors,
+  xonokai
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const WorkItem = ({ data: { prismicWorkItem } }) => {
   const { data } = prismicWorkItem;
@@ -133,10 +138,13 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                         return (
                           <div className="row justify-content-center textslice">
                             <div className={sizeMap.md}>
-                              <div className="textslice__color-block"></div>
-                              <AppRichText
-                                text={slice.primary.text}
-                              ></AppRichText>
+                              <div
+                                className={`textslice__color - block text-${slice.primary.alignment}`}
+                              >
+                                <AppRichText
+                                  text={slice.primary.text}
+                                ></AppRichText>
+                              </div>
                             </div>
                           </div>
                         );
@@ -170,8 +178,6 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                         return (
                           <div className="row justify-content-center imageslice">
                             <div className={sizeMap[slice.primary.column_size]}>
-                              {/* <img src="" ></img> */}
-                              {console.log(slice.primary.image.localFile)}
                               <Img
                                 fluid={
                                   slice.primary.image.localFile.childImageSharp
@@ -186,13 +192,23 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                         return (
                           <div className="row justify-content-center">
                             <div className={sizeMap.lg}>
-                              <SyntaxHighlighter
-                                wrapLines={true}
-                                language={slice.primary.code_type}
-                                style={atomDark}
-                              >
-                                {slice.primary.content.text}
-                              </SyntaxHighlighter>
+                              <figure className="codeslice">
+                                <SyntaxHighlighter
+                                  wrapLines={true}
+                                  language={slice.primary.code_type}
+                                  style={coy}
+                                >
+                                  {`${slice.primary.content.text.replace(
+                                    '""',
+                                    ""
+                                  )}`}
+                                </SyntaxHighlighter>
+                                <figcaption className="codeslice__caption text-right">
+                                  <p className="paragraph04">
+                                    {slice.primary.caption.text}
+                                  </p>
+                                </figcaption>
+                              </figure>
                             </div>
                           </div>
                         );
@@ -300,6 +316,7 @@ export const pageQuery = graphql`
           ... on PrismicWorkItemBodyText {
             slice_type
             primary {
+              alignment
               text {
                 html
               }
