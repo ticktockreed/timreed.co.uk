@@ -1,6 +1,6 @@
-.spacer--md {
-  height: 60px;
-}
-.spacer--lg {
-  height: 100px;
+// Spacers
+@each $item, $spacer in $spacerMap {
+  .spacer-slice-#{$item} {
+    height: $spacer;
+  }
 }

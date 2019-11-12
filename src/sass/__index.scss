@@ -20,6 +20,13 @@
   }
 }
 
+// Spacing modifier
+@each $item, $spacer in $spacerMap {
+  .spacer--#{$item} {
+    margin-bottom: $spacer;
+  }
+}
+
 html {
   width: 100%;
   height: 100%;
