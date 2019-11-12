@@ -70,7 +70,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       </div>
                       <div className="workpage-hero__client">
                         <span className="text-label mb-1 paragraph02 text-color-white">
-                          Client:
+                          For:
                         </span>{" "}
                         <span className="paragraph03 text-color-white">
                           {data.client.text}
