@@ -5,6 +5,7 @@ import SEO from "../components/seo";
 import { TransitionState } from "gatsby-plugin-transition-link";
 
 import AppRichText from "../components/AppRichText";
+import Intro from "../components/slices/Intro";
 import ReactPlayer from "react-player";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dark, atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -110,10 +111,20 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                 <div className="slices">
                   {data.body &&
                     data.body.map((slice, i) => {
-                      if (slice.slice_type === "text") {
+                      if (slice.slice_type === "intro") {
                         return (
                           <div className="row justify-content-center">
                             <div className="col-10 col-md-8">
+                              <Intro slice={slice} idx={i}></Intro>
+                            </div>
+                          </div>
+                        );
+                      }
+                      if (slice.slice_type === "text") {
+                        return (
+                          <div className="row justify-content-center textslice">
+                            <div className="col-8 col-md-6">
+                              <div className="textslice__color-block"></div>
                               <AppRichText
                                 text={slice.primary.text}
                               ></AppRichText>
@@ -161,7 +172,6 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                     })}
                 </div>
               </div>
-
               <div
                 className="workpage-hero__box-dummy"
                 style={{
@@ -217,6 +227,14 @@ export const pageQuery = graphql`
           }
         }
         body {
+          ... on PrismicWorkItemBodyIntro {
+            slice_type
+            primary {
+              text {
+                html
+              }
+            }
+          }
           ... on PrismicWorkItemBodyCode {
             slice_type
             primary {
