@@ -23,14 +23,11 @@
 html {
   width: 100%;
   height: 100%;
-  //   position: fixed;
-  //   overflow: hidden;
 }
 html,
 body {
   color: $text-black;
   background-color: $white;
-  font-family: $fontBody;
 
-  @extend %paragraph01;
+  @extend %body;
 }

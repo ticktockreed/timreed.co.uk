@@ -29,34 +29,47 @@ const AboutPage = ({
         ]}
       />
       <div className={`container`}>
-        <div className="row justify-content-lg-center  align-items-center hero">
-          <div className="col-9 offset-2 offset-lg-0 col-lg-6">
+        <div className="row justify-content-center align-items-center">
+          <div className="col-10 col-md-8 col-lg-6">
             <div className="richtext">
-              <h2 className="heading01">About</h2>
+              <h1 className="heading01">About</h1>
             </div>
-            {body.map((slice, idx) => {
-              if (slice.slice_type === "text") {
-                return (
+          </div>
+        </div>
+        {body.map((slice, idx) => {
+          if (slice.slice_type === "text") {
+            return (
+              <div className="row justify-content-center align-items-center">
+                <div className="col-10 col-md-8 col-lg-6">
                   <div
                     className={slice.slice_type}
                     key={`${slice.slice_type}_${idx}`}
                   >
                     <AppRichText text={slice.primary.text}></AppRichText>
                   </div>
-                );
-              }
-              if (slice.slice_type === "image_grid") {
-                return (
+                </div>
+              </div>
+            );
+          }
+          if (slice.slice_type === "spacer") {
+            return (
+              <div className={`spacer--${slice.primary.spacer_size}`}></div>
+            );
+          }
+          if (slice.slice_type === "image_grid") {
+            return (
+              <div className="row justify-content-center align-items-center">
+                <div className="col-12 col-md-10 col-lg-8">
                   <ImageGrid
                     slice={slice}
                     idx={idx}
                     key={`slice__${idx}`}
                   ></ImageGrid>
-                );
-              }
-            })}
-          </div>
-        </div>
+                </div>
+              </div>
+            );
+          }
+        })}
       </div>
     </Layout>
   );
@@ -78,9 +91,21 @@ export const pageQuery = graphql`
               }
             }
           }
+          ... on PrismicAboutBodySpacer {
+            slice_type
+            id
+            primary {
+              spacer_size
+            }
+          }
           ... on PrismicAboutBodyImageGrid {
             slice_type
             id
+            primary {
+              title {
+                text
+              }
+            }
             items {
               image {
                 dimensions {

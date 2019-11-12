@@ -1,5 +1,7 @@
+// Typographic scale from https://www.modularscale.com/?30&px&1.333
+
 %heading00 {
-  font-family: "Source Code Pro";
+  font-family: $fontMain;
   font-size: 20px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -12,25 +14,54 @@
 
 %heading01 {
   font-family: $fontMain;
-  font-size: 5.063em;
+  font-size: 30px;
   text-transform: uppercase;
-  font-weight: normal;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 30px;
+  }
 }
 
 %heading02 {
   font-family: $fontMain;
-  font-weight: bold;
-  font-size: 2.25em;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 22.506px;
+  letter-spacing: 0;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 22.506px;
+  }
 }
 
 %heading03 {
   font-family: $fontMain;
   font-weight: normal;
-  font-size: 1.5em;
+  text-transform: uppercase;
+  font-size: 16.883px;
+  letter-spacing: 0;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 16.883px;
+  }
+}
+
+%heading04 {
+  font-family: $fontMain;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 12.666px;
+
+  letter-spacing: 0;
+  @include media-breakpoint-up(sm) {
+    font-size: 12.666px;
+  }
 }
 
 %paragraph01 {
-  font-family: $fontMain;
+  font-family: $fontBody;
   font-size: 12px;
   letter-spacing: 0;
   line-height: 1.2;
@@ -55,7 +86,7 @@
   }
 }
 %paragraph03 {
-  font-family: $fontMain;
+  font-family: $fontBody;
   font-size: 12px;
   line-height: 1.2;
   letter-spacing: 0.15em;
@@ -64,6 +95,14 @@
   @include media-breakpoint-up(sm) {
     font-size: 14px;
   }
+}
+
+%body {
+  font-family: $fontBody;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.025em;
+  font-weight: 400;
 }
 
 .heading00 {
@@ -77,6 +116,9 @@
 }
 .heading03 {
   @extend %heading03;
+}
+.heading04 {
+  @extend %heading04;
 }
 
 .paragraph01 {
@@ -94,14 +136,32 @@
 .richtext {
   h1 {
     @extend %heading01;
+    margin-bottom: 0.5em;
   }
   h2 {
     @extend %heading02;
+    margin-bottom: 0.5em;
   }
   h3 {
     @extend %heading03;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  h4 {
+    @extend %heading04;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   a {
     color: $pink;
+  }
+  p {
+    margin-bottom: 0.5em;
+    + h1,
+    + h2,
+    + h3,
+    + h4 {
+      margin-top: 1em;
+    }
   }
 }

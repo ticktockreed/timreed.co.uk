@@ -12,6 +12,9 @@ export const linkResolver = doc => {
   if (doc.type === "about") {
     return `/about`;
   }
+  if (doc.type === "landing_page") {
+    return `/`;
+  }
   // Backup for all other types
   return "/";
 };
