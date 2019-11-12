@@ -107,45 +107,59 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                   </div>
                 </div>
 
-                {/* <div className="row">
-            <div className="col-10 offset-2">
-              {data.body &&
-                data.body.map((slice, i) => {
-                  if (slice.slice_type === "text") {
-                    return (
-                      <AppRichText text={slice.primary.text}></AppRichText>
-                    );
-                  }
-                  if (slice.slice_type === "video") {
-                    return (
-                      <ReactPlayer
-                        url={slice.primary.video_url.text}
-                        muted={true}
-                        controls={false}
-                        loop={true}
-                        playing={true}
-                      ></ReactPlayer>
-                    );
-                  }
-                  if (slice.slice_type === "code") {
-                    const string = codeExample.replace("\r\n", "\n");
-                    return (
-                      <>
-                        {console.log(slice)}
-                        <SyntaxHighlighter
-                          wrapLines={true}
-                          //   language={slice.code_type}
-                          language="javascript"
-                          style={atomDark}
-                        >
-                          {string}
-                        </SyntaxHighlighter>
-                      </>
-                    );
-                  }
-                })}
-            </div>
-          </div> */}
+                <div className="slices">
+                  {data.body &&
+                    data.body.map((slice, i) => {
+                      if (slice.slice_type === "text") {
+                        return (
+                          <div className="row justify-content-center">
+                            <div className="col-10 col-md-8">
+                              <AppRichText
+                                text={slice.primary.text}
+                              ></AppRichText>
+                            </div>
+                          </div>
+                        );
+                      }
+                      if (slice.slice_type === "spacer") {
+                        return (
+                          <div
+                            className={`spacer--${slice.primary.spacer_size}`}
+                          ></div>
+                        );
+                      }
+                      if (slice.slice_type === "video") {
+                        return (
+                          <div className="row justify-content-center">
+                            <div className="col-10 col-md-8">
+                              <ReactPlayer
+                                url={slice.primary.video_url.text}
+                                muted={true}
+                                controls={false}
+                                loop={true}
+                                playing={true}
+                              ></ReactPlayer>
+                            </div>
+                          </div>
+                        );
+                      }
+                      if (slice.slice_type === "code") {
+                        return (
+                          <div className="row justify-content-center">
+                            <div className="col-10 col-md-8">
+                              <SyntaxHighlighter
+                                wrapLines={true}
+                                language={slice.primary.code_type}
+                                style={atomDark}
+                              >
+                                {slice.primary.content.text}
+                              </SyntaxHighlighter>
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                </div>
               </div>
 
               <div

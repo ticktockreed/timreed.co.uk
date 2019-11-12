@@ -1,8 +1,10 @@
 .workpage-skills {
   position: relative;
   padding-bottom: $gutter;
+  margin-bottom: $spacer-lg;
+
   > .row {
-    height: 100px;
+    height: 80px;
   }
 }
 .workpage-skills__color-block {
@@ -12,7 +14,7 @@
   background-color: grey;
   opacity: 0.1;
   width: 70%;
-  height: 80%;
+  height: 100%;
 
   @include media-breakpoint-up(md) {
     width: 50%;
