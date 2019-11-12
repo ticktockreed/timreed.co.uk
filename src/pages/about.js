@@ -3,7 +3,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 import AppRichText from "../components/AppRichText";
-import ImageGrid from "../components/ImageGrid";
+import ImageGrid from "../components/slices/ImageGrid";
 
 const AboutPage = ({
   data: { prismicAbout },
