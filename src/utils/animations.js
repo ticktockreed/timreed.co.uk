@@ -13,11 +13,11 @@ export function transitionPage({ exit, node, e, entry, direction }) {
 
     timelineIn
       .set(document.body, {
-        position: "fixed",
         width: "100%",
         height: "100%"
       })
       .set(workpage, {
+        position: "fixed",
         opacity: 0
       })
       .set(heroBoxDummy, {
@@ -42,7 +42,8 @@ export function transitionPage({ exit, node, e, entry, direction }) {
         delay: 0.2
       })
       .to(workpage, 0.35, {
-        opacity: 1
+        opacity: 1,
+        position: "relative"
       })
       .to(heroBoxDummy, 0.35, {
         top: heroBoxRect.y,

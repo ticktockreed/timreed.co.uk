@@ -21,6 +21,10 @@
   transition-delay: 200ms;
 }
 
+.worklist-item:nth-child(2) {
+  transition-delay: 0;
+}
+
 .worklist-item:nth-child(3) {
   transition-delay: 600ms;
 }
@@ -29,11 +33,11 @@
   transition-delay: 400ms;
 }
 
-.worklist-item:nth-child(4) {
+.worklist-item:nth-child(5) {
   transition-delay: 1000ms;
 }
 
-.worklist-item:nth-child(5) {
+.worklist-item:nth-child(6) {
   transition-delay: 800ms;
 }
 

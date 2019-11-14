@@ -15,17 +15,17 @@ const Header = ({ siteTitle }) => (
         </div>
         <div className="col text-center">
           <h1>
-            <Link to="/about">
-              <Logo className="site-logo"></Logo>
-              <div className="sr-only">About Tim Reed</div>
-            </Link>
+            <Logo className="site-logo"></Logo>
+            <div className="sr-only">Tim Reed</div>
           </h1>
         </div>
         {/* <div className="col">
           <Nav></Nav>
         </div> */}
         <div className="col text-right">
-          <div className="paragraph03">Creative Developer</div>
+          <Link to="/about">
+            <div className="paragraph03">Creative Developer</div>
+          </Link>
         </div>
       </div>
     </div>
