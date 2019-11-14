@@ -1,6 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link } from "gatsby";
-
+import React, { useEffect, useRef } from "react";
 import TransitionLink from "gatsby-plugin-transition-link";
 import { transitionPage } from "../utils/animations";
 
@@ -16,15 +14,13 @@ const WorkLink = ({ children, to, ...props }) => {
         trigger: ({ exit, node, e, entry }) => {
           transitionPage({ exit, node, e, entry, direction: "out" });
         }
-        //   someCustomDefinedAnimation({ exit, node, direction: "out" })
       }}
       entry={{
         length: 0.35,
-        delay: 0.35,
+        delay: 1,
         trigger: ({ exit, node, e, entry }) => {
           transitionPage({ exit, node, e, entry, direction: "in" });
         }
-        //   someCustomDefinedAnimation({ exit, node, direction: "in" })
       }}
       {...props}
     >
