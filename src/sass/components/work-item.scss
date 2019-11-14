@@ -12,6 +12,13 @@
   display: block;
   perspective: 120px;
   z-index: 1000;
+  transition: transform 650ms $ease1;
+  transform: translate3d(0, 300px, 0);
+
+  .animate-in & {
+    transform: translate3d(0, 0, 0);
+  }
+
   img {
     max-width: 100%;
   }

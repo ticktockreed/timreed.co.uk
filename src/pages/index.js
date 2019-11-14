@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
@@ -6,6 +6,13 @@ import WorkList from "../components/WorkList";
 
 const WorkPage = ({ data: { prismicWork } }) => {
   const { data } = prismicWork;
+  const [animateIn, setAnimateIn] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimateIn(true);
+    }, 0);
+  }, []);
 
   return (
     <Layout>
@@ -19,7 +26,7 @@ const WorkPage = ({ data: { prismicWork } }) => {
           `gatsby`
         ]}
       />
-      <div className="container">
+      <div className={`container ${animateIn ? "animate-in" : ""}`}>
         <div className="row justify-content-lg-center">
           <div
             className="col-9 offset-2 offset-lg-0 col-lg-6"
