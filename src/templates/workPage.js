@@ -5,6 +5,8 @@ import Img from 'gatsby-image';
 import SEO from '../components/seo';
 import { TransitionState } from 'gatsby-plugin-transition-link';
 
+import { useMedia } from 'react-use';
+
 import AppRichText from '../components/AppRichText';
 import Intro from '../components/slices/Intro';
 import ReactPlayer from 'react-player';
@@ -21,40 +23,22 @@ import { breakpoints } from '../utils/constants';
 
 const WorkItem = ({ data: { prismicWorkItem } }) => {
   const { data } = prismicWorkItem;
-  const [mediaQueries, setMediaQueries] = useState(null);
-
-  //   mediaQueries = {
-  //     sm: {
-  //       matches: true,
-  //       media: '(max-width: 680px)',
-  //       onchange: null
-  //     }
-  //   };
-
-  useEffect(() => {
-    let queries = {
-      sm: window.matchMedia(`(max-width: ${breakpoints.sm}px)`),
-      md: window.matchMedia(`(max-width: ${breakpoints.md}px)`),
-      lg: window.matchMedia(`(max-width: ${breakpoints.lg}px)`),
-      xl: window.matchMedia(`(max-width: ${breakpoints.xl}px)`)
-    };
-
-    setMediaQueries((mQueries) => {
-      return queries;
-    });
-
-    queries.md.addListener((e) => {
-      setMediaQueries((mQueries) => {
-        return { ...mQueries, md: e };
-      });
-    });
-    return () => {
-      queries.md.removeListener();
-    };
-  }, []);
+  const isSmall = useMedia(`(min-width: ${breakpoints.sm}px)`);
+  const isMedium = useMedia(`(min-width: ${breakpoints.md}px)`);
+  const isLarge = useMedia(`(min-width: ${breakpoints.lg}px)`);
 
   const setClip = () => {
-    return `rect(0px, 1140px, 580px, 300px)`;
+    let leftClip = 116;
+    if (isSmall) {
+      leftClip = 149;
+    }
+    if (isMedium) {
+      leftClip = 200;
+    }
+    if (isLarge) {
+      leftClip = 300;
+    }
+    return `rect(0px, 1140px, 580px, ${leftClip}px)`;
   };
 
   return (
@@ -64,7 +48,6 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
         {({ transitionStatus }) => {
           return (
             <>
-              {console.log(mediaQueries && mediaQueries.md.matches)}
               <div className="container workpage">
                 <div className="workpage-hero">
                   <div className="row justify-content-lg-center align-items-center">

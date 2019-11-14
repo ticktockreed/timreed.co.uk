@@ -47,16 +47,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-
-  @include media-breakpoint-down(md) {
-    clip: rect(0px, 1140px, 580px, 200px) !important;
-  }
-  @include media-breakpoint-down(sm) {
-    clip: rect(0px, 1140px, 580px, 149px) !important;
-  }
-  @include media-breakpoint-down(xs) {
-    clip: rect(0px, 1140px, 580px, 116px) !important;
-  }
 }
 .workpage-hero__titlebox {
   width: 100%;
@@ -86,7 +76,7 @@
   }
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     background-color: $text-black;
     height: 6px;

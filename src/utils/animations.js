@@ -20,14 +20,10 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
     const heroBoxRect = heroBox.getBoundingClientRect();
 
     const clipBox = getClipBox(heroBox);
-
+    
     timelineIn
       .to(workpage, 0, {
         position: "fixed",
-        width: "100%",
-        height: "100%",
-        left: 0,
-        right: 0,
         opacity: 0
       })
       .to(heroBoxDummy, 0, {
@@ -39,14 +35,13 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
         opacity: 1
       })
       .to(heroBoxDummy, 0.6, {
+        // Animate to TOP and HEIGHT of Hero container
+        height: heroBoxRect.height,
         top: heroBoxRect.top,
         ease: Power4.easeOut
       })
-      .to(heroBoxDummy, 0.5, {
-        height: heroBoxRect.height,
-        ease: Power4.easeOut
-      })
       .to(heroBoxDummy, 0.8, {
+        // Animate to width of Hero container
         left: heroBoxRect.left + clipBox.left,
         width: heroBoxRect.width - clipBox.left,
         ease: Power4.easeOut
@@ -74,7 +69,7 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
         scrambleText: { chars: "upperCase", speed: 0.3 }
       }, "-=0.5")
       .to(workpage, 0, {
-        position: "relative"
+        position: "static"
       });
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();

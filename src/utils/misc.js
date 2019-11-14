@@ -1,11 +1,18 @@
 export function getClipBox(node) {
-  const cliplength = node.style.clip.length - 1;
-  let clipArr = node.style.clip.slice(5, cliplength).split(",");
+    let clipMap = [];
 
-  const clipMap = clipArr.map(clip => {
-    return parseInt(clip.replace("px", ""));
-  });
-  console.log("clipArr", clipMap);
+    if (node.style.clip !== "") {
+        const cliplength = node.style.clip.length - 1;
+        let clipArr = node.style.clip.slice(5, cliplength).split(",");
+        
+        console.log('clipArr',node.style)
+        
+        clipMap = clipArr.map(clip => {
+            return parseInt(clip.replace("px", ""));
+        });
+    } else {
+        clipMap = [0,0,0,0];
+    }
 
   return {
     top: clipMap[0],
