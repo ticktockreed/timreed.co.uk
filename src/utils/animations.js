@@ -84,3 +84,25 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
       .to(activeItem, 0.25, { opacity: 0 });
   }
 }
+
+export function animateNavItem({ e, direction }) {
+  const { target } = e;
+  const tl = new TimelineLite();
+
+  if (direction === "in") {
+    tl.to(target, {
+      duration: 0.5,
+      scrambleText: { text: "About Me", chars: "lowerCase", speed: 0.3 }
+    });
+  }
+  if (direction === "out") {
+    tl.to(target, {
+      duration: 0.5,
+      scrambleText: {
+        text: "Creative Developer",
+        chars: "lowerCase",
+        speed: 0.3
+      }
+    });
+  }
+}

@@ -40,8 +40,12 @@
 }
 
 .about-link {
+  @extend %paragraph03;
   color: $text-black;
   text-decoration: none;
+  width: 200px;
+  text-align: center;
+  display: inline-block;
 }
 
 .site-name {
