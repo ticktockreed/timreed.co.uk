@@ -4,7 +4,7 @@ import {
 } from "./gsap-shockingly-green/minified/gsap.min";
 import "./gsap-shockingly-green/minified/ScrambleTextPlugin.min";
 
-export function transitionPage({ exit, node, e, entry, direction }) {
+export function transitionToWorkPage({ exit, node, e, entry, direction }) {
   const targetPosition = e.target.getBoundingClientRect();
 
   if (direction === "in") {

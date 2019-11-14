@@ -4,7 +4,11 @@
 }
 
 .work-item__wrapper {
-  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+  z-index: 1000;
 }
 
 .work-item {
@@ -32,15 +36,7 @@
   display: none;
 }
 
-.work-item__image-wrapper {
-  position: relative;
-  overflow: hidden;
-  height: 300px;
-  position: relative;
-  z-index: 1000;
-}
-
-.work-item__image {
+.work-item__block {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

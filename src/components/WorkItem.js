@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import TransitionLink from "gatsby-plugin-transition-link";
-import { transitionPage } from "../utils/animations";
+import { transitionToWorkPage } from "../utils/animations";
 
 const WorkLink = ({ children, to, ...props }) => {
   return (
@@ -12,14 +12,14 @@ const WorkLink = ({ children, to, ...props }) => {
       exit={{
         length: 1,
         trigger: ({ exit, node, e, entry }) => {
-          transitionPage({ exit, node, e, entry, direction: "out" });
+          transitionToWorkPage({ exit, node, e, entry, direction: "out" });
         }
       }}
       entry={{
         length: 0.35,
         delay: 1,
         trigger: ({ exit, node, e, entry }) => {
-          transitionPage({ exit, node, e, entry, direction: "in" });
+          transitionToWorkPage({ exit, node, e, entry, direction: "in" });
         }
       }}
       {...props}
@@ -34,9 +34,9 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
     <>
       <WorkLink to={`/work/${uid}`} className="work-item">
         <div className="work-item__shadow"></div>
-        <div className="work-item__image-wrapper">
+        <div className="work-item__wrapper">
           <div
-            className="work-item__image"
+            className="work-item__block"
             style={{
               backgroundColor: data.brand_color.text
             }}
