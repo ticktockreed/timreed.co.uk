@@ -16,13 +16,13 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
     const heroBoxDummy = node.querySelector(".workpage-hero__box-dummy");
     const workpage = node.querySelector(".workpage");
     const heroBox = node.querySelector(".workpage-hero__box");
+    const heroTitle = node.querySelectorAll(".workpage-hero__title");
     const heroBoxRect = heroBox.getBoundingClientRect();
 
     const clipBox = getClipBox(heroBox);
 
-    console.log(clipBox.left);
     timelineIn
-      .set(workpage, {
+      .to(workpage, 0, {
         position: "fixed",
         width: "100%",
         height: "100%",
@@ -30,38 +30,66 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
         right: 0,
         opacity: 0
       })
-      .set(heroBoxDummy, {
-        opacity: 1
-      })
-      .set(heroBoxDummy, {
-        top: targetPosition.top,
-        left: targetPosition.left,
-        width: targetPosition.width,
-        height: targetPosition.height,
-        opacity: 1
-      })
-
       .to(heroBoxDummy, 0, {
+        // set the dummy to the same size as the workitem box
         top: targetPosition.top,
         left: targetPosition.left,
         width: targetPosition.width,
         height: targetPosition.height,
         opacity: 1
-      })
-      .to(heroBoxDummy, 0.8, {
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        ease: Power4.easeOut
       })
       .to(heroBoxDummy, 0.6, {
-        width: heroBoxRect.width - clipBox.left,
-        height: heroBoxRect.height,
         top: heroBoxRect.top,
+        ease: Power4.easeOut
+      })
+      .to(heroBoxDummy, 0.5, {
+        height: heroBoxRect.height,
+        ease: Power4.easeOut
+      })
+      .to(heroBoxDummy, 0.8, {
         left: heroBoxRect.left + clipBox.left,
-        ease: Back.easeIn
+        width: heroBoxRect.width - clipBox.left,
+        ease: Power4.easeOut
+      })
+      .to(heroTitle, 0, {
+        opacity: 0
+      })
+      .to(workpage, 0.35, {
+        width: "auto",
+        height: "auto",
+        left: 0,
+        right: 0,
+        opacity: 1,
+        ease: Power4.easeOut
+      })
+      .to(heroBoxDummy, 0.2, {
+        opacity: 0,
+        display: "none",
+        ease: Power4.easeOut
+      }, "-=0.35")
+      .to(heroTitle, 0.5, {
+        opacity: 1,
+      })
+      .to(heroTitle, 0.5, {
+        scrambleText: { chars: "upperCase", speed: 0.3 }
+      }, "-=0.5")
+      .to(workpage, 0, {
+        position: "relative"
       });
+    //   .to(heroBoxDummy, 0.8, {
+    //     top: 0,
+    //     left: 0,
+    //     width: "100%",
+    //     height: "100%",
+    //     ease: Power4.easeOut
+    //   })
+    //   .to(heroBoxDummy, 0.6, {
+    //     width: heroBoxRect.width - clipBox.left,
+    //     height: heroBoxRect.height,
+    //     top: heroBoxRect.top,
+    //     left: heroBoxRect.left + clipBox.left,
+    //     ease: Back.easeIn
+    //   });
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();
     const activeItem = node.querySelector(".worklink--active");

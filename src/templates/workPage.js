@@ -47,10 +47,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
         {({ transitionStatus }) => {
           return (
             <>
-              <div
-                className="container workpage"
-                style={{ opacity: transitionStatus === "entered" ? 1 : 0 }}
-              >
+              <div className="container workpage">
                 <div className="workpage-hero">
                   <div className="row justify-content-lg-center align-items-center">
                     <div className="workpage-hero__titlebox">
