@@ -9,17 +9,17 @@ const WorkLink = ({ children, to, ...props }) => {
       className="worklink"
       partiallyActive={true}
       to={to}
-      exit={{
-        length: 1,
-        trigger: ({ exit, node, e, entry }) => {
-          transitionToWorkPage({ exit, node, e, entry, direction: "out" });
-        }
-      }}
       entry={{
         length: 0.35,
         delay: 1,
         trigger: ({ exit, node, e, entry }) => {
           transitionToWorkPage({ exit, node, e, entry, direction: "in" });
+        }
+      }}
+      exit={{
+        length: 1,
+        trigger: ({ exit, node, e, entry }) => {
+          transitionToWorkPage({ exit, node, e, entry, direction: "out" });
         }
       }}
       {...props}

@@ -1,8 +1,11 @@
 import {
   TimelineLite,
-  Power4
+  Power4,
+  Back
 } from "./gsap-shockingly-green/minified/gsap.min";
 import "./gsap-shockingly-green/minified/ScrambleTextPlugin.min";
+
+import { getClipBox } from "./misc";
 
 export function transitionToWorkPage({ exit, node, e, entry, direction }) {
   const targetPosition = e.target.getBoundingClientRect();
@@ -15,9 +18,16 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
     const heroBox = node.querySelector(".workpage-hero__box");
     const heroBoxRect = heroBox.getBoundingClientRect();
 
+    const clipBox = getClipBox(heroBox);
+
+    console.log(clipBox.left);
     timelineIn
       .set(workpage, {
         position: "fixed",
+        width: "100%",
+        height: "100%",
+        left: 0,
+        right: 0,
         opacity: 0
       })
       .set(heroBoxDummy, {
@@ -27,39 +37,31 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
         top: targetPosition.top,
         left: targetPosition.left,
         width: targetPosition.width,
-        height: targetPosition.height
+        height: targetPosition.height,
+        opacity: 1
       })
-      .set(heroBox, {
-        clip: `rect(0px, 1140px, 580px, 0)`
-      });
 
-    // timelineIn.to(heroBoxDummy, 0.25, {
-    //   top: heroBoxRect.y,
-    //   left: workpage.getBoundingClientRect().x,
-    //   width: workpage.getBoundingClientRect().width - 15,
-    //   height: heroBoxRect.height,
-    //   delay: 0.2
-    // });
-    //   .to(workpage, 0.35, {
-    //     opacity: 1,
-    //     position: "relative"
-    //   })
-    //   .to(heroBoxDummy, 0.35, {
-    //     top: heroBoxRect.y,
-    //     left: workpage.getBoundingClientRect().x,
-    //     width: 0,
-    //     height: heroBoxRect.height,
-    //     delay: 0.2
-    //   })
-    //   .to(heroBox, 0.2, {
-    //     clip: `rect(0px, 1140px, 580px, 300px)`
-    //   })
-    //   .set(document.body, {
-    //     position: "relative"
-    //   })
-    //   .set(heroBoxDummy, {
-    //     display: "none"
-    //   });
+      .to(heroBoxDummy, 0, {
+        top: targetPosition.top,
+        left: targetPosition.left,
+        width: targetPosition.width,
+        height: targetPosition.height,
+        opacity: 1
+      })
+      .to(heroBoxDummy, 0.8, {
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        ease: Power4.easeOut
+      })
+      .to(heroBoxDummy, 0.6, {
+        width: heroBoxRect.width - clipBox.left,
+        height: heroBoxRect.height,
+        top: heroBoxRect.top,
+        left: heroBoxRect.left + clipBox.left,
+        ease: Back.easeIn
+      });
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();
     const activeItem = node.querySelector(".worklink--active");
@@ -71,17 +73,22 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
 
     timelineOut
       .to(activeItemTitle, {
-        duration: 0.5,
-        scrambleText: { chars: "upperCase", speed: 0.3 },
-        onComplete: () => {
-          console.log("complete");
-        }
+        duration: 0.35,
+        scrambleText: { chars: "upperCase", speed: 0.3 }
       })
-      .staggerTo(nonActiveWorkItems, 0.35, {
+      .to(
+        activeItemTitle,
+        {
+          duration: 0.35,
+          opacity: 0
+        },
+        "-=0.2"
+      )
+      .staggerTo(nonActiveWorkItems, 0.5, {
         opacity: 0,
         ease: Power4.easeOut
-      })
-      .to(activeItem, 0.25, { opacity: 0 });
+      });
+    //   .to(activeItem, 0.25, { opacity: 0 });
   }
 }
 

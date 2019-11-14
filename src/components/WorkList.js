@@ -9,7 +9,6 @@ const WorkList = ({ items }) => {
     refArray.push(React.createRef());
   }
 
-  console.log(",refArray", refArray);
   let workItemRefs = useRef(refArray);
 
   useEffect(() => {
