@@ -106,3 +106,21 @@ export function animateNavItem({ e, direction }) {
     });
   }
 }
+
+export function animateWorkItems({ workItems, direction }) {
+  const bl = new TimelineLite();
+  console.log(workItems[0]);
+  if (direction === "in") {
+    bl.staggerTo(
+      workItems,
+      1,
+      {
+        opacity: 1,
+        y: 0
+      },
+      0.15
+    );
+  }
+  //   if (direction === "out") {
+  //   }
+}
