@@ -33,34 +33,33 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
         clip: `rect(0px, 1140px, 580px, 0)`
       });
 
-    timelineIn
-      .to(heroBoxDummy, 0.25, {
-        top: heroBoxRect.y,
-        left: workpage.getBoundingClientRect().x,
-        width: workpage.getBoundingClientRect().width - 15,
-        height: heroBoxRect.height,
-        delay: 0.2
-      })
-      .to(workpage, 0.35, {
-        opacity: 1,
-        position: "relative"
-      })
-      .to(heroBoxDummy, 0.35, {
-        top: heroBoxRect.y,
-        left: workpage.getBoundingClientRect().x,
-        width: 0,
-        height: heroBoxRect.height,
-        delay: 0.2
-      })
-      .to(heroBox, 0.2, {
-        clip: `rect(0px, 1140px, 580px, 300px)`
-      })
-      .set(document.body, {
-        position: "relative"
-      })
-      .set(heroBoxDummy, {
-        display: "none"
-      });
+    // timelineIn.to(heroBoxDummy, 0.25, {
+    //   top: heroBoxRect.y,
+    //   left: workpage.getBoundingClientRect().x,
+    //   width: workpage.getBoundingClientRect().width - 15,
+    //   height: heroBoxRect.height,
+    //   delay: 0.2
+    // });
+    //   .to(workpage, 0.35, {
+    //     opacity: 1,
+    //     position: "relative"
+    //   })
+    //   .to(heroBoxDummy, 0.35, {
+    //     top: heroBoxRect.y,
+    //     left: workpage.getBoundingClientRect().x,
+    //     width: 0,
+    //     height: heroBoxRect.height,
+    //     delay: 0.2
+    //   })
+    //   .to(heroBox, 0.2, {
+    //     clip: `rect(0px, 1140px, 580px, 300px)`
+    //   })
+    //   .set(document.body, {
+    //     position: "relative"
+    //   })
+    //   .set(heroBoxDummy, {
+    //     display: "none"
+    //   });
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();
     const activeItem = node.querySelector(".worklink--active");
