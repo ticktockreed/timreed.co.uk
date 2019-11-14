@@ -1,4 +1,8 @@
-import { TimelineLite, Power4 } from "gsap";
+import {
+  TimelineLite,
+  Power4
+} from "./gsap-shockingly-green/minified/gsap.min";
+import "./gsap-shockingly-green/minified/ScrambleTextPlugin.min";
 
 export function transitionPage({ exit, node, e, entry, direction }) {
   const targetPosition = e.target.getBoundingClientRect();
@@ -12,10 +16,6 @@ export function transitionPage({ exit, node, e, entry, direction }) {
     const heroBoxRect = heroBox.getBoundingClientRect();
 
     timelineIn
-      .set(document.body, {
-        width: "100%",
-        height: "100%"
-      })
       .set(workpage, {
         position: "fixed",
         opacity: 0
@@ -63,13 +63,21 @@ export function transitionPage({ exit, node, e, entry, direction }) {
       });
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();
+    const activeItem = node.querySelector(".worklink--active");
+    const activeItemTitle = activeItem.querySelector(".work-item__title");
     const workItems = [].slice.call(node.querySelectorAll(".work-item"));
     const nonActiveWorkItems = workItems.filter(workItem => {
       return workItem.className !== "work-item worklink--active";
     });
-    const activeItem = node.querySelector(".worklink--active");
-    // animate out other images and pass the position of this box to
+
     timelineOut
+      .to(activeItemTitle, {
+        duration: 0.5,
+        scrambleText: { chars: "upperCase", speed: 0.3 },
+        onComplete: () => {
+          console.log("complete");
+        }
+      })
       .staggerTo(nonActiveWorkItems, 0.35, {
         opacity: 0,
         ease: Power4.easeOut
