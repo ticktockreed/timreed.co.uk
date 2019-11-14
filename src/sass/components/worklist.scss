@@ -1,11 +1,40 @@
 .worklist {
   //   width: 100%;
   padding-top: 100px;
+  overflow: hidden;
 }
 .worklist-item {
   margin-bottom: 50px;
   height: 400px;
   @include make-col(11);
+  transition: transform 1000ms $easeOutQuad, opacity 600ms $easeOutQuad;
+  transform: translate3d(0, 300px, 0);
+  opacity: 0;
+
+  .animate-in & {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.worklist-item:nth-child(1) {
+  transition-delay: 200ms;
+}
+
+.worklist-item:nth-child(3) {
+  transition-delay: 600ms;
+}
+
+.worklist-item:nth-child(4) {
+  transition-delay: 400ms;
+}
+
+.worklist-item:nth-child(4) {
+  transition-delay: 1000ms;
+}
+
+.worklist-item:nth-child(5) {
+  transition-delay: 800ms;
 }
 
 .worklist_6,
