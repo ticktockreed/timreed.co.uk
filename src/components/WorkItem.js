@@ -11,13 +11,13 @@ const WorkLink = ({ children, to, ...props }) => {
       to={to}
       entry={{
         length: 2,
-        delay: 1,
+        delay: 2,
         trigger: ({ exit, node, e, entry }) => {
           transitionToWorkPage({ exit, node, e, entry, direction: "in" });
         }
       }}
       exit={{
-        length: 1,
+        length: 2,
         trigger: ({ exit, node, e, entry }) => {
           transitionToWorkPage({ exit, node, e, entry, direction: "out" });
         }

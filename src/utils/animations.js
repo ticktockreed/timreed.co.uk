@@ -4,6 +4,7 @@ import {
   Back
 } from "./gsap-shockingly-green/minified/gsap.min";
 import "./gsap-shockingly-green/minified/ScrambleTextPlugin.min";
+import "./gsap-shockingly-green/minified/ScrollToPlugin.min";
 
 import { getClipBox } from "./misc";
 
@@ -11,66 +12,61 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
   const targetPosition = e.target.getBoundingClientRect();
 
   if (direction === "in") {
-    window.scrollTo(0, 0);
-    const timelineIn = new TimelineLite();
-    const heroBoxDummy = node.querySelector(".workpage-hero__box-dummy");
-    const workpage = node.querySelector(".workpage");
-    const heroBox = node.querySelector(".workpage-hero__box");
-    const heroTitle = node.querySelectorAll(".workpage-hero__title");
-    const heroBoxRect = heroBox.getBoundingClientRect();
+    // const timelineIn = new TimelineLite();
+    // const heroBoxDummy = node.querySelector(".workpage-hero__box-dummy");
+    // const workpage = node.querySelector(".workpage");
+    // const heroBox = node.querySelector(".workpage-hero__box");
+    // const heroTitle = node.querySelectorAll(".workpage-hero__title");
+    // const heroBoxRect = heroBox.getBoundingClientRect();
 
-    const clipBox = getClipBox(heroBox);
+    // const clipBox = getClipBox(heroBox);
     
-    timelineIn
-      .to(workpage, 0, {
-        position: "fixed",
-        opacity: 0
-      })
-      .to(heroBoxDummy, 0, {
-        // set the dummy to the same size as the workitem box
-        top: targetPosition.top,
-        left: targetPosition.left,
-        width: targetPosition.width,
-        height: targetPosition.height,
-        opacity: 1
-      })
-      .to(heroBoxDummy, 0.6, {
-        // Animate to TOP and HEIGHT of Hero container
-        height: heroBoxRect.height,
-        top: heroBoxRect.top,
-        ease: Power4.easeOut
-      })
-      .to(heroBoxDummy, 0.8, {
-        // Animate to width of Hero container
-        left: heroBoxRect.left + clipBox.left,
-        width: heroBoxRect.width - clipBox.left,
-        ease: Power4.easeOut
-      })
-      .to(heroTitle, 0, {
-        opacity: 0
-      })
-      .to(workpage, 0.35, {
-        width: "auto",
-        height: "auto",
-        left: 0,
-        right: 0,
-        opacity: 1,
-        ease: Power4.easeOut
-      })
-      .to(heroBoxDummy, 0.2, {
-        opacity: 0,
-        display: "none",
-        ease: Power4.easeOut
-      }, "-=0.35")
-      .to(heroTitle, 0.5, {
-        opacity: 1,
-      })
-      .to(heroTitle, 0.5, {
-        scrambleText: { chars: "upperCase", speed: 0.3 }
-      }, "-=0.5")
-      .to(workpage, 0, {
-        position: "static"
-      });
+    // timelineIn
+    //   .to(workpage, 0, {
+    //     opacity: 0
+    //   })
+    //   .to(heroBoxDummy, 0, {
+    //     // set the dummy to the same size as the workitem box
+    //     top: targetPosition.top,
+    //     left: targetPosition.left,
+    //     width: targetPosition.width,
+    //     height: targetPosition.height,
+    //     opacity: 1
+    //   })
+    //   .to(heroBoxDummy, 0.6, {
+    //     // Animate to TOP and HEIGHT of Hero container
+    //     height: heroBoxRect.height,
+    //     top: heroBoxRect.top,
+    //     ease: Power4.easeOut
+    //   })
+    //   .to(heroBoxDummy, 0.8, {
+    //     // Animate to width of Hero container
+    //     left: heroBoxRect.left + clipBox.left,
+    //     width: heroBoxRect.width - clipBox.left,
+    //     ease: Power4.easeOut
+    //   })
+    //   .to(heroTitle, 0, {
+    //     opacity: 0
+    //   })
+    //   .to(workpage, 0.35, {
+    //     width: "auto",
+    //     height: "auto",
+    //     left: 0,
+    //     right: 0,
+    //     opacity: 1,
+    //     ease: Power4.easeOut
+    //   })
+    //   .to(heroBoxDummy, 0.2, {
+    //     opacity: 0,
+    //     display: "none",
+    //     ease: Power4.easeOut
+    //   }, "-=0.35")
+    //   .to(heroTitle, 0.5, {
+    //     opacity: 1,
+    //   })
+    //   .to(heroTitle, 0.5, {
+    //     scrambleText: { chars: "upperCase", speed: 0.3 }
+    //   }, "-=0.5")
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();
     const activeItem = node.querySelector(".worklink--active");
@@ -81,6 +77,10 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
     });
 
     timelineOut
+      .to(window, {
+        duration: 0.35,
+        scrollTo: 0
+      })
       .to(activeItemTitle, {
         duration: 0.35,
         scrambleText: { chars: "upperCase", speed: 0.3 }
