@@ -23,7 +23,7 @@ const Header = ({ siteTitle }) => (
           <Nav></Nav>
         </div> */}
         <div className="col text-right">
-          <Link to="/about">
+          <Link to="/about" className="about-link">
             <div className="paragraph03">Creative Developer</div>
           </Link>
         </div>
