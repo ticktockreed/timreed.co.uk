@@ -76,20 +76,6 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
       .to(workpage, 0, {
         position: "relative"
       });
-    //   .to(heroBoxDummy, 0.8, {
-    //     top: 0,
-    //     left: 0,
-    //     width: "100%",
-    //     height: "100%",
-    //     ease: Power4.easeOut
-    //   })
-    //   .to(heroBoxDummy, 0.6, {
-    //     width: heroBoxRect.width - clipBox.left,
-    //     height: heroBoxRect.height,
-    //     top: heroBoxRect.top,
-    //     left: heroBoxRect.left + clipBox.left,
-    //     ease: Back.easeIn
-    //   });
   } else if (direction === "out") {
     const timelineOut = new TimelineLite();
     const activeItem = node.querySelector(".worklink--active");
@@ -116,7 +102,6 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
         opacity: 0,
         ease: Power4.easeOut
       });
-    //   .to(activeItem, 0.25, { opacity: 0 });
   }
 }
 
