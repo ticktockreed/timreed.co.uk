@@ -48,7 +48,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
             }}
           ></div>
           <div className="work-item__info" data-text={data.title.text}>
-            <div className="work-item__title">{data.title.text}</div>
+            {data.title.text}
             {/* <div className="work-item__skills">
               {data.skills.map(({ skill }, idx) => {
                 if (!skill) {

@@ -7,12 +7,6 @@ import { getClipBox } from './misc';
 export function transitionToWorkPage({ exit, node, e, entry, direction, brand_color }) {
   let target = e.target;
 
-  if (e.target.className === 'work-item__title') {
-    target = e.target.parentElement.parentElement;
-  }
-  if (e.target.className === 'work-item__info') {
-    target = e.target.parentElement.parentElement;
-  }
   if (e.target.className === 'work-item__info') {
     target = e.target.parentElement.parentElement;
   }
@@ -24,15 +18,13 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
     const timelineIn = new TimelineLite({ paused: true });
     const heroBoxDummy = node.querySelector('.workpage-hero__box-dummy');
     const workpage = node.querySelector('.workpage');
+    workpage.style.opacity = 0;
     const heroBox = node.querySelector('.workpage-hero__box');
     const heroTitle = node.querySelectorAll('.workpage-hero__title');
     const heroBoxRect = heroBox.getBoundingClientRect();
     const clipBox = getClipBox(heroBox);
 
     timelineIn
-      .to(workpage, 0, {
-        opacity: 0
-      })
       .to(heroBoxDummy, 0, {
         // set the dummy to the same size as the workitem box
         top: topOfPage,
@@ -53,10 +45,6 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         opacity: 0
       })
       .to(workpage, 0.35, {
-        width: 'auto',
-        height: 'auto',
-        left: 0,
-        right: 0,
         opacity: 1,
         ease: Power4.easeOut
       })
@@ -81,7 +69,7 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
     const timelineOut = new TimelineLite({ paused: true });
 
     const activeItem = node.querySelector('.worklink--active').parentElement;
-    const activeItemTitle = activeItem.querySelector('.work-item__title');
+    const activeItemTitle = activeItem.querySelector('.work-item__info');
     const workItems = [].slice.call(node.querySelectorAll('.work-item'));
     const nonActiveWorkItems = workItems.filter((workItem) => {
       return workItem.className !== 'work-item worklink--active';
@@ -137,24 +125,19 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
 export function workItemHover({ e, direction }) {
   let target = e.target;
 
-  console.log(target);
-  if (
-    target.className === 'work-item__title' ||
-    target.className === 'work-item__wrapper' ||
-    target.className === 'work-item__block'
-  ) {
+  if (target.className === 'work-item__wrapper' || target.className === 'work-item__block') {
     return;
   }
   const tl = new TimelineLite();
 
-  if (direction === 'in') {
-    tl
-      // Animate the text out
-      .to(target, {
-        duration: 0.35,
-        scrambleText: { text: target.getAttribute('data-text'), chars: 'upperCase', speed: 0.3, delimiter: ' ' }
-      });
-  }
+  // if (direction === 'in') {
+  //   tl
+  //     // Animate the text out
+  //     .to(target, {
+  //       duration: 0.35,
+  //       scrambleText: { text: target.getAttribute('data-text'), chars: 'upperCase', speed: 0.3, delimiter: ' ' }
+  //     });
+  // }
   if (direction === 'out') {
     tl.to(target, {
       duration: 0.5,
