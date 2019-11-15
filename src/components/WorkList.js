@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
-import WorkItem from "./WorkItem";
-import { animateWorkItems } from "../utils/animations";
+import React, { useRef, useEffect, useState } from 'react';
+import WorkItem from './WorkItem';
+import { animateWorkItems } from '../utils/animations';
 
 const WorkList = ({ items }) => {
   let refArray = [];
@@ -12,10 +12,9 @@ const WorkList = ({ items }) => {
   let workItemRefs = useRef(refArray);
 
   useEffect(() => {
-    const workItems = workItemRefs.current.map(item => item.current);
+    const workItems = workItemRefs.current.map((item) => item.current);
 
-    console.log(workItems);
-    animateWorkItems({ workItems, direction: "in" });
+    animateWorkItems({ workItems, direction: 'in' });
   }, [workItemRefs]);
 
   return (
@@ -28,15 +27,12 @@ const WorkList = ({ items }) => {
         const { data, uid } = work_item.document[0];
 
         return (
-          <div
-            className={`worklist-item worklist_${idx}`}
-            key={`workItem__${idx}`}
-            ref={workItemRefs.current[idx]}
-          >
+          <div className={`worklist-item worklist_${idx}`} key={`workItem__${idx}`} ref={workItemRefs.current[idx]}>
             <WorkItem data={data} uid={uid}></WorkItem>
           </div>
         );
       })}
+      <div className="work-item__dummy"></div>
     </div>
   );
 };

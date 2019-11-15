@@ -1,26 +1,18 @@
-import {
-  TimelineLite,
-  Power4,
-  Back
-} from "./gsap-shockingly-green/minified/gsap.min";
-import "./gsap-shockingly-green/minified/ScrambleTextPlugin.min";
-import "./gsap-shockingly-green/minified/ScrollToPlugin.min";
+import { TimelineLite, Power4, Back } from './gsap-shockingly-green/minified/gsap.min';
+import './gsap-shockingly-green/minified/ScrambleTextPlugin.min';
+import './gsap-shockingly-green/minified/ScrollToPlugin.min';
 
-import { getClipBox } from "./misc";
+import { getClipBox } from './misc';
 
-export function transitionToWorkPage({ exit, node, e, entry, direction }) {
-  const targetPosition = e.target.getBoundingClientRect();
-
-  if (direction === "in") {
+export function transitionToWorkPage({ exit, node, e, entry, direction, brand_color }) {
+  if (direction === 'in') {
     // const timelineIn = new TimelineLite();
     // const heroBoxDummy = node.querySelector(".workpage-hero__box-dummy");
     // const workpage = node.querySelector(".workpage");
     // const heroBox = node.querySelector(".workpage-hero__box");
     // const heroTitle = node.querySelectorAll(".workpage-hero__title");
     // const heroBoxRect = heroBox.getBoundingClientRect();
-
     // const clipBox = getClipBox(heroBox);
-    
     // timelineIn
     //   .to(workpage, 0, {
     //     opacity: 0
@@ -67,23 +59,38 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
     //   .to(heroTitle, 0.5, {
     //     scrambleText: { chars: "upperCase", speed: 0.3 }
     //   }, "-=0.5")
-  } else if (direction === "out") {
+  } else if (direction === 'out') {
+    const targetPosition = e.target.getBoundingClientRect();
     const timelineOut = new TimelineLite();
-    const activeItem = node.querySelector(".worklink--active");
-    const activeItemTitle = activeItem.querySelector(".work-item__title");
-    const workItems = [].slice.call(node.querySelectorAll(".work-item"));
-    const nonActiveWorkItems = workItems.filter(workItem => {
-      return workItem.className !== "work-item worklink--active";
+
+    const activeItem = node.querySelector('.worklink--active').parentElement;
+    const activeItemTitle = activeItem.querySelector('.work-item__title');
+    const workItems = [].slice.call(node.querySelectorAll('.work-item'));
+    const nonActiveWorkItems = workItems.filter((workItem) => {
+      return workItem.className !== 'work-item worklink--active';
     });
+    const workItemDummy = node.querySelector('.work-item__dummy');
 
     timelineOut
+      .staggerTo(nonActiveWorkItems, 0.5, {
+        opacity: 0,
+        ease: Power4.easeOut
+      })
+      .to(workItemDummy, {
+        duration: 0,
+        backgroundColor: brand_color,
+        top: targetPosition.top,
+        left: targetPosition.left,
+        width: targetPosition.width,
+        height: targetPosition.height
+      })
       .to(window, {
         duration: 0.35,
         scrollTo: 0
       })
       .to(activeItemTitle, {
         duration: 0.35,
-        scrambleText: { chars: "upperCase", speed: 0.3 }
+        scrambleText: { chars: 'upperCase', speed: 0.3 }
       })
       .to(
         activeItemTitle,
@@ -91,12 +98,8 @@ export function transitionToWorkPage({ exit, node, e, entry, direction }) {
           duration: 0.35,
           opacity: 0
         },
-        "-=0.2"
-      )
-      .staggerTo(nonActiveWorkItems, 0.5, {
-        opacity: 0,
-        ease: Power4.easeOut
-      });
+        '-=0.2'
+      );
   }
 }
 
@@ -104,18 +107,18 @@ export function animateNavItem({ e, direction }) {
   const { target } = e;
   const tl = new TimelineLite();
 
-  if (direction === "in") {
+  if (direction === 'in') {
     tl.to(target, {
       duration: 0.5,
-      scrambleText: { text: "About Me", chars: "lowerCase", speed: 0.3 }
+      scrambleText: { text: 'About Me', chars: 'lowerCase', speed: 0.3 }
     });
   }
-  if (direction === "out") {
+  if (direction === 'out') {
     tl.to(target, {
       duration: 0.5,
       scrambleText: {
-        text: "Creative Developer",
-        chars: "lowerCase",
+        text: 'Creative Developer',
+        chars: 'lowerCase',
         speed: 0.3
       }
     });
@@ -124,8 +127,7 @@ export function animateNavItem({ e, direction }) {
 
 export function animateWorkItems({ workItems, direction }) {
   const bl = new TimelineLite();
-  console.log(workItems[0]);
-  if (direction === "in") {
+  if (direction === 'in') {
     bl.staggerTo(
       workItems,
       1,

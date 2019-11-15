@@ -23,7 +23,7 @@
 }
 
 .work-item__shadow {
-  content: "";
+  content: '';
   transform: translate3d(0, 0, -20px);
   position: absolute;
   bottom: -50px;
@@ -49,6 +49,20 @@
   .work-item:hover & {
     opacity: 1;
   }
+}
+
+.work-item__dummy {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background-color: green;
+  opacity: 0.8;
+  left: 0;
+  top: 0;
+  transition: opacity 250ms ease-in;
 }
 
 .work-item__info {
