@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import TransitionLink from 'gatsby-plugin-transition-link';
-import { transitionToWorkPage } from '../utils/animations';
+import { transitionToWorkPage, workItemHover } from '../utils/animations';
 
 const WorkLink = ({ children, to, brand_color, ...props }) => {
   return (
@@ -10,7 +10,7 @@ const WorkLink = ({ children, to, brand_color, ...props }) => {
       partiallyActive={true}
       to={to}
       entry={{
-        length: 3,
+        length: 2,
         delay: 2,
         trigger: ({ exit, node, e, entry }) => {
           transitionToWorkPage({ exit, node, e, entry, direction: 'in', brand_color });
@@ -32,7 +32,13 @@ const WorkLink = ({ children, to, brand_color, ...props }) => {
 const WorkItem = ({ data, uid, sliderPosition }) => {
   return (
     <>
-      <WorkLink to={`/work/${uid}`} className="work-item" brand_color={data.brand_color.text}>
+      <WorkLink
+        to={`/work/${uid}`}
+        className="work-item"
+        brand_color={data.brand_color.text}
+        onMouseOver={(e) => workItemHover({ e, direction: 'out' })}
+        onMouseOut={(e) => workItemHover({ e, direction: 'in' })}
+      >
         <div className="work-item__shadow"></div>
         <div className="work-item__wrapper">
           <div
@@ -41,7 +47,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
               backgroundColor: data.brand_color.text
             }}
           ></div>
-          <div className="work-item__info">
+          <div className="work-item__info" data-text={data.title.text}>
             <div className="work-item__title">{data.title.text}</div>
             {/* <div className="work-item__skills">
               {data.skills.map(({ skill }, idx) => {
