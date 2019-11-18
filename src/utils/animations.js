@@ -15,7 +15,7 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
   const topOfPage = 120;
 
   if (direction === 'in') {
-    const timelineIn = gsap.timeline({ paused: true });
+    const tl = gsap.timeline({ paused: true });
     const heroBoxDummy = node.querySelector('.workpage-hero__box-dummy');
     const workpage = node.querySelector('.workpage');
     workpage.style.opacity = 0;
@@ -23,10 +23,6 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
     const heroTitle = node.querySelectorAll('.workpage-hero__title');
     const heroBoxRect = heroBox.getBoundingClientRect();
     const clipBox = getClipBox(heroBox);
-
-    console.log('TARGET', target);
-    console.log('BOUNDINGRECT', boundingRect);
-    console.log('TARGETPOSITION', targetPosition);
 
     gsap.set(heroBoxDummy, {
       // set the dummy to the same size as the workitem box
@@ -41,16 +37,16 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
       opacity: 0
     });
 
-    timelineIn
-      .to(heroBoxDummy, {
-        duration: 0.4,
-        // Animate to width of Hero container
-        height: heroBoxRect.height,
-        top: heroBoxRect.top,
-        left: heroBoxRect.left + clipBox.left,
-        width: heroBoxRect.width - clipBox.left,
-        ease: Back.easeOut
-      })
+    tl.to(heroBoxDummy, {
+      duration: 0.4,
+      delay: 0.2,
+      // Animate to width of Hero container
+      height: heroBoxRect.height,
+      top: heroBoxRect.top,
+      left: heroBoxRect.left + clipBox.left,
+      width: heroBoxRect.width - clipBox.left,
+      ease: Back.easeOut
+    })
       .to(workpage, {
         duration: 0.35,
         opacity: 1,
@@ -82,9 +78,9 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         },
         '-=0.5'
       );
-    timelineIn.duration(2).play();
+    tl.duration(2).play();
   } else if (direction === 'out') {
-    const timelineOut = new TimelineLite({ paused: true });
+    const tl = gsap.timeline({ paused: true });
 
     const activeItem = node.querySelector('.worklink--active').parentElement;
     const activeItemTitle = activeItem.querySelector('.work-item__info');
@@ -94,18 +90,17 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
     });
     const workItemDummy = node.querySelector('.work-item__dummy');
 
-    timelineOut
-      .staggerTo(nonActiveWorkItems, 0.5, {
-        opacity: 0,
-        ease: Power4.easeOut
-      })
+    tl.staggerTo(nonActiveWorkItems, 0.25, {
+      opacity: 0,
+      ease: Power4.easeOut
+    })
       .to(
         activeItemTitle,
         {
           duration: 0.35,
           opacity: 0
         },
-        '-=0.5'
+        '-=0.25'
       )
       // Overlay the dummy colour block
       .to(workItemDummy, {
@@ -119,7 +114,7 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
       // Fade out the active item
       .to(activeItem, {
         duration: 0,
-        opacity: 0.1
+        opacity: 0
       })
       // Scroll to the top
       .to(window, {
@@ -142,7 +137,7 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         ease: Back.easeIn
       });
 
-    timelineOut.duration(2).play();
+    tl.duration(2).play();
   }
 }
 
