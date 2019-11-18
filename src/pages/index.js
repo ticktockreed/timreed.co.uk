@@ -1,36 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
+import WorkList from "../components/WorkList";
 
-import AnimationExample from "../components/AnimationExample";
-// import ChartExample from "../components/ChartExample";
-// import AnimationExample from "../components/AnimationExample";
-
-let chartData = [];
-
-function mockData(variance) {
-  let gaussian = x => {
-    let mean = 0;
-    return (
-      (1 / Math.sqrt(2 * Math.PI * variance)) *
-      Math.exp((-(x - mean) * (x - mean)) / (2 * variance))
-    );
-  };
-
-  chartData = [];
-  for (let i = -5; i < 5; i += 0.1) {
-    chartData.push(gaussian(i));
-  }
-}
-
-const IndexPage = ({ data: { prismicLandingPage } }) => {
-  const { data } = prismicLandingPage;
-  const [variance] = useState(0.2);
-  // const [paused, pauseAnimation] = useState(false);
-  useEffect(() => {
-    mockData(variance);
-  }, [variance]);
+const WorkPage = ({ data: { prismicWork } }) => {
+  const { data } = prismicWork;
 
   return (
     <Layout>
@@ -44,50 +19,80 @@ const IndexPage = ({ data: { prismicLandingPage } }) => {
           `gatsby`
         ]}
       />
-      <AnimationExample
-        name="logo-anim"
-        className="logo-anim"
-        background="#111"
-        pause={false}
-      />
-
-      <div className="row justify-content-center">
-        <div className="col-10 col-lg-6 ">
-          {/* <div className="richtext"> */}
-          <h1 className="heading03 text-center text-color-turquoise">
-            Coming soon...
-          </h1>
-          {/* <div>
-            <h1>{data.page_title.text}</h1>
-            <p>{data.page_intro.text}</p>
-
-
-            <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} />
-          </div> */}
+      <div className={`container`}>
+        <div className="row justify-content-lg-center">
+          <div
+            className="col-9 offset-2 offset-lg-0 col-lg-6"
+            style={{ position: "static" }}
+          >
+            <div className="richtext">
+              {/* <div dangerouslySetInnerHTML={{ __html: data.page_content.html }} /> */}
+            </div>
+          </div>
         </div>
+        <WorkList items={data.body[0].items}></WorkList>
       </div>
     </Layout>
   );
 };
 
-export default IndexPage;
+export default WorkPage;
 
 export const pageQuery = graphql`
   query {
-    prismicLandingPage(uid: {}, data: {}) {
-      prismicId
+    prismicWork {
       data {
-        page_title {
-          text
-        }
-        meta_title {
-          text
-        }
-        page_intro {
-          text
-        }
-        page_content {
-          html
+        body {
+          slice_type
+          items {
+            work_item {
+              document {
+                data {
+                  main_image {
+                    url
+                    dimensions {
+                      height
+                      width
+                    }
+                    alt
+                  }
+                  title {
+                    text
+                  }
+                  brand_color {
+                    text
+                  }
+                  client {
+                    text
+                  }
+                  agency {
+                    text
+                  }
+                  skills {
+                    skill {
+                      document {
+                        data {
+                          skill_name {
+                            text
+                          }
+                          category {
+                            document {
+                              data {
+                                skill_category {
+                                  text
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                uid
+              }
+            }
+          }
         }
       }
     }

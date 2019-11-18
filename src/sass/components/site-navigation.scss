@@ -1,0 +1,51 @@
+$gutter: $grid-gutter-width;
+
+.site-navigation {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 100px;
+  margin: auto;
+
+  a {
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    margin: 0 0 -30px;
+    height: 30%;
+  }
+}
+.site-navigation__text {
+  text-transform: uppercase;
+  color: $white;
+  opacity: 0.25;
+  font-family: $fontMain;
+  font-size: 60px;
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  clip: rect(0px, 60px, 200px, 0px);
+  transition: clip 200ms ease-in-out, opacity 200ms ease-in;
+}
+
+.site-navigation__text--active,
+.site-navigation__text:hover {
+  clip-path: polygon(0% 0%, 100% 00%, 100% 100%, 0 100%);
+  opacity: 0.4;
+}
+
+.site-navigation__text--active {
+  opacity: 1;
+  &:hover {
+    opacity: 1;
+  }
+}
+.site-navigation-inner {
+  //   background-color: rgba($grey-dark, 0.8);
+  width: 90px;
+  margin: auto;
+  margin: auto;
+  border-radius: 6px;
+  padding: 10px;
+}

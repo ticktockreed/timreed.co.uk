@@ -1,19 +1,53 @@
-$fontMain: "Baloo";
-$fontBody: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+$fontMain: "Source Code Pro", sans-serif;
+$fontBody: "Open Sans", sans-serif;
 
 // Colours
 
 $grey: #b9b9b9;
+$grey-mid: hsl(0, 0%, 47%);
 $grey-dark: #2d2d2d;
+$grey-darker: #13121b;
+$text-black: #494949;
+$black: black;
 
 $turquoise: #58ffe0;
 $pink: #ec2b88;
+$green: green;
 
 $colorMap: (
-  "grey": #b9b9b9,
-  "grey-dark": #2d2d2d,
-  "turquoise": #58ffe0,
-  "pink": #ec2b88
+  "grey": $grey,
+  "grey-mid": $grey-mid,
+  "grey-dark": $grey-dark,
+  "grey-darker": $grey-darker,
+  "turquoise": $turquoise,
+  "text-black": #494949,
+  "pink": $pink,
+  "black": $black,
+  "white": $white
 );
+
+$opacityMap: (
+  "90": 0.9,
+  "80": 0.8,
+  "70": 0.7,
+  "60": 0.6,
+  "50": 0.5,
+  "40": 0.4,
+  "30": 0.3,
+  "20": 0.2,
+  "10": 0.1
+);
+
 // Gradients
 $grad-dark-grey: linear-gradient(#919191, #191919);
+$grad-dark-black: linear-gradient(0.6turn, #2e2e2e, $grey-darker);
+
+$spacer-md: 60px;
+$spacer-lg: 100px;
+
+$spacerMap: (
+  "md": $spacer-md,
+  "lg": $spacer-lg
+);
+
+$easeOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);

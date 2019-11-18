@@ -1,20 +1,120 @@
-@import "./headings.scss";
+// Typographic scale from https://www.modularscale.com/?30&px&1.333
 
-.richtext {
-  h1 {
-    @extend %heading01;
-  }
-  h2 {
-    @extend %heading02;
-  }
-  h3 {
-    @extend %heading03;
-  }
-  a {
-    color: $pink;
+%heading00 {
+  font-family: $fontMain;
+  font-size: 20px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 30px;
   }
 }
 
+%heading01 {
+  font-family: $fontMain;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 30px;
+  }
+}
+
+%heading02 {
+  font-family: $fontBody;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 16.883px;
+  letter-spacing: 2.6px;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 16.883px;
+  }
+}
+
+%heading03 {
+  font-family: $fontBody;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12.666px;
+  letter-spacing: 2.6px;
+}
+
+%heading04 {
+  font-family: $fontBody;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 12.666px;
+  letter-spacing: 0;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 12.666px;
+  }
+}
+
+%paragraph01 {
+  font-family: $fontBody;
+  font-size: 12.666px;
+  letter-spacing: 0;
+  line-height: 1.2;
+  font-weight: 400;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 12.666px;
+  }
+}
+%paragraph02 {
+  text-transform: uppercase;
+  color: $text-black;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  font-size: 9.502px;
+  line-height: 1.2;
+  letter-spacing: 0.25em;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 11.5px;
+  }
+}
+%paragraph03 {
+  font-family: $fontBody;
+  line-height: 1.2;
+  font-size: 9.502px;
+  letter-spacing: 0.15em;
+  font-weight: 400;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 12.666px;
+  }
+}
+%paragraph-intro {
+  font-family: $fontBody;
+  font-size: 16.883px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 16.883px;
+  }
+}
+
+%body {
+  font-family: $fontBody;
+  font-size: 12.666px;
+  line-height: 1.4;
+  letter-spacing: 0.025em;
+  font-weight: 400;
+}
+
+.heading00 {
+  @extend %heading00;
+}
 .heading01 {
   @extend %heading01;
 }
@@ -23,4 +123,47 @@
 }
 .heading03 {
   @extend %heading03;
+}
+.heading04 {
+  @extend %heading04;
+}
+
+.paragraph01 {
+  @extend %paragraph01;
+}
+
+.paragraph02 {
+  @extend %paragraph02;
+}
+
+.paragraph03 {
+  @extend %paragraph03;
+}
+
+.richtext {
+  h1 {
+    @extend %heading01;
+    margin-bottom: 0.5em;
+  }
+  h2 {
+    @extend %heading03;
+    margin-bottom: 0.5em;
+  }
+  h3 {
+    @extend %heading04;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  a {
+    color: $pink;
+  }
+  p {
+    margin-bottom: 0.5em;
+    + h1,
+    + h2,
+    + h3,
+    + h4 {
+      margin-top: 1em;
+    }
+  }
 }

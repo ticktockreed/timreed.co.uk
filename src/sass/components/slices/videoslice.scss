@@ -1,0 +1,12 @@
+.videoslice {
+  margin-bottom: $spacer-lg;
+  position: relative;
+  padding-bottom: 75%;
+}
+.react-player {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

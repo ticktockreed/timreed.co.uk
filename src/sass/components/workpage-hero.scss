@@ -1,0 +1,118 @@
+.workpage-hero {
+  position: relative;
+  padding-bottom: 102%;
+  margin-bottom: 2px;
+  margin-left: 0;
+
+  @include media-breakpoint-up(xs) {
+    padding-bottom: 72%;
+    margin-bottom: 30px;
+    @include make-col-offset(1);
+  }
+  @include media-breakpoint-up(sm) {
+    padding-bottom: 52%;
+    margin-bottom: 30px;
+    @include make-col-offset(1);
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-bottom: 42%;
+    margin-bottom: 50px;
+    @include make-col-offset(1);
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 100px;
+  }
+}
+
+// animateable box
+.workpage-hero__box-dummy {
+  width: 100%;
+  height: 0;
+  background-color: $green;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+.workpage-hero__box {
+  width: 100%;
+  height: 100%;
+  background-color: $green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.workpage-hero__titlebox {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.workpage-hero__title {
+  position: absolute;
+  top: 33%;
+  @include make-col(10);
+
+  @include media-breakpoint-up(sm) {
+    top: 39%;
+  }
+
+  @include media-breakpoint-up(md) {
+    top: 48%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    top: 50%;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    background-color: $text-black;
+    height: 6px;
+    width: 45px;
+    height: 5px;
+    margin-top: 16px;
+
+    @include media-breakpoint-down(md) {
+      height: 4px;
+      margin-top: 10px;
+    }
+  }
+}
+.text-label {
+  @include media-breakpoint-down(md) {
+    display: block;
+  }
+}
+.workpage-hero__agency {
+  position: absolute;
+  bottom: $gutter;
+
+  @include media-breakpoint-down(md) {
+    bottom: 20px;
+  }
+}
+
+.workpage-hero__client {
+  position: absolute;
+  bottom: $gutter;
+  right: 25px;
+
+  @include media-breakpoint-down(md) {
+    bottom: 20px;
+    right: 15px;
+    width: 50%;
+    text-align: right;
+  }
+}

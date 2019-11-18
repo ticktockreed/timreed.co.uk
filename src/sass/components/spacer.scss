@@ -1,0 +1,6 @@
+// Spacers
+@each $item, $spacer in $spacerMap {
+  .spacer-slice-#{$item} {
+    height: $spacer;
+  }
+}

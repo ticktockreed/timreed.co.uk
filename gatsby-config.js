@@ -16,14 +16,6 @@ module.exports = {
         path: `${__dirname}/src/images`
       }
     },
-    {
-      resolve: "gatsby-plugin-web-font-loader",
-      options: {
-        google: {
-          families: ["Baloo", "Droid Serif"]
-        }
-      }
-    },
     `gatsby-plugin-sass`,
     {
       resolve: "gatsby-plugin-react-svg",
@@ -33,6 +25,8 @@ module.exports = {
         }
       }
     },
+
+    `gatsby-plugin-transition-link`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -44,7 +38,15 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png` // This path is relative to the root of the site.
+        icon: `src/images/tr-logo.png` // This path is relative to the root of the site.
+      }
+    },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ["Open Sans:400,600,800", "Source Code Pro:600,700,900"]
+        }
       }
     },
     {
@@ -52,7 +54,14 @@ module.exports = {
       options: {
         repositoryName: `timreedcouk`,
         accessToken: `${process.env.API_KEY}`,
-        linkResolver: ({ node, key, value }) => post => `/${post.uid}`
+        pages: [
+          {
+            type: "work-item", // Custom type of the document
+            match: "/work/:uid", // Pages will be generated in this pattern
+            path: "/work-preview", // Placeholder route for previews
+            component: require.resolve("./src/templates/workPage.js") // Template file
+          }
+        ]
       }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality

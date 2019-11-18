@@ -1,6 +1,9 @@
+@import "./_reset.scss";
 @import "./_bootstrap.scss";
+@import "./_slick-slider.scss";
 @import "./_variables.scss";
 @import "./typography.scss";
+@import "./layout.scss";
 @import "./components/_index.scss";
 
 // Colour modifiers
@@ -9,23 +12,29 @@
     color: $color;
   }
 }
+
+// Opacity modifiers
+@each $item, $opacity in $opacityMap {
+  .opacity-#{$item} {
+    opacity: $opacity;
+  }
+}
+
+// Spacing modifier
+@each $item, $spacer in $spacerMap {
+  .spacer--#{$item} {
+    margin-bottom: $spacer;
+  }
+}
+
 html {
   width: 100%;
   height: 100%;
 }
 html,
 body {
-  background-color: black;
-  color: $grey;
+  color: $text-black;
+  background-color: $white;
 
-  font-family: $fontBody;
-}
-
-.site-logo {
-  width: 100%;
-  height: 100%;
-
-  path {
-    fill: darken($grey-dark, 10%) !important;
-  }
+  @extend %body;
 }
