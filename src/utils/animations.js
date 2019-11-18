@@ -77,7 +77,7 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
         },
         '-=0.5'
       );
-    tl.duration(2).play();
+    tl.duration(1.5).play();
   } else if (direction === 'out') {
     const tl = gsap.timeline({ paused: true });
     const activeItem = node.querySelector('.worklink--active').parentElement;
@@ -121,7 +121,7 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
         ease: Back.easeIn
       });
 
-    tl.duration(2).play();
+    tl.duration(1.5).play();
   }
 }
 

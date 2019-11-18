@@ -10,14 +10,14 @@ const WorkLink = ({ children, to, brand_color, workItemRef, ...props }) => {
       partiallyActive={true}
       to={to}
       entry={{
-        length: 2,
-        delay: 2,
+        length: 1.5,
+        delay: 1.5,
         trigger: ({ exit, node, e, entry }) => {
           transitionToWorkPage({ exit, node, e, entry, direction: 'in', brand_color, workItemRef });
         }
       }}
       exit={{
-        length: 2,
+        length: 1.5,
         trigger: ({ exit, node, e, entry }) => {
           transitionToWorkPage({ exit, node, e, entry, direction: 'out', brand_color, workItemRef });
         }
