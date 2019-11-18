@@ -106,15 +106,10 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
       .set(activeItem, {
         opacity: 0
       })
-      .staggerTo(
-        nonActiveWorkItems,
-        0.25,
-        {
-          opacity: 0,
-          ease: Power4.easeOut
-        },
-        '-=0.2'
-      )
+      .staggerTo(nonActiveWorkItems, 0.25, {
+        opacity: 0,
+        ease: Power4.easeOut
+      })
       // Scroll to the top
       .set(window, {
         scrollTo: 0
