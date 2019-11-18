@@ -130,20 +130,17 @@ export function workItemHover({ e, direction }) {
   }
   const tl = new TimelineLite();
 
-  // if (direction === 'in') {
-  //   tl
-  //     // Animate the text out
-  //     .to(target, {
-  //       duration: 0.35,
-  //       scrambleText: { text: target.getAttribute('data-text'), chars: 'upperCase', speed: 0.3, delimiter: ' ' }
-  //     });
-  // }
+  const targetText = target.getAttribute('data-text');
+
   if (direction === 'out') {
+    console.log('mouseIn');
     tl.to(target, {
-      duration: 0.5,
+      duration: 0.35,
       scrambleText: {
+        text: targetText,
         chars: 'lowerCase',
-        speed: 0.3
+        delimeter: ' ',
+        speed: 0.1
       }
     });
   }
