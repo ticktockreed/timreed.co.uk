@@ -1,10 +1,10 @@
-import { TimelineLite, Power4, Back } from './gsap-shockingly-green/minified/gsap.min';
+import { TimelineLite, Power4, Back, gsap } from './gsap-shockingly-green/minified/gsap.min';
 import './gsap-shockingly-green/minified/ScrambleTextPlugin.min';
 import './gsap-shockingly-green/minified/ScrollToPlugin.min';
 
 import { getClipBox } from './misc';
 
-export function transitionToWorkPage({ exit, node, e, entry, direction, brand_color }) {
+export function transitionToWorkPage({ exit, node, e, entry, direction, brand_color, boundingRect }) {
   let target = e.target;
 
   if (e.target.className === 'work-item__info') {
@@ -15,7 +15,7 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
   const topOfPage = 120;
 
   if (direction === 'in') {
-    const timelineIn = new TimelineLite({ paused: true });
+    const timelineIn = gsap.timeline({ paused: true });
     const heroBoxDummy = node.querySelector('.workpage-hero__box-dummy');
     const workpage = node.querySelector('.workpage');
     workpage.style.opacity = 0;
@@ -24,42 +24,60 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
     const heroBoxRect = heroBox.getBoundingClientRect();
     const clipBox = getClipBox(heroBox);
 
+    console.log('TARGET', target);
+    console.log('BOUNDINGRECT', boundingRect);
+    console.log('TARGETPOSITION', targetPosition);
+
+    gsap.set(heroBoxDummy, {
+      // set the dummy to the same size as the workitem box
+      top: topOfPage,
+      left: boundingRect.x,
+      width: boundingRect.width,
+      height: boundingRect.height,
+      opacity: 1
+    });
+    gsap.set(heroTitle, {
+      duration: 0,
+      opacity: 0
+    });
+
     timelineIn
-      .to(heroBoxDummy, 0, {
-        // set the dummy to the same size as the workitem box
-        top: topOfPage,
-        left: targetPosition.x,
-        width: targetPosition.width,
-        height: targetPosition.height,
-        opacity: 1
-      })
-      .to(heroBoxDummy, 0.8, {
+      .to(heroBoxDummy, {
+        duration: 0.4,
         // Animate to width of Hero container
         height: heroBoxRect.height,
         top: heroBoxRect.top,
         left: heroBoxRect.left + clipBox.left,
         width: heroBoxRect.width - clipBox.left,
-        ease: Power4.easeOut
+        ease: Back.easeOut
       })
-      .to(heroTitle, 0, {
-        opacity: 0
-      })
-      .to(workpage, 0.35, {
+      .to(workpage, {
+        duration: 0.35,
         opacity: 1,
         ease: Power4.easeOut
       })
-      .to(heroBoxDummy, 0.2, {
-        opacity: 0,
-        display: 'none',
-        ease: Power4.easeOut
-      })
-      .to(heroTitle, 0.5, {
-        opacity: 1
-      })
+      .to(
+        heroBoxDummy,
+        {
+          duration: 0.2,
+          opacity: 0,
+          display: 'none',
+          ease: Power4.easeOut
+        },
+        '-=0.2'
+      )
       .to(
         heroTitle,
-        0.5,
         {
+          duration: 0.5,
+          opacity: 1
+        },
+        '-=0.2'
+      )
+      .to(
+        heroTitle,
+        {
+          duration: 0.3,
           scrambleText: { chars: 'upperCase', speed: 0.5, revealDelay: 0.2, delimeter: ' ' }
         },
         '-=0.5'
@@ -81,10 +99,14 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         opacity: 0,
         ease: Power4.easeOut
       })
-      .to(activeItemTitle, {
-        duration: 0.35,
-        opacity: 0
-      })
+      .to(
+        activeItemTitle,
+        {
+          duration: 0.35,
+          opacity: 0
+        },
+        '-=0.5'
+      )
       // Overlay the dummy colour block
       .to(workItemDummy, {
         duration: 0,
@@ -97,11 +119,11 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
       // Fade out the active item
       .to(activeItem, {
         duration: 0,
-        opacity: 0
+        opacity: 0.1
       })
       // Scroll to the top
       .to(window, {
-        duration: 0.35,
+        duration: 0,
         scrollTo: 0
       })
       // Overlay the dummy colour block fixed at the position of the worklist__item
@@ -113,9 +135,11 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         width: targetPosition.width,
         height: targetPosition.height
       })
+      // move the blok to the top of the page
       .to(workItemDummy, {
-        duration: 0.35,
-        top: topOfPage
+        duration: 0.15,
+        top: topOfPage,
+        ease: Back.easeIn
       });
 
     timelineOut.duration(2).play();

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TransitionLink from 'gatsby-plugin-transition-link';
 import { transitionToWorkPage, workItemHover } from '../utils/animations';
 
-const WorkLink = ({ children, to, brand_color, ...props }) => {
+const WorkLink = ({ children, to, brand_color, boundingRect, ...props }) => {
   return (
     <TransitionLink
       activeClassName="worklink--active"
@@ -13,13 +13,13 @@ const WorkLink = ({ children, to, brand_color, ...props }) => {
         length: 2,
         delay: 2,
         trigger: ({ exit, node, e, entry }) => {
-          transitionToWorkPage({ exit, node, e, entry, direction: 'in', brand_color });
+          transitionToWorkPage({ exit, node, e, entry, direction: 'in', brand_color, boundingRect });
         }
       }}
       exit={{
         length: 2,
         trigger: ({ exit, node, e, entry }) => {
-          transitionToWorkPage({ exit, node, e, entry, direction: 'out', brand_color });
+          transitionToWorkPage({ exit, node, e, entry, direction: 'out', brand_color, boundingRect });
         }
       }}
       {...props}
@@ -30,6 +30,12 @@ const WorkLink = ({ children, to, brand_color, ...props }) => {
 };
 
 const WorkItem = ({ data, uid, sliderPosition }) => {
+  const workItemBlock = useRef(null);
+  const [blockRect, setBlockRect] = useState();
+
+  useEffect(() => {
+    setBlockRect(workItemBlock.current.getBoundingClientRect());
+  }, [workItemBlock]);
   return (
     <>
       <WorkLink
@@ -38,6 +44,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
         brand_color={data.brand_color.text}
         onMouseOver={(e) => workItemHover({ e, direction: 'out' })}
         onMouseOut={(e) => workItemHover({ e, direction: 'in' })}
+        boundingRect={blockRect}
       >
         <div className="work-item__shadow"></div>
         <div className="work-item__wrapper">
@@ -46,6 +53,7 @@ const WorkItem = ({ data, uid, sliderPosition }) => {
             style={{
               backgroundColor: data.brand_color.text
             }}
+            ref={workItemBlock}
           ></div>
           <div className="work-item__info" data-text={data.title.text}>
             {data.title.text}

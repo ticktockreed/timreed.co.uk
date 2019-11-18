@@ -95,7 +95,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
 
                 <div className="slices">
                   {data.body &&
-                    data.body.map((slice, i) => {
+                    data.body.map((slice, idx) => {
                       const sizeMap = {
                         xs: 'col-6 col-md-3',
                         sm: 'col-6 col-md-4',
@@ -106,16 +106,16 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
 
                       if (slice.slice_type === 'intro') {
                         return (
-                          <div className="row justify-content-center">
+                          <div className="row justify-content-center" key={`slice_${idx}`}>
                             <div className={sizeMap.lg}>
-                              <Intro slice={slice} idx={i}></Intro>
+                              <Intro slice={slice} idx={idx}></Intro>
                             </div>
                           </div>
                         );
                       }
                       if (slice.slice_type === 'text') {
                         return (
-                          <div className="row justify-content-center textslice">
+                          <div className="row justify-content-center textslice" key={`slice_${idx}`}>
                             <div className={sizeMap.md}>
                               <div className={`textslice__color - block text-${slice.primary.alignment}`}>
                                 <AppRichText text={slice.primary.text}></AppRichText>
@@ -125,11 +125,11 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                         );
                       }
                       if (slice.slice_type === 'spacer') {
-                        return <div className={`spacer--${slice.primary.spacer_size}`}></div>;
+                        return <div className={`spacer--${slice.primary.spacer_size}`} key={`slice_${idx}`}></div>;
                       }
                       if (slice.slice_type === 'video') {
                         return (
-                          <div className="row justify-content-center">
+                          <div className="row justify-content-center" key={`slice_${idx}`}>
                             <div className={sizeMap[slice.primary.column_size]}>
                               <div className="videoslice">
                                 <ReactPlayer
@@ -147,7 +147,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       }
                       if (slice.slice_type === 'image') {
                         return (
-                          <div className="row justify-content-center imageslice">
+                          <div className="row justify-content-center imageslice" key={`slice_${idx}`}>
                             <div className={sizeMap[slice.primary.column_size]}>
                               <Img fluid={slice.primary.image.localFile.childImageSharp.fluid}></Img>
                             </div>
@@ -156,7 +156,7 @@ const WorkItem = ({ data: { prismicWorkItem } }) => {
                       }
                       if (slice.slice_type === 'code') {
                         return (
-                          <div className="row justify-content-center">
+                          <div className="row justify-content-center" key={`slice_${idx}`}>
                             <div className={sizeMap.lg}>
                               <figure className="codeslice">
                                 <SyntaxHighlighter wrapLines={true} language={slice.primary.code_type} style={coy}>
