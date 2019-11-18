@@ -1,21 +1,19 @@
 import { TimelineLite, Power4, Back, gsap } from './gsap-shockingly-green/minified/gsap.min';
 import './gsap-shockingly-green/minified/ScrambleTextPlugin.min';
 import './gsap-shockingly-green/minified/ScrollToPlugin.min';
+import SplitText from './gsap-shockingly-green/minified/SplitText.min';
 
 import { getClipBox } from './misc';
 
-export function transitionToWorkPage({ exit, node, e, entry, direction, brand_color, boundingRect }) {
-  let target = e.target;
-
-  if (e.target.className === 'work-item__info') {
-    target = e.target.parentElement.parentElement;
-  }
-
-  const targetPosition = target.getBoundingClientRect();
+export function transitionToWorkPage({ node, direction, brand_color, workItemRef }) {
+  const workItem = workItemRef.current;
+  console.log(workItem);
+  const targetPosition = workItem.getBoundingClientRect();
   const topOfPage = 120;
 
   if (direction === 'in') {
     const tl = gsap.timeline({ paused: true });
+
     const heroBoxDummy = node.querySelector('.workpage-hero__box-dummy');
     const workpage = node.querySelector('.workpage');
     workpage.style.opacity = 0;
@@ -24,12 +22,14 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
     const heroBoxRect = heroBox.getBoundingClientRect();
     const clipBox = getClipBox(heroBox);
 
+    const titleSplitText = new SplitText(heroTitle, { type: 'words' });
+
     gsap.set(heroBoxDummy, {
       // set the dummy to the same size as the workitem box
       top: topOfPage,
-      left: boundingRect.x,
-      width: boundingRect.width,
-      height: boundingRect.height,
+      left: targetPosition.x,
+      width: targetPosition.width,
+      height: targetPosition.height,
       opacity: 1
     });
     gsap.set(heroTitle, {
@@ -71,7 +71,7 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         '-=0.2'
       )
       .to(
-        heroTitle,
+        titleSplitText.words,
         {
           duration: 0.3,
           scrambleText: { chars: 'upperCase', speed: 0.5, revealDelay: 0.2, delimeter: ' ' }
@@ -141,28 +141,16 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
   }
 }
 
-export function workItemHover({ e, direction }) {
-  let target = e.target;
+export function workItemHover({ workItemTextRef }) {
+  const mySplitText = new SplitText(workItemTextRef.current, { type: 'words' });
 
-  if (target.className === 'work-item__wrapper' || target.className === 'work-item__block') {
-    return;
-  }
-  const tl = new TimelineLite();
-
-  const targetText = target.getAttribute('data-text');
-
-  if (direction === 'out') {
-    console.log('mouseIn');
-    tl.to(target, {
-      duration: 0.35,
-      scrambleText: {
-        text: targetText,
-        chars: 'lowerCase',
-        delimeter: ' ',
-        speed: 0.1
-      }
-    });
-  }
+  gsap.to(mySplitText.words, {
+    duration: 0.35,
+    scrambleText: {
+      chars: 'lowerCase',
+      speed: 0.1
+    }
+  });
 }
 
 export function animateNavItem({ e, direction }) {

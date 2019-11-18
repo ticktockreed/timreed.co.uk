@@ -1,39 +1,6 @@
-.work-items__slider {
-  position: absolute;
-  display: flex;
-}
-
-.work-item__wrapper {
-  position: relative;
-  overflow: hidden;
-  height: 300px;
-  position: relative;
-  z-index: 1000;
-}
-
 .work-item {
   position: relative;
   display: block;
-  perspective: 120px;
-  z-index: 1000;
-
-  img {
-    max-width: 100%;
-  }
-}
-
-.work-item__shadow {
-  content: '';
-  transform: translate3d(0, 0, -20px);
-  position: absolute;
-  bottom: -50px;
-  left: auto;
-  width: 100%;
-  height: 100%;
-  right: -50px;
-  background-color: #f0f0f0;
-  z-index: 1000;
-  display: none;
 }
 
 .work-item__block {
@@ -41,7 +8,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 100%;
+  height: 300px;
   opacity: 0.8;
   transition: opacity 250ms ease-in;
   background-color: $green;
@@ -63,8 +30,8 @@
 }
 
 .work-item__info {
-    @extend %heading02;
-    font-family: $fontMain;
+  @extend %heading02;
+  font-family: $fontMain;
   width: 100%;
   height: 100%;
   vertical-align: bottom;
