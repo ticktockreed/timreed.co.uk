@@ -1,11 +1,13 @@
-import { Link } from "gatsby";
-import PropTypes from "prop-types";
-import React from "react";
-import Logo from "../images/TR-Logo-Flat.svg";
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
+import Logo from '../images/TR-Logo-Flat.svg';
 // import Nav from "./nav";
-import { animateNavItem } from "../utils/animations";
+import { animateNavItem } from '../utils/animations';
 
 const Header = ({ siteTitle }) => {
+  const navAbout = useRef(null);
+
   return (
     <header className="site-header">
       <div className="container">
@@ -28,8 +30,9 @@ const Header = ({ siteTitle }) => {
             <Link
               to="/about"
               className="about-link"
-              onMouseEnter={e => animateNavItem({ e, direction: "in" })}
-              onMouseLeave={e => animateNavItem({ e, direction: "out" })}
+              ref={navAbout}
+              onMouseEnter={() => animateNavItem({ navAbout, direction: 'in' })}
+              onMouseLeave={() => animateNavItem({ navAbout, direction: 'out' })}
             >
               Creative Developer
             </Link>

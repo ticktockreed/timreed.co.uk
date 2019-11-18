@@ -6,14 +6,14 @@ import SplitText from './gsap-shockingly-green/minified/SplitText.min';
 import { getClipBox } from './misc';
 
 export function transitionToWorkPage({ node, direction, brand_color, workItemRef }) {
+  if (workItemRef === null) return;
+
   const workItem = workItemRef.current;
-  console.log(workItem);
   const targetPosition = workItem.getBoundingClientRect();
   const topOfPage = 120;
 
   if (direction === 'in') {
     const tl = gsap.timeline({ paused: true });
-
     const heroBoxDummy = node.querySelector('.workpage-hero__box-dummy');
     const workpage = node.querySelector('.workpage');
     workpage.style.opacity = 0;
@@ -21,7 +21,6 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
     const heroTitle = node.querySelectorAll('.workpage-hero__title');
     const heroBoxRect = heroBox.getBoundingClientRect();
     const clipBox = getClipBox(heroBox);
-
     const titleSplitText = new SplitText(heroTitle, { type: 'words' });
 
     gsap.set(heroBoxDummy, {
@@ -39,13 +38,13 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
 
     tl.to(heroBoxDummy, {
       duration: 0.4,
-      delay: 0.2,
+      delay: 0.1,
       // Animate to width of Hero container
       height: heroBoxRect.height,
       top: heroBoxRect.top,
       left: heroBoxRect.left + clipBox.left,
       width: heroBoxRect.width - clipBox.left,
-      ease: Back.easeOut
+      ease: Back.easeInOut
     })
       .to(workpage, {
         duration: 0.35,
@@ -81,54 +80,44 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
     tl.duration(2).play();
   } else if (direction === 'out') {
     const tl = gsap.timeline({ paused: true });
-
     const activeItem = node.querySelector('.worklink--active').parentElement;
-    const activeItemTitle = activeItem.querySelector('.work-item__info');
     const workItems = [].slice.call(node.querySelectorAll('.work-item'));
     const nonActiveWorkItems = workItems.filter((workItem) => {
       return workItem.className !== 'work-item worklink--active';
     });
     const workItemDummy = node.querySelector('.work-item__dummy');
 
-    tl.staggerTo(nonActiveWorkItems, 0.25, {
-      opacity: 0,
-      ease: Power4.easeOut
-    })
-      .to(
-        activeItemTitle,
-        {
-          duration: 0.35,
-          opacity: 0
-        },
-        '-=0.25'
-      )
+    gsap
       // Overlay the dummy colour block
-      .to(workItemDummy, {
-        duration: 0,
+      .set(workItemDummy, {
         backgroundColor: brand_color,
         top: targetPosition.y,
         left: targetPosition.x,
         width: targetPosition.width,
+        opacity: 0,
         height: targetPosition.height
-      })
-      // Fade out the active item
-      .to(activeItem, {
-        duration: 0,
+      });
+
+    tl.to(workItemDummy, {
+      duration: 0.2,
+      opacity: 1
+    })
+      // Hide the active item
+      .set(activeItem, {
         opacity: 0
       })
+      .staggerTo(
+        nonActiveWorkItems,
+        0.25,
+        {
+          opacity: 0,
+          ease: Power4.easeOut
+        },
+        '-=0.2'
+      )
       // Scroll to the top
-      .to(window, {
-        duration: 0,
+      .set(window, {
         scrollTo: 0
-      })
-      // Overlay the dummy colour block fixed at the position of the worklist__item
-      .to(workItemDummy, {
-        duration: 0,
-        backgroundColor: brand_color,
-        top: targetPosition.top,
-        left: targetPosition.left,
-        width: targetPosition.width,
-        height: targetPosition.height
       })
       // move the blok to the top of the page
       .to(workItemDummy, {
@@ -153,32 +142,21 @@ export function workItemHover({ workItemTextRef }) {
   });
 }
 
-export function animateNavItem({ e, direction }) {
-  const { target } = e;
-  const tl = new TimelineLite();
+export function animateNavItem({ navAbout, direction }) {
+  const mySplitText = new SplitText(navAbout.current, { type: 'words' });
 
   if (direction === 'in') {
-    tl.to(target, {
+    gsap.to(mySplitText.words, {
       duration: 0.5,
-      scrambleText: { text: 'About Me', chars: 'lowerCase', speed: 0.3 }
-    });
-  }
-  if (direction === 'out') {
-    tl.to(target, {
-      duration: 0.5,
-      scrambleText: {
-        text: 'Creative Developer',
-        chars: 'lowerCase',
-        speed: 0.3
-      }
+      scrambleText: { chars: 'lowerCase', speed: 0.3 }
     });
   }
 }
 
 export function animateWorkItems({ workItems, direction }) {
-  const bl = new TimelineLite();
+  const tl = gsap.timeline();
   if (direction === 'in') {
-    bl.staggerTo(
+    tl.staggerTo(
       workItems,
       1,
       {
