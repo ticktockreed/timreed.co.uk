@@ -5,30 +5,31 @@ import SplitText from './gsap-shockingly-green/minified/SplitText.min';
 
 import { getClipBox } from './misc';
 
-export function transitionToWorkPage({ node, direction, brand_color, workItemRef }) {
-  if (workItemRef === null) return;
-
-  const workItem = workItemRef.current;
-  const targetPosition = workItem.getBoundingClientRect();
-  const topOfPage = 120;
-
+export function transitionToWorkPage({
+  direction,
+  brand_color,
+  activeWorkItem,
+  activeItemPosition,
+  workItems,
+  exitDummy,
+  entryDummy,
+  workPage
+}) {
   if (direction === 'in') {
     const tl = gsap.timeline({ paused: true });
-    const heroBoxDummy = node.querySelector('.workpage-hero__box-dummy');
-    const workpage = node.querySelector('.workpage');
-    workpage.style.opacity = 0;
-    const heroBox = node.querySelector('.workpage-hero__box');
-    const heroTitle = node.querySelectorAll('.workpage-hero__title');
+    const heroBox = workPage.querySelector('.workpage-hero__box');
+    const heroTitle = workPage.querySelector('.workpage-hero__title');
     const heroBoxRect = heroBox.getBoundingClientRect();
+    console.log(heroTitle);
     const clipBox = getClipBox(heroBox);
     const titleSplitText = new SplitText(heroTitle, { type: 'words' });
 
-    gsap.set(heroBoxDummy, {
+    gsap.set(entryDummy, {
       // set the dummy to the same size as the workitem box
-      top: topOfPage,
-      left: targetPosition.x,
-      width: targetPosition.width,
-      height: targetPosition.height,
+      top: 120,
+      left: activeItemPosition.x,
+      width: activeItemPosition.width,
+      height: activeItemPosition.height,
       opacity: 1
     });
     gsap.set(heroTitle, {
@@ -36,7 +37,7 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
       opacity: 0
     });
 
-    tl.to(heroBoxDummy, {
+    tl.to(entryDummy, {
       duration: 0.4,
       delay: 0.1,
       // Animate to width of Hero container
@@ -46,13 +47,13 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
       width: heroBoxRect.width - clipBox.left,
       ease: Back.easeInOut
     })
-      .to(workpage, {
+      .to(workPage, {
         duration: 0.35,
         opacity: 1,
         ease: Power4.easeOut
       })
       .to(
-        heroBoxDummy,
+        entryDummy,
         {
           duration: 0.2,
           opacity: 0,
@@ -80,30 +81,28 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
     tl.duration(1.5).play();
   } else if (direction === 'out') {
     const tl = gsap.timeline({ paused: true });
-    const activeItem = node.querySelector('.worklink--active').parentElement;
-    const workItems = [].slice.call(node.querySelectorAll('.work-item'));
+
     const nonActiveWorkItems = workItems.filter((workItem) => {
       return workItem.className !== 'work-item worklink--active';
     });
-    const workItemDummy = node.querySelector('.work-item__dummy');
 
     gsap
       // Overlay the dummy colour block
-      .set(workItemDummy, {
+      .set(exitDummy, {
         backgroundColor: brand_color,
-        top: targetPosition.y,
-        left: targetPosition.x,
-        width: targetPosition.width,
-        opacity: 0,
-        height: targetPosition.height
+        top: activeItemPosition.y,
+        left: activeItemPosition.x,
+        width: activeItemPosition.width,
+        opacity: 1,
+        height: activeItemPosition.height
       });
 
-    tl.to(workItemDummy, {
+    tl.to(exitDummy, {
       duration: 0.2,
       opacity: 1
     })
       // Hide the active item
-      .set(activeItem, {
+      .set(activeWorkItem, {
         opacity: 0
       })
       .staggerTo(nonActiveWorkItems, 0.25, {
@@ -115,9 +114,9 @@ export function transitionToWorkPage({ node, direction, brand_color, workItemRef
         scrollTo: 0
       })
       // move the blok to the top of the page
-      .to(workItemDummy, {
+      .to(exitDummy, {
         duration: 0.15,
-        top: topOfPage,
+        top: 120,
         ease: Back.easeIn
       });
 
