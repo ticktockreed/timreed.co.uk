@@ -1,21 +1,19 @@
 import { TimelineLite, Power4, Back, gsap } from './gsap-shockingly-green/minified/gsap.min';
 import './gsap-shockingly-green/minified/ScrambleTextPlugin.min';
 import './gsap-shockingly-green/minified/ScrollToPlugin.min';
+import SplitText from './gsap-shockingly-green/minified/SplitText.min';
 
 import { getClipBox } from './misc';
 
-export function transitionToWorkPage({ exit, node, e, entry, direction, brand_color, boundingRect }) {
-  let target = e.target;
+export function transitionToWorkPage({ node, direction, brand_color, workItemRef }) {
+  if (workItemRef === null) return;
 
-  if (e.target.className === 'work-item__info') {
-    target = e.target.parentElement.parentElement;
-  }
-
-  const targetPosition = target.getBoundingClientRect();
+  const workItem = workItemRef.current;
+  const targetPosition = workItem.getBoundingClientRect();
   const topOfPage = 120;
 
   if (direction === 'in') {
-    const timelineIn = gsap.timeline({ paused: true });
+    const tl = gsap.timeline({ paused: true });
     const heroBoxDummy = node.querySelector('.workpage-hero__box-dummy');
     const workpage = node.querySelector('.workpage');
     workpage.style.opacity = 0;
@@ -23,17 +21,14 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
     const heroTitle = node.querySelectorAll('.workpage-hero__title');
     const heroBoxRect = heroBox.getBoundingClientRect();
     const clipBox = getClipBox(heroBox);
-
-    console.log('TARGET', target);
-    console.log('BOUNDINGRECT', boundingRect);
-    console.log('TARGETPOSITION', targetPosition);
+    const titleSplitText = new SplitText(heroTitle, { type: 'words' });
 
     gsap.set(heroBoxDummy, {
       // set the dummy to the same size as the workitem box
       top: topOfPage,
-      left: boundingRect.x,
-      width: boundingRect.width,
-      height: boundingRect.height,
+      left: targetPosition.x,
+      width: targetPosition.width,
+      height: targetPosition.height,
       opacity: 1
     });
     gsap.set(heroTitle, {
@@ -41,16 +36,16 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
       opacity: 0
     });
 
-    timelineIn
-      .to(heroBoxDummy, {
-        duration: 0.4,
-        // Animate to width of Hero container
-        height: heroBoxRect.height,
-        top: heroBoxRect.top,
-        left: heroBoxRect.left + clipBox.left,
-        width: heroBoxRect.width - clipBox.left,
-        ease: Back.easeOut
-      })
+    tl.to(heroBoxDummy, {
+      duration: 0.4,
+      delay: 0.1,
+      // Animate to width of Hero container
+      height: heroBoxRect.height,
+      top: heroBoxRect.top,
+      left: heroBoxRect.left + clipBox.left,
+      width: heroBoxRect.width - clipBox.left,
+      ease: Back.easeInOut
+    })
       .to(workpage, {
         duration: 0.35,
         opacity: 1,
@@ -75,65 +70,49 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         '-=0.2'
       )
       .to(
-        heroTitle,
+        titleSplitText.words,
         {
           duration: 0.3,
           scrambleText: { chars: 'upperCase', speed: 0.5, revealDelay: 0.2, delimeter: ' ' }
         },
         '-=0.5'
       );
-    timelineIn.duration(2).play();
+    tl.duration(1.5).play();
   } else if (direction === 'out') {
-    const timelineOut = new TimelineLite({ paused: true });
-
+    const tl = gsap.timeline({ paused: true });
     const activeItem = node.querySelector('.worklink--active').parentElement;
-    const activeItemTitle = activeItem.querySelector('.work-item__info');
     const workItems = [].slice.call(node.querySelectorAll('.work-item'));
     const nonActiveWorkItems = workItems.filter((workItem) => {
       return workItem.className !== 'work-item worklink--active';
     });
     const workItemDummy = node.querySelector('.work-item__dummy');
 
-    timelineOut
-      .staggerTo(nonActiveWorkItems, 0.5, {
-        opacity: 0,
-        ease: Power4.easeOut
-      })
-      .to(
-        activeItemTitle,
-        {
-          duration: 0.35,
-          opacity: 0
-        },
-        '-=0.5'
-      )
+    gsap
       // Overlay the dummy colour block
-      .to(workItemDummy, {
-        duration: 0,
+      .set(workItemDummy, {
         backgroundColor: brand_color,
         top: targetPosition.y,
         left: targetPosition.x,
         width: targetPosition.width,
+        opacity: 0,
         height: targetPosition.height
+      });
+
+    tl.to(workItemDummy, {
+      duration: 0.2,
+      opacity: 1
+    })
+      // Hide the active item
+      .set(activeItem, {
+        opacity: 0
       })
-      // Fade out the active item
-      .to(activeItem, {
-        duration: 0,
-        opacity: 0.1
+      .staggerTo(nonActiveWorkItems, 0.25, {
+        opacity: 0,
+        ease: Power4.easeOut
       })
       // Scroll to the top
-      .to(window, {
-        duration: 0,
+      .set(window, {
         scrollTo: 0
-      })
-      // Overlay the dummy colour block fixed at the position of the worklist__item
-      .to(workItemDummy, {
-        duration: 0,
-        backgroundColor: brand_color,
-        top: targetPosition.top,
-        left: targetPosition.left,
-        width: targetPosition.width,
-        height: targetPosition.height
       })
       // move the blok to the top of the page
       .to(workItemDummy, {
@@ -142,60 +121,37 @@ export function transitionToWorkPage({ exit, node, e, entry, direction, brand_co
         ease: Back.easeIn
       });
 
-    timelineOut.duration(2).play();
+    tl.duration(1.5).play();
   }
 }
 
-export function workItemHover({ e, direction }) {
-  let target = e.target;
+export function workItemHover({ workItemTextRef }) {
+  const mySplitText = new SplitText(workItemTextRef.current, { type: 'words' });
 
-  if (target.className === 'work-item__wrapper' || target.className === 'work-item__block') {
-    return;
-  }
-  const tl = new TimelineLite();
-
-  const targetText = target.getAttribute('data-text');
-
-  if (direction === 'out') {
-    console.log('mouseIn');
-    tl.to(target, {
-      duration: 0.35,
-      scrambleText: {
-        text: targetText,
-        chars: 'lowerCase',
-        delimeter: ' ',
-        speed: 0.1
-      }
-    });
-  }
+  gsap.to(mySplitText.words, {
+    duration: 0.35,
+    scrambleText: {
+      chars: 'lowerCase',
+      speed: 0.1
+    }
+  });
 }
 
-export function animateNavItem({ e, direction }) {
-  const { target } = e;
-  const tl = new TimelineLite();
+export function animateNavItem({ navAbout, direction }) {
+  const mySplitText = new SplitText(navAbout.current, { type: 'words' });
 
   if (direction === 'in') {
-    tl.to(target, {
+    gsap.to(mySplitText.words, {
       duration: 0.5,
-      scrambleText: { text: 'About Me', chars: 'lowerCase', speed: 0.3 }
-    });
-  }
-  if (direction === 'out') {
-    tl.to(target, {
-      duration: 0.5,
-      scrambleText: {
-        text: 'Creative Developer',
-        chars: 'lowerCase',
-        speed: 0.3
-      }
+      scrambleText: { chars: 'lowerCase', speed: 0.3 }
     });
   }
 }
 
 export function animateWorkItems({ workItems, direction }) {
-  const bl = new TimelineLite();
+  const tl = gsap.timeline();
   if (direction === 'in') {
-    bl.staggerTo(
+    tl.staggerTo(
       workItems,
       1,
       {
